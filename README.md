@@ -7,9 +7,8 @@ Reto: 0
 
 ## Equipo
 
-- Integrante 1
-- Integrante 2
-- Integrante 3
+- Mainor Villarreal (@tlegend7)
+- Giovanny Arpaia (@giovaar)
 
 ## Problema
 
