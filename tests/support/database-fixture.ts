@@ -103,7 +103,7 @@ export async function setupTestDatabase(): Promise<DatabaseFixture> {
   const config = readConfig({
     NODE_ENV: "test",
     TEST_DATABASE_URL: "postgres://equipo10_api:d1-test-only-password@127.0.0.1:55435/equipo10_d1_test",
-    SUPABASE_URL: "http://127.0.0.1:55436",
+    SUPABASE_URL: process.env.TEST_SUPABASE_URL ?? "http://127.0.0.1:55438",
     SUPABASE_PUBLISHABLE_KEY: "sb_publishable_d1_test",
     HOST: "127.0.0.1",
     PORT: "3001",

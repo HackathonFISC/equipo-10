@@ -45,7 +45,9 @@ Cuenta, experiencia, disponibilidad, revisión y primer Inicio; PATCH por secci�
 
 Contratos, grant, ejecución asíncrona con herramientas reales y propuestas por revisión; lote de decisiones y alternativa manual. BALTHASAR puede escribir los archivos del bloque mediante Vertex en desarrollo; A02 del producto usa integración propia, no la CLI de desarrollo como servidor compartido. RP04/RP12/RP13/RP15/RP18 e I02/I07; evaluar con texto gold, demostrar decisión/pregunta y herramienta, no solo JSON.
 
-### D2-C — PDF, imagen y audio
+### D2-C — Texto y PDF digital
+
+Decisión humana del 2026-10-17: aceptar en esta etapa texto escrito/pegado y PDF digital con texto seleccionable. Imágenes/fotos, PDF escaneado/OCR y audio quedan pendientes para una ampliación posterior. Las comprobaciones de esos formatos que figuren debajo se conservan como requisitos futuros, no como aceptación exigible o ejecución acreditada del cierre D2. Mantener error recuperable y alternativa manual ante formatos no habilitados; no afirmar extracción ni transcripción de ellos.
 
 Habilitar cada formato tras verificar parser, límites y política de tratamiento/retención; fuente/fragmentos/versiones/transcripción revisable. RP14/RP15 y E15/E16 por formato. No extender permisos de Storage ni enviar datos reales para suplir falta de fixtures.
 

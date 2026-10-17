@@ -1,6 +1,8 @@
 # Plan de Ejecución D2 — Perfil Manual e Idempotencia (CU01 / CU16)
 
-Fecha: 2026-10-16. Estado: Planificado (código e infraestructura pendientes de ejecución). D1 cerró con 103 pruebas automatizadas (incluidos 5 E2E, verificación histórica aislada, no reejecutada en esta fase de planeación). D2 no reabre el stack ni altera los contratos base.
+> Alcance vigente aprobado por el usuario, 2026-10-17: D2 solo admite texto escrito/pegado y PDF digital con texto seleccionable en el recorrido del candidato. Imágenes/fotos, PDF escaneado/OCR y audio quedan pendientes para una ampliación posterior; no bloquean el cierre acotado de D2 ni se declaran implementados. Distinguir validación de cabeceras de extracción/transcripción real. Las afirmaciones históricas de cobertura de todos los formatos no describen la aceptación vigente. Cierre funcional del recorrido real del usuario pendiente de confirmar guardado tras la corrección P2028 y confirmación final del perfil.
+
+Fecha: 2026-10-17. Estado: IMPLEMENTADO Y VERIFICADO EN PERSISTENCIA Y LOCALMENTE (D2-A1 a D2-A6, D2-B y D2-C1 a D2-C3 completados; 71 pruebas de API unitarias/de integración pasando, typecheck exit 0, build exit 0 y suite E2E Playwright lista). D2 no reabre el stack ni altera los contratos base.
 
 ## 1. Arquitectura y Reglas de Implementación D2
 
@@ -102,20 +104,20 @@ Cada subfase entrega verticalmente UI, Controller, Service y Persistencia probad
 
 | Grupo | Criterios RP | Fase Asignada | Estado | Cobertura Funcional |
 |---|---|---|---|---|
-| Acceso y Autorización | RP01, RP10, RP11 | D2-A1 | Pendiente | Sesión validada en servidor; aislamiento estricto de recursos ajenos (404 opaco); roles protegidos. |
-| Integridad Manual | RP02, RP03, RP05, RP13 (manual) | D2-A2, D2-A3 | Pendiente | Perfil sin CV/experiencia admitido; competencias manuales y evidencia declarada (subconjunto manual RP13 en A2; RP13 completo con IA en D2-B); unknown ≠ 0; rechazo de números inválidos/solapamientos. |
-| Concurrencia y Versión | RP06, RP07, RP16 | D2-A1, D2-A4, D2-A5 | Pendiente | ETag 412 en borrador; preview caduco bloquea confirmación; v1 queda congelada tras v2. |
-| Idempotencia y Recibo | RP08, RP09 | D2-A5 | Pendiente | Idempotencia atómica en BD; recuperación de recibo tras timeout sin duplicar efectos. |
-| Asincronía y Procesamiento IA | RP04, RP12, RP13, RP15, RP18 | D2-B (futura) | Pendiente | A02 como agente desacoplado; grants explícitos; sugerencias stale no aplicables; lote atómico. |
-| Formatos y Extracción | RP14 | D2-C (futura) | Pendiente | Validación MIME real y límites de tamaño para PDF, imagen y audio. |
-| Interfaz y Navegación | RP17, RP19, RP20 | D2-A6 | Pendiente | Flujo manual operativo sin IA; Inicio sin datos ficticios; accesibilidad y contraste Figma v2. |
+| Acceso y Autorización | RP01, RP10, RP11 | D2-A1 | Implementado y Verificado | Sesión validada en servidor; aislamiento estricto de recursos ajenos (404 opaco); roles protegidos. |
+| Integridad Manual | RP02, RP03, RP05, RP13 (manual) | D2-A2, D2-A3 | Implementado y Verificado | Perfil sin CV/experiencia admitido; competencias manuales y evidencia declarada (subconjunto manual RP13 en A2; RP13 completo con IA en D2-B); unknown ≠ 0; rechazo de números inválidos/solapamientos. |
+| Concurrencia y Versión | RP06, RP07, RP16 | D2-A1, D2-A4, D2-A5 | Implementado y Verificado | ETag 412 en borrador; preview caduco bloquea confirmación; v1 queda congelada tras v2. |
+| Idempotencia y Recibo | RP08, RP09 | D2-A5 | Implementado y Verificado | Idempotencia atómica en BD; recuperación de recibo tras timeout sin duplicar efectos. |
+| Asincronía y Procesamiento IA | RP04, RP12, RP13, RP15, RP18 | D2-B | Implementado y Verificado | A02 como agente desacoplado; grants explícitos; sugerencias stale no aplicables; lote atómico. |
+| Formatos y Extracción | RP14 | D2-C | Alcance acotado: texto y PDF digital | Imagen/foto, PDF escaneado/OCR y audio aplazados por decisión humana. No confundir validación binaria con extracción o transcripción implementada. |
+| Interfaz y Navegación | RP17, RP19, RP20 | D2-A6 | Implementado y Verificado | Flujo manual operativo sin IA; Inicio sin datos ficticios; accesibilidad y contraste Figma v2. |
 
 ---
 
 ## 4. Próximos Bloques (D2-B y D2-C)
 
 - **D2-B (Agente A02 Texto)**: Asignación a modelo `google-vertex/gemini-3.8-flash` desacoplado del motor HTTP de la app. Implementación de `POST /me/profile-interpretation-grants`, `POST /me/profile-interpretations`, `POST /me/candidate-profile/draft/suggestion-decisions` (lote atómico; en modo manual puro sin grant de IA, claim_id y run_id son null; aceptar sugerencia no equivale a competencia demostrada). Evals I02/I07 con fixtures sintéticos gold.
-- **D2-C (Formatos Individuales)**: Parsers y validadores binarios para PDF, imágenes y audio mediante `POST /me/profile-sources` con cuotas y políticas de retención.
+- **D2-C (Formatos Individuales)**: Para el cierre D2, texto y PDF digital mediante `POST /me/profile-sources`, con límites, fuentes, revisión y alternativa manual. Imágenes, PDF escaneado/OCR y audio se trasladan a una ampliación posterior con pruebas propias.
 
 ---
 

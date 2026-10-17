@@ -7,6 +7,8 @@ import { AppError } from "./errors";
 import type { VerifiedIdentity, VerifyToken } from "./security/auth";
 import type { IdentityService } from "./modules/identity/identity.service";
 import { createIdentityModule } from "./modules/identity/identity.module";
+import type { ProfileService } from "./modules/profile/profile.service";
+import { createProfileModule } from "./modules/profile/profile.module";
 
 export interface AppEnv {
   Variables: {
@@ -17,6 +19,7 @@ export interface AppEnv {
 
 export interface AppDependencies {
   identityService: IdentityService;
+  profileService?: ProfileService;
   verifyToken: VerifyToken;
   allowedOrigins: string[];
 }
@@ -42,8 +45,9 @@ export function createApp(deps: AppDependencies): Hono<AppEnv> {
       }
       c.header("Vary", "Origin");
       c.header("Access-Control-Allow-Origin", origin);
-      c.header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
-      c.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
+      c.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, OPTIONS");
+      c.header("Access-Control-Allow-Headers", "Authorization, Content-Type, If-Match, Idempotency-Key");
+      c.header("Access-Control-Expose-Headers", "ETag, X-Request-Id");
     }
 
     if (c.req.method === "OPTIONS") {
@@ -53,9 +57,20 @@ export function createApp(deps: AppDependencies): Hono<AppEnv> {
     await next();
   });
 
-  app.use(
-    "*",
-    bodyLimit({
+  app.use("*", async (c, next) => {
+    if (c.req.path.includes("/profile-sources")) {
+      return bodyLimit({
+        maxSize: 10 * 1024 * 1024,
+        onError: (c) => {
+          const requestId = c.get("requestId") ?? randomUUID();
+          return c.json(
+            new AppError(413, "SOURCE_TOO_LARGE", "El archivo supera el límite de 10 MiB").toPayload(requestId),
+            413
+          );
+        },
+      })(c, next);
+    }
+    return bodyLimit({
       maxSize: 4096,
       onError: (c) => {
         const requestId = c.get("requestId") ?? randomUUID();
@@ -64,8 +79,8 @@ export function createApp(deps: AppDependencies): Hono<AppEnv> {
           413
         );
       },
-    })
-  );
+    })(c, next);
+  });
 
   app.get("/health", (c) => {
     return c.json({ status: "ok", stage: "D1" }, 200);
@@ -94,8 +109,13 @@ export function createApp(deps: AppDependencies): Hono<AppEnv> {
     await next();
   });
 
-  const identityModule = createIdentityModule(deps.identityService);
+  const identityModule = createIdentityModule(deps.identityService, deps.profileService);
   api.route("/", identityModule);
+
+  if (deps.profileService) {
+    const profileModule = createProfileModule(deps.profileService);
+    api.route("/", profileModule);
+  }
 
   app.route("/api/v1", api);
 
@@ -109,9 +129,14 @@ export function createApp(deps: AppDependencies): Hono<AppEnv> {
 
   app.onError((err, c) => {
     const requestId = c.get("requestId") ?? randomUUID();
-    if (err instanceof AppError) {
-      return c.json(err.toPayload(requestId), err.status as ContentfulStatusCode);
+    if (
+      err instanceof AppError ||
+      (typeof err === "object" && err !== null && (err as any).name === "AppError")
+    ) {
+      const appErr = err as AppError;
+      return c.json(appErr.toPayload(requestId), appErr.status as ContentfulStatusCode);
     }
+    console.error("Hono unhandled error:", err);
     const fallback = new AppError(503, "SERVICE_UNAVAILABLE", "Servicio no disponible", true);
     return c.json(fallback.toPayload(requestId), 503);
   });

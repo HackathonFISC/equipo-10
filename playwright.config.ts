@@ -29,7 +29,7 @@ export default defineConfig({
       timeout: 60000,
       reuseExistingServer: false,
       env: {
-        VITE_SUPABASE_URL: 'http://127.0.0.1:55436',
+        VITE_SUPABASE_URL: process.env.VITE_SUPABASE_URL || 'http://127.0.0.1:55438',
         VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_d1_test',
         VITE_API_URL: 'http://127.0.0.1:55437',
       },

@@ -61,7 +61,7 @@ Dependencia: D1. Agente: A02 modo perfil; C02/C03 desde la primera escritura.
 3. Registrar intereses de puesto, experiencia, formación declarada, disponibilidad, zona aproximada, movilidad, salario y presupuesto con unidades; desconocido es distinto de cero.
 4. Revisar sugerencias y permitir aceptar/rechazar/corregir; confirmar crea versión. Confirmar perfil no comparte con empresas ni orientador.
 5. Mostrar Inicio vacío y siguiente acción real; progreso de registro indica pasos completados, no porcentaje de empleabilidad. Retomar un borrador desde la etapa pendiente.
-6. Añadir importación de CV PDF/foto y audio progresivamente con fixtures gold, revisión de extracción/transcripción, fuente/versión y alternativa manual. No declarar cobertura completa hasta comprobar cada formato.
+6. Alcance de formatos de D2 decidido por el usuario el 2026-10-17: texto escrito o pegado y CV en PDF digital con texto seleccionable. Conservar revisión, fuente/versión y alternativa manual. Fotos, imágenes, PDF escaneado/OCR y audio quedan fuera del cierre D2 y pendientes de una ampliación posterior. Esta decisión acota la etapa; no elimina los requisitos originales de la hackathon ni los declara satisfechos.
 
 Salida: joven sin CV confirma y vuelve a consultar su perfil; sugerencia rechazada no reaparece como dato confirmado; candidato B no ve datos de A; caída de Vertex conserva borrador y permite continuar manualmente. Cubrir E12–E16 según formato implementado, X01/X13 e I02. Registrar prueba manual y automática por separado.
 

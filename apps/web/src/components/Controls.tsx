@@ -78,7 +78,7 @@ export function ProgressSteps({ current }: ProgressStepsProps) {
             className={`${styles.stepItem} ${isDone ? styles.stepDone : ''} ${isCurrent ? styles.stepCurrent : ''}`.trim()}
             aria-current={isCurrent ? 'step' : undefined}
           >
-            <span className={styles.stepContent}>{label}</span>
+            <span className={styles.stepContent} data-step={idx + 1}>{label}</span>
             {showLine && (
               <span className={`${styles.stepLine} ${isDone ? styles.lineDone : ''}`.trim()} />
             )}

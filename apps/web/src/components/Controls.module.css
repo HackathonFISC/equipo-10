@@ -15,6 +15,9 @@
   color: var(--color-action-text);
 }
 
+.button:disabled { opacity: 0.55; cursor: not-allowed; }
+.button[aria-busy="true"] { cursor: wait; }
+
 .secondary {
   background-color: transparent;
   border-color: var(--color-border);
@@ -114,4 +117,15 @@
 
 .lineDone {
   background-color: var(--color-action);
+}
+
+@media (max-width: 600px) {
+  .progressSteps { gap: 8px; }
+  .stepItem { display: block; min-width: 0; padding-bottom: 8px; border-bottom: 2px solid var(--color-divider); }
+  .stepContent { display: block; white-space: nowrap; font-size: 0; }
+  .stepContent::before { content: attr(data-step); font-size: 14px; margin-right: 6px; }
+  .stepCurrent .stepContent { font-size: 14px; }
+  .stepLine { display: none; }
+  .stepCurrent { flex: 3; border-bottom-color: var(--color-action); }
+  .stepDone { border-bottom-color: var(--color-action); }
 }

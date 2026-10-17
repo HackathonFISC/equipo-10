@@ -1,7 +1,10 @@
+process.noDeprecation = true;
+
 import { readConfig } from "./config";
 import { Database } from "./infrastructure/database";
 import { createVerifyToken } from "./security/auth";
 import { IdentityService } from "./modules/identity/identity.service";
+import { ProfileService } from "./modules/profile/profile.service";
 import { createApp } from "./app";
 
 async function main() {
@@ -11,9 +14,11 @@ async function main() {
     db = new Database(config);
     const verifyToken = createVerifyToken(config);
     const identityService = new IdentityService(db);
+    const profileService = new ProfileService(db);
 
     const app = createApp({
       identityService,
+      profileService,
       verifyToken,
       allowedOrigins: config.allowedOrigins,
     });
@@ -21,7 +26,8 @@ async function main() {
     const server = Bun.serve({
       port: config.port,
       hostname: config.host,
-      maxRequestBodySize: 4096,
+      maxRequestBodySize: 12 * 1024 * 1024,
+      idleTimeout: 130, // A02 has a 120-second total provider deadline.
       fetch: app.fetch,
     });
 

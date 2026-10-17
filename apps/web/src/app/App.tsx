@@ -4,6 +4,11 @@ import { useSession } from './session';
 import { ThemeSelect } from './theme';
 import { AccessPage } from '../features/access/AccessPage';
 import { HomePage } from '../features/home/HomePage';
+import { AccountStep } from '../features/profile/AccountStep';
+import { ExperienceStep } from '../features/profile/ExperienceStep';
+import { AvailabilityStep } from '../features/profile/AvailabilityStep';
+import { ReviewStep } from '../features/profile/ReviewStep';
+import { ProfilePage } from '../features/profile/ProfilePage';
 import { Button, Notice } from '../components/Controls';
 import { fetchData } from '../lib/api';
 import styles from '../styles/App.module.css';
@@ -68,7 +73,7 @@ function StaticFeaturePage({ title, desc }: { title: string; desc: string }) {
 function ProtectedLayout() {
   const { session, me, loading, error, reload, signOut } = useSession();
 
-  if (loading) {
+  if (loading && !me) {
     return <div className={styles.layout}><main className={styles.main}><p>Cargando sesión...</p></main></div>;
   }
   if (!session) {
@@ -110,6 +115,11 @@ function ProtectedLayout() {
       <main id="contenido" className={styles.main}>
         <Routes>
           <Route path="/inicio" element={<HomePage />} />
+          <Route path="/perfil" element={<ProfilePage />} />
+          <Route path="/perfil/cuenta" element={<AccountStep />} />
+          <Route path="/perfil/trayectoria" element={<ExperienceStep />} />
+          <Route path="/perfil/disponibilidad" element={<AvailabilityStep />} />
+          <Route path="/perfil/revision" element={<ReviewStep />} />
           <Route path="/explorar" element={<StaticFeaturePage title="Explorar" desc="Sección de exploración disponible en la siguiente fase." />} />
           <Route path="/mi-ruta" element={<StaticFeaturePage title="Mi Ruta" desc="Módulo de itinerario formativo en preparación." />} />
           <Route path="/agenda" element={<StaticFeaturePage title="Agenda" desc="Planificación de entrevistas y eventos en preparación." />} />

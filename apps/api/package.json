@@ -6,6 +6,7 @@
   "dependencies": {
     "@equipo10/contracts": "workspace:*",
     "@supabase/supabase-js": "2.118.0",
-    "hono": "4.13.13"
+    "hono": "4.13.13",
+    "pdfjs-dist": "^4.10.38"
   }
 }

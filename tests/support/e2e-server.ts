@@ -5,7 +5,8 @@ import { IdentityService } from '../../apps/api/src/modules/identity/identity.se
 import { createVerifyToken } from '../../apps/api/src/security/auth';
 
 const fixture = await setupTestDatabase();
-const auth = startAuthFixture(55436);
+const authPort = Number(process.env.TEST_AUTH_PORT || 55438);
+const auth = startAuthFixture(authPort);
 
 const config = {
   ...fixture.config,
@@ -13,10 +14,14 @@ const config = {
   allowedOrigins: ['http://127.0.0.1:5175', 'http://localhost:5175'],
 };
 
+import { ProfileService } from '../../apps/api/src/modules/profile/profile.service';
+
 const identity = new IdentityService(fixture.db);
+const profile = new ProfileService(fixture.db);
 const verifyToken = createVerifyToken(config);
 const app = createApp({
   identityService: identity,
+  profileService: profile,
   verifyToken,
   allowedOrigins: config.allowedOrigins,
 });

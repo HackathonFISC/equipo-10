@@ -31,9 +31,14 @@ test.describe('D1 Access and Session E2E Flows', () => {
     await expect(page.getByRole('heading', { name: 'Tu camino empieza aquí.' })).toBeVisible();
 
     const createProfileBtn = page.getByRole('button', { name: 'Crear mi espacio privado' });
+    const continueProfileBtn = page.getByRole('button', { name: 'Continuar construyendo mi perfil' });
+    const savedProfileLink = page.getByRole('link', { name: 'Ver mi perfil guardado', exact: true });
+    const beginProfileLink = page.getByRole('link', { name: 'Comenzar mi perfil', exact: true });
+    await expect(createProfileBtn.or(continueProfileBtn).or(savedProfileLink).or(beginProfileLink).first()).toBeVisible();
+
     if (await createProfileBtn.isVisible()) {
       await createProfileBtn.click();
-      await expect(page.getByText('Perfil privado creado.')).toBeVisible();
+      await expect(page.getByText('Perfil privado creado.').or(page.getByText('Borrador de perfil en preparación'))).toBeVisible();
     }
 
     await page.goto('/mi-cuenta');

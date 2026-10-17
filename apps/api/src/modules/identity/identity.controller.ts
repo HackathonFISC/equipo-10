@@ -3,9 +3,10 @@ import type { Context } from "hono";
 import { IdSchema, EmptyBodySchema } from "@equipo10/contracts";
 import { AppError } from "../../errors";
 import type { IdentityService } from "./identity.service";
+import type { ProfileService } from '../profile/profile.service';
 import type { AppEnv } from "../../app";
 
-export function createIdentityController(service: IdentityService): Hono<AppEnv> {
+export function createIdentityController(service: IdentityService, profileReader?: Pick<ProfileService, 'getProfile'>): Hono<AppEnv> {
   const router = new Hono<AppEnv>();
 
   router.get("/me", async (c) => {
@@ -53,7 +54,7 @@ export function createIdentityController(service: IdentityService): Hono<AppEnv>
   router.get("/me/candidate-profile", async (c) => {
     const identity = c.get("identity");
     const requestId = c.get("requestId");
-    const data = await service.getProfile(identity);
+    const data = profileReader ? await profileReader.getProfile(identity) : await service.getProfile(identity);
     return c.json({ data, request_id: requestId }, 200);
   });
 

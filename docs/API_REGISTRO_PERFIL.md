@@ -120,3 +120,9 @@ Presupuesto inicial para prototipo, propuesta a medir: una generación por solic
 Editar revisión, retirar fuente/revocar grant o descartar borrador mientras A02 trabaja evita incorporar salida vieja. El run puede conservar estado stale/cancelled y evento mínimo, sin mostrarlo como cambio del perfil. Decidir sugerencias en lote puede cambiar revisión: dentro del mismo lote se compara una sola revisión base, todos los elementos provienen de ella y la revisión sube una vez; no invalidar el segundo elemento por haber aceptado el primero. Un lote posterior con otra revisión requiere regeneración o revisión explícita contra base actual, sin aceptación silenciosa.
 
 Reglas de contrato y casos observables en [aceptación](ACEPTACION_REGISTRO_PERFIL.md). Esta ficha no prueba disponibilidad de Vertex, capacidades del SDK, configuración Supabase o implementación de ninguna ruta.
+
+### Consulta de contenido guardado (2026-10-17)
+
+GET /api/v1/me/candidate-profile, con el módulo de perfil habilitado, devuelve CandidateProfileView completo: id, owner_user_id, current_version_id, active_draft y current_version (ProfileDraftView confirmado o null). El controlador de identidad delega la lectura al servicio de perfil; no hay una segunda ruta duplicada. La respuesta sigue limitada al actor autenticado mediante withActor/RLS.
+
+La ruta web /perfil solo consulta. Permite ver el borrador y la versión confirmada si existen ambos, y retomar las secciones del borrador. Entrar a un editor sin borrador pero con versión confirmada redirige a esta consulta; no inicia otro borrador vacío. La actualización de una versión confirmada mediante copia a una nueva revisión sigue pendiente de un bloque específico.

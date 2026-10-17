@@ -28,13 +28,22 @@ const SPANISH_STATUS_MESSAGES: Record<number, string> = {
   503: 'Servicio temporalmente no disponible. Reintente en un momento.',
 };
 
-export async function fetchData<T>(
+export interface FetchResponse<T> {
+  data: T;
+  etag: string | null;
+  requestId: string | null;
+}
+
+export async function fetchWithHeaders<T>(
   path: string,
   token: string,
-  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET',
-  body?: unknown,
-  signal?: AbortSignal
-): Promise<T> {
+  options: {
+    method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    body?: unknown;
+    headers?: Record<string, string>;
+    signal?: AbortSignal;
+  } = {}
+): Promise<FetchResponse<T>> {
   if (!path.startsWith('/me') && !path.startsWith('/organizations/')) {
     throw new ApiClientError(400, 'INVALID_PATH', 'Ruta no permitida.', false);
   }
@@ -51,16 +60,22 @@ export async function fetchData<T>(
     throw new ApiClientError(500, 'CONFIG_ERROR', 'Configuración de API inválida.', false);
   }
 
+  const method = options.method || 'GET';
   const fullUrl = `${baseOrigin}/api/v1${path}`;
   const headers: Record<string, string> = {
     Authorization: `Bearer ${token}`,
     Accept: 'application/json',
+    ...(options.headers || {}),
   };
 
-  let requestBody: string | undefined;
-  if (body !== undefined) {
-    headers['Content-Type'] = 'application/json';
-    requestBody = JSON.stringify(body);
+  let requestBody: any;
+  if (options.body !== undefined) {
+    if (typeof FormData !== 'undefined' && options.body instanceof FormData) {
+      requestBody = options.body;
+    } else {
+      headers['Content-Type'] = 'application/json';
+      requestBody = JSON.stringify(options.body);
+    }
   }
 
   let response: Response;
@@ -69,10 +84,10 @@ export async function fetchData<T>(
       method,
       headers,
       body: requestBody,
-      signal,
+      signal: options.signal,
     });
   } catch (err: unknown) {
-    if (signal?.aborted) {
+    if (options.signal?.aborted) {
       throw err;
     }
     throw new ApiClientError(503, 'NETWORK_ERROR', SPANISH_STATUS_MESSAGES[503], true);
@@ -94,9 +109,33 @@ export async function fetchData<T>(
     throw new ApiClientError(response.status, `HTTP_${response.status}`, fallbackMessage, response.status >= 500);
   }
 
+  const etag = response.headers.get('ETag');
+  const requestId = response.headers.get('X-Request-Id');
   const json = await response.json();
+  let data: T;
   if (typeof json === 'object' && json !== null && 'data' in json) {
-    return (json as DataEnvelope<T>).data;
+    data = (json as DataEnvelope<T>).data;
+  } else {
+    data = json as T;
   }
-  return json as T;
+
+  return { data, etag, requestId };
 }
+
+export async function fetchData<T>(
+  path: string,
+  token: string,
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET',
+  body?: unknown,
+  signal?: AbortSignal,
+  customHeaders?: Record<string, string>
+): Promise<T> {
+  const res = await fetchWithHeaders<T>(path, token, {
+    method,
+    body,
+    signal,
+    headers: customHeaders,
+  });
+  return res.data;
+}
+

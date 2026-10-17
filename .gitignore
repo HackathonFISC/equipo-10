@@ -23,6 +23,7 @@ coverage/
 .cache/
 .vite/
 .runtime/
+storage/
 *.log
 
 # Herramientas y registros internos de desarrollo, fuera de la entrega.

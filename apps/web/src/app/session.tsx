@@ -66,6 +66,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
       setSession(newSession);
+      setMe((current) => current?.user.auth_subject === newSession?.user.id ? current : null);
       if (event === 'PASSWORD_RECOVERY') {
         setRecovery(true);
       } else if (event === 'SIGNED_OUT') {
@@ -90,7 +91,8 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    setMe(null);
+    // Keep this user's form mounted while refreshing credentials or profile context.
+    setMe((current) => current?.user.auth_subject === session?.user.id ? current : null);
     setLoading(true);
     setError(null);
     const controller = new AbortController();

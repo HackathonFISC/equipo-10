@@ -1,0 +1,20 @@
+.container { overflow-wrap: anywhere; }
+.container a { color: var(--color-action); text-underline-offset: 3px; }
+.inlineLink {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-action);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  text-align: left;
+}
+.inlineLink:hover {
+  opacity: 0.85;
+}
+.inlineLink:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

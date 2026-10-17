@@ -5,9 +5,11 @@ import pg from "pg";
 import { AppError } from "../errors";
 import type { APIConfig } from "../config";
 
+export interface ActorTransactionOptions { timeout?: number; maxWait?: number }
+
 export interface IdentityDatabase {
   resolveAuthSubject(subject: string, bootstrap: boolean): Promise<string | null>;
-  withActor<T>(id: string, fn: (tx: Prisma.TransactionClient) => Promise<T>): Promise<T>;
+  withActor<T>(id: string, fn: (tx: Prisma.TransactionClient) => Promise<T>, options?: ActorTransactionOptions): Promise<T>;
   close(): Promise<void>;
 }
 
@@ -82,8 +84,12 @@ export class Database implements IdentityDatabase {
     }
   }
 
-  async withActor<T>(id: string, fn: (tx: Prisma.TransactionClient) => Promise<T>): Promise<T> {
+  async withActor<T>(id: string, fn: (tx: Prisma.TransactionClient) => Promise<T>, options?: ActorTransactionOptions): Promise<T> {
     const client = this.getClient();
+    const effectiveOptions: ActorTransactionOptions = {
+      timeout: options?.timeout ?? 30000,
+      maxWait: options?.maxWait ?? 8000,
+    };
     try {
       return await client.$transaction(async (tx) => {
         await tx.$executeRawUnsafe("SET LOCAL ROLE equipo10_runtime;");
@@ -99,18 +105,97 @@ export class Database implements IdentityDatabase {
         }
 
         return await fn(tx);
-      });
+      }, effectiveOptions);
     } catch (err: unknown) {
-      if (err instanceof AppError) {
+      if (
+        err instanceof AppError ||
+        (typeof err === "object" && err !== null && (err as any).name === "AppError")
+      ) {
         throw err;
       }
+      const rawMessage = String((err as any)?.message || "");
+      if (rawMessage.includes("invalid_revision_update")) {
+        throw new AppError(
+          412,
+          "DRAFT_REVISION_CONFLICT",
+          "El perfil cambió en otra pestaña. Revisa la versión guardada antes de continuar."
+        );
+      }
+      if (rawMessage.includes("stale_or_invalid_confirmation")) {
+        throw new AppError(
+          412,
+          "CONFIRMATION_EXPIRED_OR_STALE",
+          "La vista previa ha expirado o el borrador fue modificado. Genera una nueva vista previa."
+        );
+      }
+      if (rawMessage.includes("overlapping_availability")) {
+        throw new AppError(
+          400,
+          "INVALID_REQUEST",
+          "Las ventanas de disponibilidad no pueden solaparse en el mismo día"
+        );
+      }
+      if (rawMessage.includes("known_constraints_valid")) {
+        throw new AppError(
+          400,
+          "INVALID_REQUEST",
+          "Restricciones inválidas según el estado conocido/desconocido"
+        );
+      }
+      if (rawMessage.includes("invalid_timezone")) {
+        throw new AppError(
+          400,
+          "INVALID_REQUEST",
+          "Zona horaria no válida"
+        );
+      }
       if (err instanceof Prisma.PrismaClientKnownRequestError) {
-        const meta = err.meta as { code?: string; driverAdapterError?: { cause?: { originalCode?: string; code?: string } } } | undefined;
+        if (err.code === "P2028") {
+          throw new AppError(503, "DATABASE_TRANSACTION_TIMEOUT", "El guardado no pudo terminar a tiempo. Conservamos tus elecciones; puedes volver a intentar guardar.", true);
+        }
+        const meta = err.meta as { code?: string; driverAdapterError?: { cause?: { originalCode?: string; code?: string; message?: string } } } | undefined;
         const sqlCode = meta?.code ?? meta?.driverAdapterError?.cause?.originalCode ?? meta?.driverAdapterError?.cause?.code;
+        const adapterMsg = meta?.driverAdapterError?.cause?.message || "";
+        if (adapterMsg.includes("invalid_revision_update")) {
+          throw new AppError(
+            412,
+            "DRAFT_REVISION_CONFLICT",
+            "El perfil cambió en otra pestaña. Revisa la versión guardada antes de continuar."
+          );
+        }
+        if (adapterMsg.includes("overlapping_availability")) {
+          throw new AppError(
+            400,
+            "INVALID_REQUEST",
+            "Las ventanas de disponibilidad no pueden solaparse en el mismo día"
+          );
+        }
+        if (adapterMsg.includes("known_constraints_valid")) {
+          throw new AppError(
+            400,
+            "INVALID_REQUEST",
+            "Restricciones inválidas según el estado conocido/desconocido"
+          );
+        }
+        if (adapterMsg.includes("invalid_timezone")) {
+          throw new AppError(
+            400,
+            "INVALID_REQUEST",
+            "Zona horaria no válida"
+          );
+        }
+        if (adapterMsg.includes("one_active_draft_per_profile") || err.message.includes("one_active_draft_per_profile")) {
+          throw new AppError(
+            409,
+            "ACTIVE_DRAFT_EXISTS",
+            "Ya existe un borrador activo para este perfil"
+          );
+        }
         if (sqlCode === "42501") {
           throw new AppError(403, "OPERATION_NOT_ALLOWED", "Operación no permitida");
         }
       }
+      console.error("Database unexpected error in withActor:", err);
       throw new AppError(503, "SERVICE_UNAVAILABLE", "Servicio de base de datos no disponible", true);
     }
   }
