@@ -1,6 +1,6 @@
 # Requisitos del reto 3: Empleabilidad
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 
 Estado: matriz de obligaciones y alcance del enunciado. Fuente: `magi/contexto/RETO_OFICIAL.md`, documento aportado por el equipo. Referencias por sección y página impresa. No convertir sugerencias en obligaciones textuales. Las filas de planificación se contrastan con la [cobertura actual de CU](CASOS_DE_USO.md#cobertura-actual-por-caso) y los informes de verificación; no significan que el producto siga sin implementar ni que el cumplimiento formal esté aprobado. Entrada del paquete: [README](../README.md).
 
@@ -27,7 +27,7 @@ Precisión verificada en código: el parser usa pdfjs getTextContent para extrae
 | O03 | Cálculos/asignaciones/verificaciones con código | Cálculos con reglas de código y límites explícitos | C01 matcher/planner y suites; no solver global laboral | Implementado con alcance acotado |
 | O04 | Humano aprobar/corregir decisiones clave y explicación | Confirmación vigente, explicación y denegación sin aprobación | Revisión de propuestas, consentimientos y D8 corregido | Implementado y probado localmente; aceptación real pendiente |
 | O05 | Trazabilidad de decisiones por agente | Correlacionar agente, entrada, herramienta, aprobación y efecto | Trazas/eventos por ámbito; falta caso consolidado de tres agentes | Parcial; evidencia integrada pendiente |
-| O06 | Al menos 15 casos, métrica y resultados | 15+ casos con métrica y resultados reproducibles | 20 diseñados en evals/casos.csv; sin resultados registrados | Pendiente de ejecución/registro formal |
+| O06 | Al menos 15 casos, métrica y resultados | Set reproducible de reglas, permisos, guardrails y errores | [37 casos PASS con 94 pruebas](../evals/README.md); resultados y JUnit publicados | Cumplido para el set definido; límites de calidad/modelo explícitos |
 | O07 | Guardrails ante entradas maliciosas, fuera de alcance o absurdas | Rechazar entradas inválidas o no autorizadas sin actuar | Guardrails y pruebas técnicas; falta consolidar evals adversarios y de modelo | Parcialmente verificado; evals pendientes |
 | O08 | Sistema agéntico, no chat reemplazable por prompt | Recorrido ingreso → decisión → aprobación → acción → consulta | E2E sintéticos y efectos reales locales; ensayo con cuentas reales pendiente | Implementado por bloques; demo final pendiente |
 

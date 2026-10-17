@@ -1,0 +1,18 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\a02-result.test.ts:
+(pass) A02 must return proposals or a useful interview > identifies missing experience kind and accepts explicitly pending dates [26.03ms]
+(pass) A02 must return proposals or a useful interview > identifies partial and conflicting dates without inventing replacements [3.34ms]
+(pass) A02 must return proposals or a useful interview > returns questions when evidence is incomplete; uses global endpoint and one deadline [13.11ms]
+(pass) A02 must return proposals or a useful interview > sends the safety and complete-CV instructions to the provider on every round [2.70ms]
+(pass) A02 must return proposals or a useful interview > recovers once from truncation without executing partial calls or changing context [1.72ms]
+(pass) A02 must return proposals or a useful interview > rejects a truncated response even if it contains a usable partial tool call [1.50ms]
+(pass) A02 must return proposals or a useful interview > rejects an empty result instead of reporting success [0.85ms]
+(pass) A02 must return proposals or a useful interview > rejects exhausted tool rounds without a completed analysis [1.91ms]
+(pass) A02 must return proposals or a useful interview > rejects invented evidence instead of attaching unrelated fragments [1.26ms]
+
+ 9 pass
+ 0 fail
+ 34 expect() calls
+Ran 9 tests across 1 file. [520.00ms]

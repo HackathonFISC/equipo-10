@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="9" assertions="0" failures="1" skipped="8" time="123.8946684">
+  <testsuite name="tests\api\d2-pdf-a02-verification.test.ts" file="tests\api\d2-pdf-a02-verification.test.ts" tests="9" assertions="0" failures="1" skipped="8" time="0" hostname="">
+    <testsuite name="D2-B &amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp; A02 Vertex AI" file="tests\api\d2-pdf-a02-verification.test.ts" line="15" tests="9" assertions="0" failures="1" skipped="8" time="120.014" hostname="">
+      <testcase name="Escenario 1: extrae texto digital limpio de un PDF sencillo sin metadatos internos" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="121" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 2: preserva el orden de lectura en un PDF de dos columnas sin entrelazar" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="139" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 3: procesa CV sin experiencia y marca campos faltantes sin inventar fechas" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="162" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 4: PDF escaneado (0 caracteres de texto) devuelve estado FAILED recuperable y no fabrica texto" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="218" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 5: rechaza archivo PDF corrupto con 422 INVALID_SOURCE_FILE" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="247" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 6: maneja intentos de inyección de instrucciones como texto plano biográfico" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="264" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 7: cuando Vertex no está disponible o falla la red, devuelve 503 sin bloquear" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="277" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 8: bloquea interpretación si la fuente fue retirada o el consentimiento revocado" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="0" file="tests\api\d2-pdf-a02-verification.test.ts" line="341" assertions="0">
+        <skipped />
+      </testcase>
+      <testcase name="Escenario 9: ejecuta ciclo de herramientas con Vertex AI real cuando ADC está disponible" classname="D2-B &amp;amp; D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle &amp;amp; A02 Vertex AI" time="120.014754" file="tests\api\d2-pdf-a02-verification.test.ts" line="406" assertions="0">
+        <failure type="TimeoutError" />
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testsuites>

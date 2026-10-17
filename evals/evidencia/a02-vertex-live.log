@@ -1,0 +1,21 @@
+bun test v1.3.14 (0d9b296a)
+
+tests\api\d2-pdf-a02-verification.test.ts:
+DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+      at <anonymous> (internal:util/deprecate:11:28)
+      at deprecated (internal:util/deprecate:20:29)
+      at query (<workspace>\node_modules\pg\lib\client.js:780:7)
+      at performIO (<workspace>\node_modules\@prisma\adapter-pg\dist\index.mjs:645:40)
+      at queryRaw (<workspace>\node_modules\@prisma\adapter-pg\dist\index.mjs:595:41)
+      at <anonymous> (<workspace>\node_modules\@prisma\client\runtime\client.js:11:70523)
+      at <anonymous> (<workspace>\node_modules\@prisma\client\runtime\client.js:11:70490)
+      at <anonymous> (<workspace>\node_modules\@prisma\client\runtime\client.js:11:71642)
+      at map (1:11)
+
+(fail) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 9: ejecuta ciclo de herramientas con Vertex AI real cuando ADC está disponible [120014.75ms]
+  ^ this test timed out after 120000ms.
+
+ 0 pass
+ 8 filtered out
+ 1 fail
+Ran 1 test across 1 file. [123.89s]

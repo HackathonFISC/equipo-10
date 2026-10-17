@@ -128,7 +128,7 @@ Las flechas muestran responsabilidades y dependencias, no una conversación auto
 Fuentes: información aportada y confirmada por el usuario; catálogos internos de puestos/habilidades; vacantes, cursos y participantes sintéticos DEMO. La investigación de ESCO, formación y movilidad se registra en [FUENTES.csv](docs/FUENTES.csv). Investigar una fuente no implica que exista una integración automática con ella. MAGI/OpenCode se usó como apoyo externo de desarrollo y no forma parte del producto entregado.
 
 ## Instalación y ejecución
-Requiere Bun 1.3.14, Node.js 24 según engines, Git y acceso autorizado a una BD configurada. Las cuentas/credenciales y ADC no se incluyen en el repositorio.
+Requiere Bun 1.3.14, Node.js 24 según engines, Git y acceso autorizado a una BD configurada. Las claves de infraestructura y ADC no se incluyen en el repositorio; los accesos de prueba están en [cuentas demo](docs/CUENTAS_DEMO.md).
 
 ~~~powershell
 git clone https://github.com/HackathonFISC/equipo-10.git
@@ -172,12 +172,16 @@ Las integraciones reinicializan bases **locales de prueba identificadas** y se e
 
 La [verificación integral](docs/VERIFICACION_INTEGRAL_D1_D8.md) registró 267 API PASS, 56 controles de datos/permisos y 10 E2E PASS; detectó fronteras D8. La [revisión focal de Codex](docs/REVISION_D8_CIERRE_FOCAL.md) registró 17 D8 y 10 reservas PASS, y detectó un caso independiente fallido. El [cierre posterior de Antigravity](docs/D8_ENTREGA.md) registra su corrección y suites 17/17, 16/16, 10/10, 8/8 y 9/9 PASS, además de tipos, build y comprobación CLI. No se reejecutaron en esta actualización documental. Son snapshots distintos; no sumar sus resultados como pruebas únicas.
 
-[evals/casos.csv](evals/casos.csv) contiene 20 casos diseñados. Falta publicar al menos 15 evals con entradas/expectativas, métricas y resultados reproducibles. Pueden combinar reglas, permisos, guardrails y calidad del modelo; el requisito no exige 15 llamadas LLM. [El resultado técnico JSON](evals/verificacion_d1_d8.json) no se presenta como esos 15 evals.
+**Evals finales: 37/37 PASS**, sustentados por 94 pruebas ejecutadas en 10 suites locales, sin fallos. [Casos y métricas](evals/casos.csv), [resultados reproducibles](evals/resultados.json) y [metodología y límites](evals/README.md). Se distinguen controles determinísticos, integraciones locales y respuestas IA simuladas; no se presentan como 37 llamadas reales al modelo.
+
+Los [20 casos del diseño inicial](evals/casos_diseno_inicial.csv) y el [snapshot técnico anterior](evals/verificacion_d1_d8.json) se conservan como históricos. La traza correlacionada de tres agentes y el ensayo completo con cuentas reales siguen pendientes.
+
+Comprobación adicional real de A02: [timeout de 120 s](evals/vertex-a02.json), 0 PASS / 1 FAIL. El resultado no se incluye entre los 37 PASS offline y no acredita funcionamiento live estable. Se conserva como límite de la versión congelada.
 
 ## Datos, acceso demo y límites
 Se utiliza un catálogo acotado y datos sintéticos identificados como DEMO; no representan ofertas, matrículas ni certificados reales de instituciones externas. [Fuentes investigadas](docs/FUENTES.csv) no equivalen a integraciones activas o a datos vigentes importados.
 
-La demo requiere cuentas autenticadas y membresías/habilitación reales del servidor; cambiar un selector visual no concede permisos. Las identidades de los fixtures son sintéticas y no constituyen credenciales Supabase de producción.
+Las [cinco cuentas demo](docs/CUENTAS_DEMO.md) ya están creadas y verificadas con login real y contexto runtime. La demo requiere cuentas autenticadas y membresías/habilitación reales del servidor; cambiar un selector visual no concede permisos. Las identidades de los fixtures son sintéticas y no constituyen credenciales Supabase de producción.
 
 Certificados adjuntos se conservan en almacenamiento local privado .local/certificates; requieren sesión y respaldo al mover el servidor. No es almacenamiento multiinstancia. No publicar .env, ADC, MAGI, documentos personales ni registros privados.
 

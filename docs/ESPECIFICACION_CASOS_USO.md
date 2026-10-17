@@ -1,6 +1,6 @@
 # Especificación de casos de uso de AImpulsa
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 
 Actualizado: 2026-10-17. Ideas y acuerdos funcionales: Mainor Villarreal y Giovanny Arpaia. Redacción, mapeo y actualización asistidos por IA según [bitácora](BITACORA_IA.csv).
 

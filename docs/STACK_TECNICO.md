@@ -1,6 +1,6 @@
 # Stack técnico cerrado — decisión ST01
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 
 Actualización documental 2026-10-17: la selección ST01 ya se utiliza en el producto. El párrafo fechado siguiente registra la decisión inicial, no el estado de implementación actual. Ver [metodología y tres capas](METODOLOGIA.md) y [README](../README.md); no declarar microservicios ni contar module/controller/service como aplicaciones independientes.
 

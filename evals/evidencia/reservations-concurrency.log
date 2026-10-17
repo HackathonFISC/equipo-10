@@ -1,0 +1,30 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\reservations-concurrency.test.ts:
+DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+      at <anonymous> (internal:util/deprecate:11:28)
+      at deprecated (internal:util/deprecate:20:29)
+      at query (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\pg\lib\client.js:780:7)
+      at performIO (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:645:40)
+      at queryRaw (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:595:41)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70523)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70490)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:71642)
+      at map (1:11)
+
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-07: rejects reservation when candidate lacks mandatory prerequisites with 409 [70.12ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-09: allows reservation when candidate meets mandatory prerequisites [116.35ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-10: two candidates competing for the last 1 slot: exactly one succeeds and one receives 409 NO_AVAILABLE_SLOTS [125.86ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-11: rejects reservation if it collides with another active reservation on candidate schedule [93.98ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-12: exact idempotency replay with same key and body returns 200 OK and identical reservation receipt [31.15ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-13: idempotency conflict: reusing same key with different body returns 409 IDEMPOTENCY_CONFLICT [24.02ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > recovers operation receipt by idempotency key [29.98ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-14: cancellation releases 1 slot, repeated cancellation is idempotent without double freeing [207.41ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > CASE-D4-15: foreign candidate cannot access or cancel someone else's reservation (returns 404) [108.14ms]
+(pass) D4-C Reservations Concurrency, Atomic Locks & Idempotency > derives agenda events strictly from active confirmed reservations [47.14ms]
+
+ 10 pass
+ 0 fail
+ 37 expect() calls
+Ran 10 tests across 1 file. [5.48s]

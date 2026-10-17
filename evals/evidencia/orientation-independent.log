@@ -1,0 +1,37 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\orientation-independent.test.ts:
+(pass) D8 Independent Orientation & Accompaniment Tests > 1. Joven lista orientadores habilitados activos [40.87ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 2. Joven solicita acompañamiento con versión concreta de ruta; idempotencia no duplica [209.69ms]
+DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+      at <anonymous> (internal:util/deprecate:11:28)
+      at deprecated (internal:util/deprecate:20:29)
+      at query (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\pg\lib\client.js:780:7)
+      at performIO (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:645:40)
+      at queryRaw (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:595:41)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70523)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70490)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:71642)
+      at map (1:11)
+
+(pass) D8 Independent Orientation & Accompaniment Tests > 3. Orientador asignado ve la solicitud en su bandeja de entrada [59.89ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 4. Orientador ajeno NO ve la solicitud asignada al otro orientador [137.78ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 5. Orientador consulta detalle autorizado: ruta, factibilidad C01 y datos minimizados [81.72ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 6. Orientador propone aclaración; joven la recibe y responde (aceptar/rechazar) [159.41ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 7. Plan INVIABLE no puede ser aprobado por orientador (regla determinista C01) [160.91ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 8. Intento de aprobar con versión obsoleta de plan falla con 409 OUTDATED_PLAN_VERSION [62.57ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 9. Ruta acompañada NO aprobada bloquea la reserva; aprobación válida permite reservar [315.37ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 10. Joven revoca acompañamiento; orientador pierde inmediatamente acceso por RLS y revocación no cancela reserva previa [210.29ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 11. AUDIT V01: Orientador no puede aprobar viabilidad con logística PENDING [173.83ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 12. AUDIT V02: Plan marcado como outdated rechaza aprobación [153.38ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 13. AUDIT V02: Modificación de versión de vacante invalida revisión dependiente [163.42ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 14. AUDIT V03: Reintento de revisión con misma clave no duplica registros ni efectos [286.49ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 15. AUDIT V04: Revisión motivada emite evidencia atómica en AuditEvent [254.96ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 16. AUDIT V05: Reserva procedente de ruta revocada exige revalidación, pero reserva independiente de la misma edición tras revocar queda habilitada [394.31ms]
+(pass) D8 Independent Orientation & Accompaniment Tests > 17. D8/D4 Integración: Reserva independiente de catálogo no se bloquea por ruta revocada de otra edición [97.72ms]
+
+ 17 pass
+ 0 fail
+ 82 expect() calls
+Ran 17 tests across 1 file. [6.14s]

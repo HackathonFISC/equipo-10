@@ -18,12 +18,20 @@ Se consultó GitHub mediante git ls-remote: main remoto apunta a 509a2b6. No dev
 - Migración D8 aplicada y verificada en Supabase según [cierre ejecutado](CIERRE_MIGRACIONES_REPOSITORIO.md); no volver a tratarla como pendiente.
 - Casos de prueba técnicos y algunos resultados reales Vertex separados. Estos antecedentes no equivalen automáticamente a aceptación del commit final ni a colaboración correlacionada.
 
+## Comprobación adicional live
+
+A02 perfil agotó 120 segundos en el intento final; 0 PASS / 1 FAIL, etapa no atribuida. [Resultado](../evals/vertex-a02.json). No se transforma en PASS ni se oculta por cumplir el mínimo numérico del set offline. Sigue pendiente comprobar estabilidad live para la demo.
+
+## Actualización de evals finales
+
+Set final ejecutado: [37/37 casos PASS y 94 pruebas sin fallos](../evals/README.md). El CSV vigente contiene F01–F37; E01–E20 se conserva como diseño inicial. Las observaciones siguientes que describían el CSV sin resultados corresponden a la revisión anterior. La evidencia de tres agentes y los otros pendientes no se consideran cerrados por este set.
+
 ## Prioridades de cierre
 
 | Prioridad | Pendiente | Por qué importa | Evidencia para cerrarlo |
 |---|---|---|---|
 | P0 | Flujo de mínimo tres agentes colaborando en un mismo caso | Requisito obligatorio §2.1 y diseño agéntico 25% | IDs/versiones, qué resultado produjo cada agente, qué consumió el siguiente, herramientas observadas, confirmaciones y efecto final. No juntar ejecuciones inconexas ni contar asistentes de desarrollo. |
-| P0 | Publicar al menos 15 evals propios ejecutados | Requisito obligatorio §2.6, entregable §6 y robustez 15% | Entradas/fixtures, esperado, métrica, resultado observado, fecha, versión y comando. El CSV actual conserva 20 DISEÑADO_NO_EJECUTADO; resultado_real y evidencia vacíos. |
+| Completado | Publicar al menos 15 evals propios ejecutados | Requisito obligatorio §2.6, entregable §6 y robustez 15% | Entradas/fixtures, esperado, métrica, resultado observado, fecha, versión y comando. El CSV actual conserva 20 DISEÑADO_NO_EJECUTADO; resultado_real y evidencia vacíos. |
 | P1 | Ensayar demo de punta a punta con cuentas reales de los cuatro roles | Funcionamiento en vivo 20% | Joven confirma perfil; empresa publica y consulta candidatura consentida; centro publica formación; joven reserva; orientador revisa acceso autorizado. Mostrar recarga/recibo y un intento bloqueado. Puede ser un recorrido acotado; no hace falta enseñar todos los CU. |
 | P1 | Probar instalación desde clon y provisionar acceso de demo | README/ejecución exigidos §6 | Pasos suficientes y probados, variables de ejemplo, BD con permisos y usuarios/membresías habilitados. No publicar claves de infraestructura. Entregar acceso al jurado por canal acordado; fixtures Auth sintéticos no son cuentas reales Supabase. |
 | Resuelto documentalmente | Conciliar documentación de cierre | Presentación/bitácora 10% y reproducibilidad | Estados, referencias y notas históricas conciliados; ver ESTADO_ACTUAL.md. No cierra pruebas, evals ni aceptación funcional. |

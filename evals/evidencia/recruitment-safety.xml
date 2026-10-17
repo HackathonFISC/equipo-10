@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="7" assertions="14" failures="0" skipped="0" time="4.8880057">
+  <testsuite name="tests\api\recruitment-safety.test.ts" file="tests\api\recruitment-safety.test.ts" tests="7" assertions="14" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="Recruitment safety: semantic guards, fixed catalog and real C01" file="tests\api\recruitment-safety.test.ts" line="9" tests="7" assertions="14" failures="0" skipped="0" time="2.456" hostname="">
+      <testcase name="requires an active company rather than any organization ADMIN" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.290982" file="tests\api\recruitment-safety.test.ts" line="30" assertions="2" />
+      <testcase name="does not clear semantic A01 warnings through an unrelated PATCH" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.241031" file="tests\api\recruitment-safety.test.ts" line="35" assertions="3" />
+      <testcase name="uses clarification answers in a real fresh analysis before updating" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.150196" file="tests\api\recruitment-safety.test.ts" line="42" assertions="2" />
+      <testcase name="rechecks final requirements semantically before publication" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.118032" file="tests\api\recruitment-safety.test.ts" line="48" assertions="1" />
+      <testcase name="rejects foreign catalog mappings before creating opportunities" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.220755" file="tests\api\recruitment-safety.test.ts" line="52" assertions="2" />
+      <testcase name="uses C01: missing entry skill is unknown, trainable does not bar entry, absent logistics stays pending" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="1.248458" file="tests\api\recruitment-safety.test.ts" line="57" assertions="3" />
+      <testcase name="publishes against the draft&apos;s original catalog even after a newer catalog appears" classname="Recruitment safety: semantic guards, fixed catalog and real C01" time="0.18979" file="tests\api\recruitment-safety.test.ts" line="67" assertions="1" />
+    </testsuite>
+  </testsuite>
+</testsuites>

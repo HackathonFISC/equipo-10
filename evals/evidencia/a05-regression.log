@@ -1,0 +1,18 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\a05-regression.test.ts:
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > does not accredit an accepted claim with no evidence through the agent tool [4.19ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > preserves accreditation when evidence really exists [0.36ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > requires commute clarification rather than silently assuming zero [0.98ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > requires availability clarification even when zero commute is explicit [0.25ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > does not treat a course without structured sessions as a verified schedule [0.17ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > preserves viable plans with explicit compatible logistics [0.13ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > does not turn a known budget violation into pending for unknown logistics [0.25ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > does not persist a successful explanation when Vertex fails to deliver a tool result [4.59ms]
+(pass) A05 regressions: evidence, unknown logistics and completed delivery > persists a genuine structured model delivery while preserving C01 feasibility [1.18ms]
+
+ 9 pass
+ 0 fail
+ 19 expect() calls
+Ran 9 tests across 1 file. [187.00ms]

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="19" assertions="140" failures="0" skipped="0" time="0.1069258">
+  <testsuite name="tests\api\c01-matcher.test.ts" file="tests\api\c01-matcher.test.ts" tests="19" assertions="140" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="D3-2 Deterministic Matching Engine C01" file="tests\api\c01-matcher.test.ts" line="6" tests="19" assertions="140" failures="0" skipped="0" time="0.002" hostname="">
+      <testcase name="loads 15 synthetic cases from tests/fixtures/d3/expected.json" classname="D3-2 Deterministic Matching Engine C01" time="0.000095" file="tests\api\c01-matcher.test.ts" line="10" assertions="1" />
+      <testcase name="evaluates CASE-D3-01-VIABLE-KNOWN: Viable conocido completo" classname="D3-2 Deterministic Matching Engine C01" time="0.002123" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-02-SALARY-INCOMPATIBLE: Salario incompatible" classname="D3-2 Deterministic Matching Engine C01" time="0.000487" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-03-CURRENCY-PERIOD-INCOMPARABLE: Moneda o periodo incomparables" classname="D3-2 Deterministic Matching Engine C01" time="0.000115" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-04-COMMUTE-EXCESSIVE: Traslado excesivo" classname="D3-2 Deterministic Matching Engine C01" time="0.000044" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-05-COMMUTE-UNKNOWN: Traslado desconocido" classname="D3-2 Deterministic Matching Engine C01" time="0.000034" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-06-SCHEDULE-INCOMPATIBLE: Horario incompatible" classname="D3-2 Deterministic Matching Engine C01" time="0.000043" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-07-SCHEDULE-UNKNOWN: Horario desconocido" classname="D3-2 Deterministic Matching Engine C01" time="0.000026" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-08-ESSENTIAL-ENTRY-UNMET: Esencial ENTRY incumplido" classname="D3-2 Deterministic Matching Engine C01" time="0.000052" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-09-ESSENTIAL-ENTRY-UNKNOWN: Esencial ENTRY desconocido" classname="D3-2 Deterministic Matching Engine C01" time="0.000045" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-10-DESIRABLE-PENDING: Deseable pendiente" classname="D3-2 Deterministic Matching Engine C01" time="0.000062" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-11-TRAINABLE-NOT-ACQUIRED: Entrenable no adquirido" classname="D3-2 Deterministic Matching Engine C01" time="0.000136" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-12-NO-EVALUABLE-REQUIREMENTS: Ningún requisito evaluable" classname="D3-2 Deterministic Matching Engine C01" time="0.000023" file="tests\api\c01-matcher.test.ts" line="91" assertions="10" />
+      <testcase name="evaluates CASE-D3-15-COUNTERFACTUAL-FAIRNESS: Contrafactual nombre, género o residencia con logística constante" classname="D3-2 Deterministic Matching Engine C01" time="0.000375" file="tests\api\c01-matcher.test.ts" line="21" assertions="4" />
+      <testsuite name="C01 Negative Tests reproducing D3 Audit Findings" file="tests\api\c01-matcher.test.ts" line="158" tests="5" assertions="15" failures="0" skipped="0" time="0" hostname="">
+        <testcase name="Finding 2: Absent skill remains DESCONOCIDO and PENDIENTE even when candidate has other claims" classname="C01 Negative Tests reproducing D3 Audit Findings &amp;gt; D3-2 Deterministic Matching Engine C01" time="0.000309" file="tests\api\c01-matcher.test.ts" line="159" assertions="4" />
+        <testcase name="Finding 3: REJECTED claim with hasEvidence=false must NOT be accredited as CUMPLE; results in NO_CUMPLE and INVIABLE" classname="C01 Negative Tests reproducing D3 Audit Findings &amp;gt; D3-2 Deterministic Matching Engine C01" time="0.000201" file="tests\api\c01-matcher.test.ts" line="207" assertions="3" />
+        <testcase name="Finding 3: PROPOSED claim or claim without evidence (hasEvidence=false) must remain DESCONOCIDO" classname="C01 Negative Tests reproducing D3 Audit Findings &amp;gt; D3-2 Deterministic Matching Engine C01" time="0.000198" file="tests\api\c01-matcher.test.ts" line="252" assertions="3" />
+        <testcase name="Finding 3: Catalog version mismatch must NOT accredit claim" classname="C01 Negative Tests reproducing D3 Audit Findings &amp;gt; D3-2 Deterministic Matching Engine C01" time="0.00018" file="tests\api\c01-matcher.test.ts" line="297" assertions="2" />
+        <testcase name="Finding 4: Candidate without constraints, windows or claims against vacancy without requirements must NOT return VIABLE" classname="C01 Negative Tests reproducing D3 Audit Findings &amp;gt; D3-2 Deterministic Matching Engine C01" time="0.000147" file="tests\api\c01-matcher.test.ts" line="348" assertions="3" />
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

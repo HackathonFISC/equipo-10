@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="8" assertions="30" failures="0" skipped="0" time="0.0596276">
+  <testsuite name="tests\api\c01-planner.test.ts" file="tests\api\c01-planner.test.ts" tests="8" assertions="30" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="D4-B C01 Learning Route Planner (Unit Tests)" file="tests\api\c01-planner.test.ts" line="9" tests="8" assertions="30" failures="0" skipped="0" time="0.001" hostname="">
+      <testcase name="calculates a VIABLE route when an edition covers the gap within budget and schedule" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.00147" file="tests\api\c01-planner.test.ts" line="41" assertions="8" />
+      <testcase name="returns a partial route with residual gap when courses only cover part of the requirements" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000203" file="tests\api\c01-planner.test.ts" line="79" assertions="4" />
+      <testcase name="flags feasibility as PENDING when edition fees have incomparable currencies" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000347" file="tests\api\c01-planner.test.ts" line="112" assertions="1" />
+      <testcase name="marks route INVIABLE when course cost exceeds candidate budget" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000132" file="tests\api\c01-planner.test.ts" line="154" assertions="3" />
+      <testcase name="disqualifies edition when sessions collide with candidate availability windows" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000094" file="tests\api\c01-planner.test.ts" line="186" assertions="2" />
+      <testcase name="disqualifies edition when sessions collide with candidate active reservations" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000248" file="tests\api\c01-planner.test.ts" line="214" assertions="2" />
+      <testcase name="disqualifies edition when an essential prerequisite is missing and cannot be learned" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000146" file="tests\api\c01-planner.test.ts" line="252" assertions="2" />
+      <testcase name="generates a sequential CONDITIONAL route when Course 2 depends on Course 1 learning outcomes" classname="D4-B C01 Learning Route Planner (Unit Tests)" time="0.000229" file="tests\api\c01-planner.test.ts" line="280" assertions="8" />
+    </testsuite>
+  </testsuite>
+</testsuites>

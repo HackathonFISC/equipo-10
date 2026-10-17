@@ -1,0 +1,28 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\c01-matcher.test.ts:
+(pass) D3-2 Deterministic Matching Engine C01 > loads 15 synthetic cases from tests/fixtures/d3/expected.json [0.09ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-01-VIABLE-KNOWN: Viable conocido completo [2.12ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-02-SALARY-INCOMPATIBLE: Salario incompatible [0.49ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-03-CURRENCY-PERIOD-INCOMPARABLE: Moneda o periodo incomparables [0.12ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-04-COMMUTE-EXCESSIVE: Traslado excesivo [0.04ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-05-COMMUTE-UNKNOWN: Traslado desconocido [0.03ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-06-SCHEDULE-INCOMPATIBLE: Horario incompatible [0.04ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-07-SCHEDULE-UNKNOWN: Horario desconocido [0.03ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-08-ESSENTIAL-ENTRY-UNMET: Esencial ENTRY incumplido [0.05ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-09-ESSENTIAL-ENTRY-UNKNOWN: Esencial ENTRY desconocido [0.04ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-10-DESIRABLE-PENDING: Deseable pendiente [0.06ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-11-TRAINABLE-NOT-ACQUIRED: Entrenable no adquirido [0.14ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-12-NO-EVALUABLE-REQUIREMENTS: Ningún requisito evaluable [0.02ms]
+(pass) D3-2 Deterministic Matching Engine C01 > evaluates CASE-D3-15-COUNTERFACTUAL-FAIRNESS: Contrafactual nombre, género o residencia con logística constante [0.38ms]
+(pass) D3-2 Deterministic Matching Engine C01 > C01 Negative Tests reproducing D3 Audit Findings > Finding 2: Absent skill remains DESCONOCIDO and PENDIENTE even when candidate has other claims [0.31ms]
+(pass) D3-2 Deterministic Matching Engine C01 > C01 Negative Tests reproducing D3 Audit Findings > Finding 3: REJECTED claim with hasEvidence=false must NOT be accredited as CUMPLE; results in NO_CUMPLE and INVIABLE [0.20ms]
+(pass) D3-2 Deterministic Matching Engine C01 > C01 Negative Tests reproducing D3 Audit Findings > Finding 3: PROPOSED claim or claim without evidence (hasEvidence=false) must remain DESCONOCIDO [0.20ms]
+(pass) D3-2 Deterministic Matching Engine C01 > C01 Negative Tests reproducing D3 Audit Findings > Finding 3: Catalog version mismatch must NOT accredit claim [0.18ms]
+(pass) D3-2 Deterministic Matching Engine C01 > C01 Negative Tests reproducing D3 Audit Findings > Finding 4: Candidate without constraints, windows or claims against vacancy without requirements must NOT return VIABLE [0.15ms]
+
+ 19 pass
+ 0 fail
+ 140 expect() calls
+Ran 19 tests across 1 file. [106.00ms]

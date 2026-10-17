@@ -1,0 +1,11 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\a01-draft-live.test.ts:
+(pass) Live/Synthetic Agent A01 Vertex AI Test > Detécta sesgos deterministas inmediatamente sin llamar a Vertex [0.56ms]
+
+ 1 pass
+ 1 filtered out
+ 0 fail
+ 2 expect() calls
+Ran 1 test across 1 file. [2.01s]

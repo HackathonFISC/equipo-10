@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="9" assertions="34" failures="0" skipped="0" time="0.5207141">
+  <testsuite name="tests\api\a02-result.test.ts" file="tests\api\a02-result.test.ts" tests="9" assertions="34" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="A02 must return proposals or a useful interview" file="tests\api\a02-result.test.ts" line="38" tests="9" assertions="34" failures="0" skipped="0" time="0.048" hostname="">
+      <testcase name="identifies missing experience kind and accepts explicitly pending dates" classname="A02 must return proposals or a useful interview" time="0.026034" file="tests\api\a02-result.test.ts" line="39" assertions="2" />
+      <testcase name="identifies partial and conflicting dates without inventing replacements" classname="A02 must return proposals or a useful interview" time="0.003343" file="tests\api\a02-result.test.ts" line="44" assertions="3" />
+      <testcase name="returns questions when evidence is incomplete; uses global endpoint and one deadline" classname="A02 must return proposals or a useful interview" time="0.013111" file="tests\api\a02-result.test.ts" line="49" assertions="5" />
+      <testcase name="sends the safety and complete-CV instructions to the provider on every round" classname="A02 must return proposals or a useful interview" time="0.002703" file="tests\api\a02-result.test.ts" line="57" assertions="14" />
+      <testcase name="recovers once from truncation without executing partial calls or changing context" classname="A02 must return proposals or a useful interview" time="0.001725" file="tests\api\a02-result.test.ts" line="70" assertions="6" />
+      <testcase name="rejects a truncated response even if it contains a usable partial tool call" classname="A02 must return proposals or a useful interview" time="0.001502" file="tests\api\a02-result.test.ts" line="79" assertions="1" />
+      <testcase name="rejects an empty result instead of reporting success" classname="A02 must return proposals or a useful interview" time="0.000851" file="tests\api\a02-result.test.ts" line="83" assertions="1" />
+      <testcase name="rejects exhausted tool rounds without a completed analysis" classname="A02 must return proposals or a useful interview" time="0.001912" file="tests\api\a02-result.test.ts" line="86" assertions="1" />
+      <testcase name="rejects invented evidence instead of attaching unrelated fragments" classname="A02 must return proposals or a useful interview" time="0.001263" file="tests\api\a02-result.test.ts" line="89" assertions="1" />
+    </testsuite>
+  </testsuite>
+</testsuites>

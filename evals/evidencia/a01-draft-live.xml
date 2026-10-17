@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="2" assertions="2" failures="0" skipped="1" time="2.0097857">
+  <testsuite name="tests\api\a01-draft-live.test.ts" file="tests\api\a01-draft-live.test.ts" tests="2" assertions="2" failures="0" skipped="1" time="0" hostname="">
+    <testsuite name="Live/Synthetic Agent A01 Vertex AI Test" file="tests\api\a01-draft-live.test.ts" line="5" tests="2" assertions="2" failures="0" skipped="1" time="0" hostname="">
+      <testcase name="Detécta sesgos deterministas inmediatamente sin llamar a Vertex" classname="Live/Synthetic Agent A01 Vertex AI Test" time="0.000563" file="tests\api\a01-draft-live.test.ts" line="18" assertions="2" />
+      <testcase name="Analiza vacante válida mediante A01 (Vertex AI o fallback)" classname="Live/Synthetic Agent A01 Vertex AI Test" time="0" file="tests\api\a01-draft-live.test.ts" line="25" assertions="0">
+        <skipped />
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testsuites>

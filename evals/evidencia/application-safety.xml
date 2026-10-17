@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="6" assertions="23" failures="0" skipped="0" time="6.4673368">
+  <testsuite name="tests\api\application-safety.test.ts" file="tests\api\application-safety.test.ts" tests="6" assertions="23" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="D5/D6 consent replay and company scope safety" file="tests\api\application-safety.test.ts" line="7" tests="6" assertions="23" failures="0" skipped="0" time="2.031" hostname="">
+      <testcase name="original apply retry after withdrawal returns WITHDRAWN without restoring access" classname="D5/D6 consent replay and company scope safety" time="0.889758" file="tests\api\application-safety.test.ts" line="33" assertions="3" />
+      <testcase name="reactivation requires a fresh key and creates a new receipt/audit atomically" classname="D5/D6 consent replay and company scope safety" time="0.296248" file="tests\api\application-safety.test.ts" line="41" assertions="7" />
+      <testcase name="same key different payload fails and concurrent exact apply creates one candidacy" classname="D5/D6 consent replay and company scope safety" time="0.273622" file="tests\api\application-safety.test.ts" line="49" assertions="3" />
+      <testcase name="active company scope denies training administrators and inactive companies at RLS" classname="D5/D6 consent replay and company scope safety" time="0.165194" file="tests\api\application-safety.test.ts" line="55" assertions="5" />
+      <testcase name="failed audit rolls back reactivation and the same fresh key can safely retry" classname="D5/D6 consent replay and company scope safety" time="0.365903" file="tests\api\application-safety.test.ts" line="65" assertions="3" />
+      <testcase name="HTTP honors header idempotency and rejects header/body mismatch" classname="D5/D6 consent replay and company scope safety" time="0.043519" file="tests\api\application-safety.test.ts" line="76" assertions="2" />
+    </testsuite>
+  </testsuite>
+</testsuites>

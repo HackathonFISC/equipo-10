@@ -1,6 +1,6 @@
 # Guion de demo y PPT de AImpulsa
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 Actualizado: 2026-10-17. Decisión humana: demo en vivo alternando perfiles y PPT de módulos; video fuera del plan. No se afirma dispensa organizadora del video ni una duración obligatoria de la demo derivada de aquel límite.
 
 El diseño Figma v2 y la aplicación existen. La presentación PPT y el ensayo final no se consideran creados por este guion. Nombre: **AImpulsa**, con AI destacado y cohete; temas claro/oscuro terracota, marfil, carbón y oliva. [Entrega visual](ENTREGA_REDISENO_FIGMA_V2.md).

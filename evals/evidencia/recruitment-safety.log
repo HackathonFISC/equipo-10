@@ -1,0 +1,27 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\recruitment-safety.test.ts:
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > requires an active company rather than any organization ADMIN [290.98ms]
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > does not clear semantic A01 warnings through an unrelated PATCH [241.03ms]
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > uses clarification answers in a real fresh analysis before updating [150.20ms]
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > rechecks final requirements semantically before publication [118.03ms]
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > rejects foreign catalog mappings before creating opportunities [220.75ms]
+DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+      at <anonymous> (internal:util/deprecate:11:28)
+      at deprecated (internal:util/deprecate:20:29)
+      at query (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\pg\lib\client.js:780:7)
+      at performIO (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:645:40)
+      at queryRaw (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:595:41)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70523)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70490)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:71642)
+      at map (1:11)
+
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > uses C01: missing entry skill is unknown, trainable does not bar entry, absent logistics stays pending [1248.46ms]
+(pass) Recruitment safety: semantic guards, fixed catalog and real C01 > publishes against the draft's original catalog even after a newer catalog appears [189.79ms]
+
+ 7 pass
+ 0 fail
+ 14 expect() calls
+Ran 7 tests across 1 file. [4.89s]

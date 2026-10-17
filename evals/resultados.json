@@ -1,0 +1,1038 @@
+{
+  "generated_at": "2026-10-17T17:49:37.358Z",
+  "source_commit": "16056ef2f76154640d17a16029d270ac661fabdf",
+  "evaluated_files_sha256": "45b05d1f170b4d948fe5fef6e688cdb2341a48913bfd9d2f5e76c8fadfa91e97",
+  "fingerprint_files": 207,
+  "provider": "offline: no live model invocation; explicit mocks/injected runners where indicated",
+  "databases": [
+    "127.0.0.1:55435/equipo10_d1_test",
+    "127.0.0.1:55445/aimpulsa_d7_test"
+  ],
+  "summary": {
+    "evals": 37,
+    "passed": 37,
+    "failed": 0,
+    "tests_passed": 94,
+    "tests_failed": 0
+  },
+  "suites": [
+    {
+      "suite": "c01-matcher",
+      "command": "bun --no-env-file test tests/api/c01-matcher.test.ts --reporter=junit --reporter-outfile=evals/evidencia/c01-matcher.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 199,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/c01-matcher.log",
+      "junit": "evals/evidencia/c01-matcher.xml"
+    },
+    {
+      "suite": "c01-planner",
+      "command": "bun --no-env-file test tests/api/c01-planner.test.ts --reporter=junit --reporter-outfile=evals/evidencia/c01-planner.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 140,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/c01-planner.log",
+      "junit": "evals/evidencia/c01-planner.xml"
+    },
+    {
+      "suite": "reservations-concurrency",
+      "command": "bun --no-env-file test tests/api/reservations-concurrency.test.ts --reporter=junit --reporter-outfile=evals/evidencia/reservations-concurrency.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 5575,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/reservations-concurrency.log",
+      "junit": "evals/evidencia/reservations-concurrency.xml"
+    },
+    {
+      "suite": "orientation-independent",
+      "command": "bun --no-env-file test tests/api/orientation-independent.test.ts --reporter=junit --reporter-outfile=evals/evidencia/orientation-independent.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 6251,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/orientation-independent.log",
+      "junit": "evals/evidencia/orientation-independent.xml"
+    },
+    {
+      "suite": "recruitment-safety",
+      "command": "bun --no-env-file test tests/api/recruitment-safety.test.ts --reporter=junit --reporter-outfile=evals/evidencia/recruitment-safety.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 5013,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/recruitment-safety.log",
+      "junit": "evals/evidencia/recruitment-safety.xml"
+    },
+    {
+      "suite": "a01-draft-live",
+      "command": "bun --no-env-file test tests/api/a01-draft-live.test.ts --reporter=junit --reporter-outfile=evals/evidencia/a01-draft-live.xml --test-name-pattern Detécta sesgos deterministas",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 2168,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 1,
+      "log": "evals/evidencia/a01-draft-live.log",
+      "junit": "evals/evidencia/a01-draft-live.xml"
+    },
+    {
+      "suite": "d2-pdf-a02-verification",
+      "command": "bun --no-env-file test tests/api/d2-pdf-a02-verification.test.ts --reporter=junit --reporter-outfile=evals/evidencia/d2-pdf-a02-verification.xml --test-name-pattern Escenario [1-8]:",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 9907,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 1,
+      "log": "evals/evidencia/d2-pdf-a02-verification.log",
+      "junit": "evals/evidencia/d2-pdf-a02-verification.xml"
+    },
+    {
+      "suite": "a02-result",
+      "command": "bun --no-env-file test tests/api/a02-result.test.ts --reporter=junit --reporter-outfile=evals/evidencia/a02-result.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 702,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/a02-result.log",
+      "junit": "evals/evidencia/a02-result.xml"
+    },
+    {
+      "suite": "a05-regression",
+      "command": "bun --no-env-file test tests/api/a05-regression.test.ts --reporter=junit --reporter-outfile=evals/evidencia/a05-regression.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 369,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/a05-regression.log",
+      "junit": "evals/evidencia/a05-regression.xml"
+    },
+    {
+      "suite": "application-safety",
+      "command": "bun --no-env-file test tests/api/application-safety.test.ts --reporter=junit --reporter-outfile=evals/evidencia/application-safety.xml",
+      "exit_code": 0,
+      "infrastructure_error": null,
+      "duration_ms": 6744,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "log": "evals/evidencia/application-safety.log",
+      "junit": "evals/evidencia/application-safety.xml"
+    }
+  ],
+  "cases": [
+    {
+      "id": "F01",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-01-VIABLE-KNOWN",
+      "name": "Viabilidad conocida",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-01-VIABLE-KNOWN: Viable conocido completo"
+      ]
+    },
+    {
+      "id": "F02",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-02-SALARY-INCOMPATIBLE",
+      "name": "Salario incompatible",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-02-SALARY-INCOMPATIBLE: Salario incompatible"
+      ]
+    },
+    {
+      "id": "F03",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-03-CURRENCY-PERIOD-INCOMPARABLE",
+      "name": "Moneda y periodo no comparables",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-03-CURRENCY-PERIOD-INCOMPARABLE: Moneda o periodo incomparables"
+      ]
+    },
+    {
+      "id": "F04",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-04-COMMUTE-EXCESSIVE",
+      "name": "Traslado excesivo",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-04-COMMUTE-EXCESSIVE: Traslado excesivo"
+      ]
+    },
+    {
+      "id": "F05",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-05-COMMUTE-UNKNOWN",
+      "name": "Traslado desconocido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-05-COMMUTE-UNKNOWN: Traslado desconocido"
+      ]
+    },
+    {
+      "id": "F06",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-06-SCHEDULE-INCOMPATIBLE",
+      "name": "Horario incompatible",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-06-SCHEDULE-INCOMPATIBLE: Horario incompatible"
+      ]
+    },
+    {
+      "id": "F07",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-07-SCHEDULE-UNKNOWN",
+      "name": "Horario desconocido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-07-SCHEDULE-UNKNOWN: Horario desconocido"
+      ]
+    },
+    {
+      "id": "F08",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-08-ESSENTIAL-ENTRY-UNMET",
+      "name": "Requisito esencial incumplido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-08-ESSENTIAL-ENTRY-UNMET: Esencial ENTRY incumplido"
+      ]
+    },
+    {
+      "id": "F09",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-09-ESSENTIAL-ENTRY-UNKNOWN",
+      "name": "Requisito esencial desconocido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-09-ESSENTIAL-ENTRY-UNKNOWN: Esencial ENTRY desconocido"
+      ]
+    },
+    {
+      "id": "F10",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-10-DESIRABLE-PENDING",
+      "name": "Requisito deseable pendiente",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-10-DESIRABLE-PENDING: Deseable pendiente"
+      ]
+    },
+    {
+      "id": "F11",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-11-TRAINABLE-NOT-ACQUIRED",
+      "name": "Entrenable no acredita habilidad",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-11-TRAINABLE-NOT-ACQUIRED: Entrenable no adquirido"
+      ]
+    },
+    {
+      "id": "F12",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-12-NO-EVALUABLE-REQUIREMENTS",
+      "name": "Cobertura sin requisitos evaluables",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-12-NO-EVALUABLE-REQUIREMENTS: Ningún requisito evaluable"
+      ]
+    },
+    {
+      "id": "F13",
+      "metric": "coincidencia con gold / invariantes C01",
+      "expected": "Todas las aserciones del caso satisfechas",
+      "kind": "deterministic",
+      "fixture": "tests/fixtures/d3/expected.json",
+      "suite": "c01-matcher",
+      "match": "CASE-D3-15-COUNTERFACTUAL-FAIRNESS",
+      "name": "Invariancia contrafactual con logística fija",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-matcher.log",
+        "evals/evidencia/c01-matcher.xml"
+      ],
+      "test_names": [
+        "evaluates CASE-D3-15-COUNTERFACTUAL-FAIRNESS: Contrafactual nombre, género o residencia con logística constante"
+      ]
+    },
+    {
+      "id": "F14",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/c01-planner.test.ts",
+      "suite": "c01-planner",
+      "match": "course cost exceeds candidate budget",
+      "name": "Presupuesto de formación excedido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-planner.log",
+        "evals/evidencia/c01-planner.xml"
+      ],
+      "test_names": [
+        "marks route INVIABLE when course cost exceeds candidate budget"
+      ]
+    },
+    {
+      "id": "F15",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/c01-planner.test.ts",
+      "suite": "c01-planner",
+      "match": "sessions collide with candidate active reservations",
+      "name": "Solapamiento con reservas existentes",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/c01-planner.log",
+        "evals/evidencia/c01-planner.xml"
+      ],
+      "test_names": [
+        "disqualifies edition when sessions collide with candidate active reservations"
+      ]
+    },
+    {
+      "id": "F16",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/reservations-concurrency.test.ts",
+      "suite": "reservations-concurrency",
+      "match": "CASE-D4-10:",
+      "name": "Dos candidatos para la última plaza",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/reservations-concurrency.log",
+        "evals/evidencia/reservations-concurrency.xml"
+      ],
+      "test_names": [
+        "CASE-D4-10: two candidates competing for the last 1 slot: exactly one succeeds and one receives 409 NO_AVAILABLE_SLOTS"
+      ]
+    },
+    {
+      "id": "F17",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/reservations-concurrency.test.ts",
+      "suite": "reservations-concurrency",
+      "match": "CASE-D4-12:",
+      "name": "Reintento exacto sin duplicar reserva",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/reservations-concurrency.log",
+        "evals/evidencia/reservations-concurrency.xml"
+      ],
+      "test_names": [
+        "CASE-D4-12: exact idempotency replay with same key and body returns 200 OK and identical reservation receipt"
+      ]
+    },
+    {
+      "id": "F18",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/reservations-concurrency.test.ts",
+      "suite": "reservations-concurrency",
+      "match": "CASE-D4-13:",
+      "name": "Conflicto de idempotencia",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/reservations-concurrency.log",
+        "evals/evidencia/reservations-concurrency.xml"
+      ],
+      "test_names": [
+        "CASE-D4-13: idempotency conflict: reusing same key with different body returns 409 IDEMPOTENCY_CONFLICT"
+      ]
+    },
+    {
+      "id": "F19",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/reservations-concurrency.test.ts",
+      "suite": "reservations-concurrency",
+      "match": "CASE-D4-14:",
+      "name": "Cancelar libera cupo una sola vez",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/reservations-concurrency.log",
+        "evals/evidencia/reservations-concurrency.xml"
+      ],
+      "test_names": [
+        "CASE-D4-14: cancellation releases 1 slot, repeated cancellation is idempotent without double freeing"
+      ]
+    },
+    {
+      "id": "F20",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/reservations-concurrency.test.ts",
+      "suite": "reservations-concurrency",
+      "match": "CASE-D4-15:",
+      "name": "Reserva ajena inaccesible",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/reservations-concurrency.log",
+        "evals/evidencia/reservations-concurrency.xml"
+      ],
+      "test_names": [
+        "CASE-D4-15: foreign candidate cannot access or cancel someone else's reservation (returns 404)"
+      ]
+    },
+    {
+      "id": "F21",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/orientation-independent.test.ts",
+      "suite": "orientation-independent",
+      "match": "9. Ruta acompañada NO aprobada",
+      "name": "Bloquear acción sin revisión y permitir aprobación válida",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/orientation-independent.log",
+        "evals/evidencia/orientation-independent.xml"
+      ],
+      "test_names": [
+        "9. Ruta acompañada NO aprobada bloquea la reserva; aprobación válida permite reservar"
+      ]
+    },
+    {
+      "id": "F22",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/orientation-independent.test.ts",
+      "suite": "orientation-independent",
+      "match": "13. AUDIT V02:",
+      "name": "Cambio de vacante invalida dictamen",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/orientation-independent.log",
+        "evals/evidencia/orientation-independent.xml"
+      ],
+      "test_names": [
+        "13. AUDIT V02: Modificación de versión de vacante invalida revisión dependiente"
+      ]
+    },
+    {
+      "id": "F23",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/orientation-independent.test.ts",
+      "suite": "orientation-independent",
+      "match": "16. AUDIT V05:",
+      "name": "Revocación y reserva independiente de misma edición",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/orientation-independent.log",
+        "evals/evidencia/orientation-independent.xml"
+      ],
+      "test_names": [
+        "16. AUDIT V05: Reserva procedente de ruta revocada exige revalidación, pero reserva independiente de la misma edición tras revocar queda habilitada"
+      ]
+    },
+    {
+      "id": "F24",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "injected_model",
+      "fixture": "tests/api/recruitment-safety.test.ts",
+      "suite": "recruitment-safety",
+      "match": "rechecks final requirements semantically",
+      "name": "Alerta semántica bloquea publicación",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/recruitment-safety.log",
+        "evals/evidencia/recruitment-safety.xml"
+      ],
+      "test_names": [
+        "rechecks final requirements semantically before publication"
+      ]
+    },
+    {
+      "id": "F25",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/a01-draft-live.test.ts",
+      "suite": "a01-draft-live",
+      "match": "Detécta sesgos deterministas",
+      "name": "Detectar términos discriminatorios por código",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a01-draft-live.log",
+        "evals/evidencia/a01-draft-live.xml"
+      ],
+      "test_names": [
+        "Detécta sesgos deterministas inmediatamente sin llamar a Vertex"
+      ]
+    },
+    {
+      "id": "F26",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 1:",
+      "name": "Extracción limpia de PDF digital",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 1: extrae texto digital limpio de un PDF sencillo sin metadatos internos"
+      ]
+    },
+    {
+      "id": "F27",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 2:",
+      "name": "Orden de lectura PDF de dos columnas",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 2: preserva el orden de lectura en un PDF de dos columnas sin entrelazar"
+      ]
+    },
+    {
+      "id": "F28",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 4:",
+      "name": "Escaneo sin texto: fallo recuperable",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 4: PDF escaneado (0 caracteres de texto) devuelve estado FAILED recuperable y no fabrica texto"
+      ]
+    },
+    {
+      "id": "F29",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 5:",
+      "name": "Rechazo de PDF corrupto",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 5: rechaza archivo PDF corrupto con 422 INVALID_SOURCE_FILE"
+      ]
+    },
+    {
+      "id": "F30",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 6:",
+      "name": "Texto malicioso permanece dato del parser",
+      "limitation": "Prueba del parser; no demuestra resistencia semántica del modelo ante toda inyección.",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 6: maneja intentos de inyección de instrucciones como texto plano biográfico"
+      ]
+    },
+    {
+      "id": "F31",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "injected_model",
+      "fixture": "tests/api/d2-pdf-a02-verification.test.ts",
+      "suite": "d2-pdf-a02-verification",
+      "match": "Escenario 8:",
+      "name": "Consentimiento revocado impide interpretación",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/d2-pdf-a02-verification.log",
+        "evals/evidencia/d2-pdf-a02-verification.xml"
+      ],
+      "test_names": [
+        "Escenario 8: bloquea interpretación si la fuente fue retirada o el consentimiento revocado"
+      ]
+    },
+    {
+      "id": "F32",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "mocked_vertex",
+      "fixture": "tests/api/a02-result.test.ts",
+      "suite": "a02-result",
+      "match": "rejects invented evidence",
+      "name": "Referencias de evidencia inventadas rechazadas",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a02-result.log",
+        "evals/evidencia/a02-result.xml"
+      ],
+      "test_names": [
+        "rejects invented evidence instead of attaching unrelated fragments"
+      ]
+    },
+    {
+      "id": "F33",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "mocked_vertex",
+      "fixture": "tests/api/a02-result.test.ts",
+      "suite": "a02-result",
+      "match": "rejects a truncated response",
+      "name": "Salida truncada no produce éxito",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a02-result.log",
+        "evals/evidencia/a02-result.xml"
+      ],
+      "test_names": [
+        "rejects a truncated response even if it contains a usable partial tool call"
+      ]
+    },
+    {
+      "id": "F34",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/a05-regression.test.ts",
+      "suite": "a05-regression",
+      "match": "requires commute clarification",
+      "name": "A05 solicita traslado desconocido",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a05-regression.log",
+        "evals/evidencia/a05-regression.xml"
+      ],
+      "test_names": [
+        "requires commute clarification rather than silently assuming zero"
+      ]
+    },
+    {
+      "id": "F35",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "injected_tools",
+      "fixture": "tests/api/a05-regression.test.ts",
+      "suite": "a05-regression",
+      "match": "does not accredit an accepted claim",
+      "name": "A05 no acredita habilidad sin evidencia",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a05-regression.log",
+        "evals/evidencia/a05-regression.xml"
+      ],
+      "test_names": [
+        "does not accredit an accepted claim with no evidence through the agent tool"
+      ]
+    },
+    {
+      "id": "F36",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "mocked_vertex",
+      "fixture": "tests/api/a05-regression.test.ts",
+      "suite": "a05-regression",
+      "match": "does not persist a successful explanation",
+      "name": "Entrega de IA incompleta no persiste éxito",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/a05-regression.log",
+        "evals/evidencia/a05-regression.xml"
+      ],
+      "test_names": [
+        "does not persist a successful explanation when Vertex fails to deliver a tool result"
+      ]
+    },
+    {
+      "id": "F37",
+      "metric": "aserciones del caso satisfechas; violaciones esperadas=0",
+      "expected": "PASS del caso específico y suite sin fallos",
+      "kind": "deterministic_or_local_integration",
+      "fixture": "tests/api/application-safety.test.ts",
+      "suite": "application-safety",
+      "match": "original apply retry after withdrawal",
+      "name": "Reintento antiguo no restaura consentimiento",
+      "status": "PASS",
+      "observed": {
+        "matched_tests": 1,
+        "passed": 1,
+        "failed": 0,
+        "suite_exit": 0
+      },
+      "evidence": [
+        "evals/evidencia/application-safety.log",
+        "evals/evidencia/application-safety.xml"
+      ],
+      "test_names": [
+        "original apply retry after withdrawal returns WITHDRAWN without restoring access"
+      ]
+    }
+  ],
+  "not_proven": [
+    "Full correlated three-agent live case",
+    "Full manual UI acceptance with real accounts",
+    "Semantic correctness or adversarial robustness of all real-model outputs",
+    "Global optimal job assignment",
+    "Video/administrative deadline compliance"
+  ]
+}

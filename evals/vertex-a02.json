@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-10-17T17:52:35.598Z",
+  "source_commit": "16056ef2f76154640d17a16029d270ac661fabdf",
+  "status": "TIMEOUT",
+  "suite": "tests/api/d2-pdf-a02-verification.test.ts",
+  "test": "Escenario 9",
+  "command": "bun --env-file=.env test tests/api/d2-pdf-a02-verification.test.ts --test-name-pattern 'Escenario 9:' --reporter=junit --reporter-outfile=evals/evidencia/a02-vertex-live.xml",
+  "timeout_ms": 120000,
+  "duration_ms": 120014.75,
+  "passed": 0,
+  "failed": 1,
+  "filtered": 8,
+  "provider": "Real Vertex-configured A02 integration attempted; did not complete",
+  "stage": "Not attributed: no completed result; provider vs local tool delay not established",
+  "evidence": [
+    "evals/evidencia/a02-vertex-live.log",
+    "evals/evidencia/a02-vertex-live.xml"
+  ],
+  "effect": "Only synthetic local fixture, no demo accounts or remote business DB modified"
+}

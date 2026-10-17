@@ -1,0 +1,44 @@
+bun test v1.3.14 (0d9b296a)
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+Warning: Indexing all PDF objects
+Warning: Indexing all PDF objects
+Warning: Indexing all PDF objects
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+Warning: Indexing all PDF objects
+Warning: Font "F1" is not available -- attempting to fallback to a default font.
+
+
+tests\api\d2-pdf-a02-verification.test.ts:
+DeprecationWarning: Calling client.query() when the client is already executing a query is deprecated and will be removed in pg@9.0. Use async/await or an external async flow control mechanism instead.
+      at <anonymous> (internal:util/deprecate:11:28)
+      at deprecated (internal:util/deprecate:20:29)
+      at query (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\pg\lib\client.js:780:7)
+      at performIO (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:645:40)
+      at queryRaw (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:595:41)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70523)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:70490)
+      at <anonymous> (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:11:71642)
+      at map (1:11)
+
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 1: extrae texto digital limpio de un PDF sencillo sin metadatos internos [213.68ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 2: preserva el orden de lectura en un PDF de dos columnas sin entrelazar [10.04ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 3: procesa CV sin experiencia y marca campos faltantes sin inventar fechas [2963.45ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 4: PDF escaneado (0 caracteres de texto) devuelve estado FAILED recuperable y no fabrica texto [488.40ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 5: rechaza archivo PDF corrupto con 422 INVALID_SOURCE_FILE [20.32ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 6: maneja intentos de inyección de instrucciones como texto plano biográfico [14.47ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 7: cuando Vertex no está disponible o falla la red, devuelve 503 sin bloquear [689.67ms]
+(pass) D2-B & D2-C Verification Suite: Reliable PDF Parsing, Column Ordering, Consent Lifecycle & A02 Vertex AI > Escenario 8: bloquea interpretación si la fuente fue retirada o el consentimiento revocado [926.64ms]
+
+ 8 pass
+ 1 filtered out
+ 0 fail
+ 36 expect() calls
+Ran 8 tests across 1 file. [9.72s]

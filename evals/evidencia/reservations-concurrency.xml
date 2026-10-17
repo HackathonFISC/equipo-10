@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="10" assertions="37" failures="0" skipped="0" time="5.4756014">
+  <testsuite name="tests\api\reservations-concurrency.test.ts" file="tests\api\reservations-concurrency.test.ts" tests="10" assertions="37" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="D4-C Reservations Concurrency, Atomic Locks &amp; Idempotency" file="tests\api\reservations-concurrency.test.ts" line="11" tests="10" assertions="37" failures="0" skipped="0" time="0.85" hostname="">
+      <testcase name="CASE-D4-07: rejects reservation when candidate lacks mandatory prerequisites with 409" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.070122" file="tests\api\reservations-concurrency.test.ts" line="331" assertions="2" />
+      <testcase name="CASE-D4-09: allows reservation when candidate meets mandatory prerequisites" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.116347" file="tests\api\reservations-concurrency.test.ts" line="350" assertions="5" />
+      <testcase name="CASE-D4-10: two candidates competing for the last 1 slot: exactly one succeeds and one receives 409 NO_AVAILABLE_SLOTS" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.125856" file="tests\api\reservations-concurrency.test.ts" line="372" assertions="4" />
+      <testcase name="CASE-D4-11: rejects reservation if it collides with another active reservation on candidate schedule" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.093981" file="tests\api\reservations-concurrency.test.ts" line="412" assertions="2" />
+      <testcase name="CASE-D4-12: exact idempotency replay with same key and body returns 200 OK and identical reservation receipt" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.031154" file="tests\api\reservations-concurrency.test.ts" line="432" assertions="3" />
+      <testcase name="CASE-D4-13: idempotency conflict: reusing same key with different body returns 409 IDEMPOTENCY_CONFLICT" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.024017" file="tests\api\reservations-concurrency.test.ts" line="451" assertions="2" />
+      <testcase name="recovers operation receipt by idempotency key" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.029984" file="tests\api\reservations-concurrency.test.ts" line="469" assertions="4" />
+      <testcase name="CASE-D4-14: cancellation releases 1 slot, repeated cancellation is idempotent without double freeing" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.207406" file="tests\api\reservations-concurrency.test.ts" line="484" assertions="10" />
+      <testcase name="CASE-D4-15: foreign candidate cannot access or cancel someone else&apos;s reservation (returns 404)" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.108143" file="tests\api\reservations-concurrency.test.ts" line="539" assertions="2" />
+      <testcase name="derives agenda events strictly from active confirmed reservations" classname="D4-C Reservations Concurrency, Atomic Locks &amp;amp; Idempotency" time="0.047137" file="tests\api\reservations-concurrency.test.ts" line="570" assertions="3" />
+    </testsuite>
+  </testsuite>
+</testsuites>

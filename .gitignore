@@ -60,3 +60,6 @@ Desktop.ini
 
 # Preview de la copia D7: depende de la carpeta hermana y no es configuracion de entrega.
 /apps/web/vite.d7.config.ts
+
+# Evidencia de evals sanitizada para la entrega (no logs privados de desarrollo).
+!/evals/evidencia/*.log

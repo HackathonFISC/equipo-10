@@ -1,0 +1,17 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\c01-planner.test.ts:
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > calculates a VIABLE route when an edition covers the gap within budget and schedule [1.47ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > returns a partial route with residual gap when courses only cover part of the requirements [0.20ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > flags feasibility as PENDING when edition fees have incomparable currencies [0.35ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > marks route INVIABLE when course cost exceeds candidate budget [0.13ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > disqualifies edition when sessions collide with candidate availability windows [0.09ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > disqualifies edition when sessions collide with candidate active reservations [0.25ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > disqualifies edition when an essential prerequisite is missing and cannot be learned [0.15ms]
+(pass) D4-B C01 Learning Route Planner (Unit Tests) > generates a sequential CONDITIONAL route when Course 2 depends on Course 1 learning outcomes [0.23ms]
+
+ 8 pass
+ 0 fail
+ 30 expect() calls
+Ran 8 tests across 1 file. [59.00ms]

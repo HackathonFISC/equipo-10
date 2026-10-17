@@ -1,6 +1,6 @@
 # Mapeo de casos, actores y agentes — revisión 2
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 
 Actualización 2026-10-17: esta matriz asigna responsabilidades del diseño a CU01–CU17; no declara que todas sus filas estén implementadas. Estado por caso en [la cobertura actual](CASOS_DE_USO.md#cobertura-actual-por-caso). Reparto de [arquitectura](ARQUITECTURA_AGENTES.md): A01 Vacantes/contenido; A02 Perfil/aprendizaje; A03 Compatibilidad/brechas; A05 Formación implementados por modos con los límites de sus informes. A04 Postulación/práctica/coordinación sigue aplazado. C01 cálculos, C02 seguridad/equidad/trazas y C03 flujo/acción son código, no agentes LLM adicionales. El antiguo A05 Auditor migra a C02. No se requiere IA para cada operación. [Colaboración real, prompts y herramientas](COLABORACION_AGENTES.md).
 

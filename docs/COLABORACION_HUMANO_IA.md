@@ -1,6 +1,6 @@
 # Colaboración humana e IA en AImpulsa
 
-> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; el ensayo manual completo y la traza de tres agentes siguen pendientes. Los evals finales están en [el paquete reproducible](../evals/README.md).
 
 Fecha de revisión: 2026-10-17. Este documento sintetiza las 89 entradas existentes de [BITACORA_IA.csv](BITACORA_IA.csv) antes de registrar esta actualización. La bitácora conserva el detalle histórico de fechas, herramientas/modelos, archivos y verificaciones; esta síntesis no lo reemplaza.
 

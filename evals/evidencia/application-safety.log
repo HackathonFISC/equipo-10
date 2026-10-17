@@ -1,0 +1,57 @@
+bun test v1.3.14 (0d9b296a)
+
+
+tests\api\application-safety.test.ts:
+(pass) D5/D6 consent replay and company scope safety > original apply retry after withdrawal returns WITHDRAWN without restoring access [889.76ms]
+(pass) D5/D6 consent replay and company scope safety > reactivation requires a fresh key and creates a new receipt/audit atomically [296.25ms]
+(pass) D5/D6 consent replay and company scope safety > same key different payload fails and concurrent exact apply creates one candidacy [273.62ms]
+(pass) D5/D6 consent replay and company scope safety > active company scope denies training administrators and inactive companies at RLS [165.19ms]
+Database unexpected error in withActor: 60 | 
+61 | Example:
+62 |   await prisma.$executeRawUnsafe(\`ALTER USER prisma WITH PASSWORD '\${password}'\`)
+63 | 
+64 | More Information: https://pris.ly/d/execute-raw
+65 | `)}var zi=({clientMethod:e,activeProvider:t,clientVersion:r})=>n=>{let i="",o;if(Ur(n))i=n.sql,o={values:It(n.values,r),__prismaRawParameters__:!0};else if(Array.isArray(n)){let[s,...a]=n;i=s,o={values:It(a||[],r),__prismaRawParameters__:!0}}else switch(t){case"sqlite":case"mysql":{i=n.sql,o={values:It(n.values,r),__prismaRawParameters__:!0};break}case"cockroachdb":case"postgresql":case"postgres":{i=n.text,o={values:It(n.values,r),__prismaRawParameters__:!0};break}case"sqlserver":{i=Al(n),o={values:It(n.values,r),__prismaRawParameters__:!0};break}default:throw new Error(`The ${t} provider does not support ${e}`)}return o?.values?Ol(`prisma.${e}(${i}, ${o.values})`):Ol(`prisma.${e}(${i})`),{query:i,parameters:o}},Dl={requestArgsToMiddlewareArgs(e){return[e.strings,...e.values]},middlewareArgsToRequestArgs(e){let[t,...r]=e;return new Nl.Sql(t,r)}},Ml={requestArgsToMiddlewareArgs(e){return[e]},middlewareArgsToRequestArgs(e){return e[0]}};function Hi(e){return function(r,n){let i,o=(s=e)=>{try{return s===void 0||
+
+PrismaClientKnownRequestError: 
+Invalid `tx.auditEvent.create()` invocation in
+C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\apps\api\src\modules\recruitment\applications.service.ts:42:25
+
+  39 }
+  40 private async record(tx:Prisma.TransactionClient,actor:string,profile:string,operation:string,key:string,hash:string,result:CandidateApplicationView,reason:string) {
+  41   const receipt=await tx.operationReceipt.create({data:{actorUserId:actor,profileId:profile,operation,idempotencyKey:key,payloadHash:hash,receiptPayload:result as unknown as Prisma.InputJsonValue}});
+→ 42   await tx.auditEvent.create(
+Database error. Code: `P0001`. Message: `synthetic audit failure`
+       meta: {
+  modelName: "AuditEvent",
+  driverAdapterError: 661 |       this.onError(e);
+662 |     }
+663 |   }
+664 |   onError(error) {
+665 |     debug("Error in performIO: %O", error);
+666 |     throw new DriverAdapterError(convertDriverError(error));
+                    ^
+DriverAdapterError: synthetic audit failure
+ cause: [Object ...],
+
+      at onError (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:666:15)
+      at performIO (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:717:9)
+      at queryRaw (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\adapter-pg\dist\index.mjs:647:15)
+      at processTicksAndRejections (unknown:7:39)
+,
+},
+ clientVersion: "7.10.1",
+       code: "P2039"
+
+      at handleRequestError (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:65:8646)
+      at handleAndLogRequestError (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:1:2495)
+      at request (C:\Users\sebas\OneDrive - Universidad Tecnológica de Panamá\Documentos\Universidad\Hackaton\magi\solucion\equipo-10\node_modules\@prisma\client\runtime\client.js:1:2495)
+      at processTicksAndRejections (unknown:7:39)
+
+(pass) D5/D6 consent replay and company scope safety > failed audit rolls back reactivation and the same fresh key can safely retry [365.90ms]
+(pass) D5/D6 consent replay and company scope safety > HTTP honors header idempotency and rejects header/body mismatch [43.52ms]
+
+ 6 pass
+ 0 fail
+ 23 expect() calls
+Ran 6 tests across 1 file. [6.47s]

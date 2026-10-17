@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="bun test" tests="9" assertions="19" failures="0" skipped="0" time="0.1877741">
+  <testsuite name="tests\api\a05-regression.test.ts" file="tests\api\a05-regression.test.ts" tests="9" assertions="19" failures="0" skipped="0" time="0" hostname="">
+    <testsuite name="A05 regressions: evidence, unknown logistics and completed delivery" file="tests\api\a05-regression.test.ts" line="47" tests="9" assertions="19" failures="0" skipped="0" time="0.009" hostname="">
+      <testcase name="does not accredit an accepted claim with no evidence through the agent tool" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.004194" file="tests\api\a05-regression.test.ts" line="48" assertions="2" />
+      <testcase name="preserves accreditation when evidence really exists" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000361" file="tests\api\a05-regression.test.ts" line="55" assertions="2" />
+      <testcase name="requires commute clarification rather than silently assuming zero" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000978" file="tests\api\a05-regression.test.ts" line="62" assertions="3" />
+      <testcase name="requires availability clarification even when zero commute is explicit" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000252" file="tests\api\a05-regression.test.ts" line="69" assertions="2" />
+      <testcase name="does not treat a course without structured sessions as a verified schedule" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000167" file="tests\api\a05-regression.test.ts" line="75" assertions="1" />
+      <testcase name="preserves viable plans with explicit compatible logistics" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000133" file="tests\api\a05-regression.test.ts" line="80" assertions="1" />
+      <testcase name="does not turn a known budget violation into pending for unknown logistics" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.000246" file="tests\api\a05-regression.test.ts" line="85" assertions="2" />
+      <testcase name="does not persist a successful explanation when Vertex fails to deliver a tool result" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.004587" file="tests\api\a05-regression.test.ts" line="91" assertions="2" />
+      <testcase name="persists a genuine structured model delivery while preserving C01 feasibility" classname="A05 regressions: evidence, unknown logistics and completed delivery" time="0.001178" file="tests\api\a05-regression.test.ts" line="99" assertions="4" />
+    </testsuite>
+  </testsuite>
+</testsuites>
