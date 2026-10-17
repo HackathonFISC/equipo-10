@@ -1,0 +1,276 @@
+{
+  "generated_at": "2026-10-17T16:20:30.934Z",
+  "head": "5e448e008028010f62623ccc5431b4d641b75664",
+  "working_tree_sha256": "52bc32c6579696f11166ac9c847dd6c3800e0058e92e0ac301839672b91a3fb5",
+  "fingerprint_files": 197,
+  "verdict": "REJECT_D8_CLOSURE",
+  "environments": [
+    "PostgreSQL test-only localhost:55435",
+    "PostgreSQL test-only localhost:55445",
+    "PGlite in memory",
+    "Edge headless with synthetic Auth",
+    "Vertex AI with synthetic inputs",
+    "Supabase read-only migration check"
+  ],
+  "api": {
+    "suites": [
+      {
+        "suite": "a02-interpretation.test.ts",
+        "passed": 10,
+        "failed": 0,
+        "log": "a02-interpretation.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "a02-result.test.ts",
+        "passed": 9,
+        "failed": 0,
+        "log": "a02-result.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "a03-orientation.test.ts",
+        "passed": 9,
+        "failed": 0,
+        "log": "a03-retry.log",
+        "initial_exit": 1
+      },
+      {
+        "suite": "a05-orientation.test.ts",
+        "passed": 7,
+        "failed": 0,
+        "log": "a05-orientation.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "a05-regression.test.ts",
+        "passed": 9,
+        "failed": 0,
+        "log": "a05-regression.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "access.test.ts",
+        "passed": 10,
+        "failed": 0,
+        "log": "access-current-limit.log",
+        "initial_exit": 1
+      },
+      {
+        "suite": "application-safety.test.ts",
+        "passed": 6,
+        "failed": 0,
+        "log": "application-safety.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "c01-matcher.test.ts",
+        "passed": 19,
+        "failed": 0,
+        "log": "c01-matcher.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "c01-planner.test.ts",
+        "passed": 8,
+        "failed": 0,
+        "log": "c01-planner.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "config.test.ts",
+        "passed": 11,
+        "failed": 0,
+        "log": "config.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "courses.test.ts",
+        "passed": 9,
+        "failed": 0,
+        "log": "courses.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "deploy-d5-d7.test.ts",
+        "passed": 2,
+        "failed": 0,
+        "log": "deploy-d5-d7.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "multimodal-sources.test.ts",
+        "passed": 11,
+        "failed": 0,
+        "log": "multimodal-sources.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "opportunities.test.ts",
+        "passed": 25,
+        "failed": 0,
+        "log": "opportunities.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "orientation-independent.test.ts",
+        "passed": 10,
+        "failed": 0,
+        "log": "orientation-independent.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "profile.test.ts",
+        "passed": 36,
+        "failed": 0,
+        "log": "profile.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "recruitment-applications.test.ts",
+        "passed": 8,
+        "failed": 0,
+        "log": "recruitment-applications.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "recruitment-safety.test.ts",
+        "passed": 7,
+        "failed": 0,
+        "log": "recruitment-safety.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "reservations-concurrency.test.ts",
+        "passed": 10,
+        "failed": 0,
+        "log": "reservations-concurrency.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "training-assessments.test.ts",
+        "passed": 18,
+        "failed": 0,
+        "log": "training-assessments.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "training-center.test.ts",
+        "passed": 8,
+        "failed": 0,
+        "log": "training-center.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "training-certificates.test.ts",
+        "passed": 8,
+        "failed": 0,
+        "log": "training-certificates.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "training-participants.test.ts",
+        "passed": 9,
+        "failed": 0,
+        "log": "training-participants.test.ts.log",
+        "initial_exit": 0
+      },
+      {
+        "suite": "d2-pdf-a02-verification.test.ts (offline scenarios 1–8)",
+        "passed": 8,
+        "failed": 0,
+        "log": "d2-pdf-offline.log"
+      }
+    ],
+    "passed": 267,
+    "failed": 0
+  },
+  "schema_checks": {
+    "passed": 30
+  },
+  "runtime_rls_checks": {
+    "passed": 15
+  },
+  "identity_db_checks": {
+    "passed": 11
+  },
+  "browser": {
+    "command": "bun run test:e2e",
+    "passed": 10,
+    "failed": 0,
+    "d8_specific_browser_coverage": false,
+    "real_supabase_auth_acceptance": false
+  },
+  "compiler": {
+    "typecheck": "PASS",
+    "build": "PASS",
+    "prisma_validate": "PASS",
+    "bundle_warning": "approximately 823 kB"
+  },
+  "d8_extra_checks": {
+    "baseline": 10,
+    "additional_passed": 0,
+    "additional_failed": 6,
+    "observed": {
+      "pending_approval_http": 200,
+      "outdated_approval_http": 200,
+      "changed_vacancy_approval_http": 200,
+      "duplicate_review_rows": 2,
+      "review_audit_events_added": 0,
+      "reservation_without_plan_id_after_revocation_http": 201
+    },
+    "reproduction": ".local/verification-d1-d8/d8-audit.test.ts",
+    "note": "The last case requires distinguishing independent bookings from actions originating in an accompanied plan."
+  },
+  "vertex": {
+    "A01_syllabus": {
+      "status": "PASS",
+      "synthetic": true
+    },
+    "A02_assessment_bank": {
+      "status": "TIMEOUT",
+      "elapsed_ms": 119627,
+      "error": "ASSESSMENT_GENERATION_FAILED",
+      "published": false
+    },
+    "A03": {
+      "passed": 1,
+      "failed": 0,
+      "status": "PASS",
+      "duration_seconds": 8.78
+    },
+    "A05": {
+      "passed": 1,
+      "failed": 0,
+      "status": "PASS",
+      "duration_seconds": 19.68
+    },
+    "A02_profile": {
+      "passed": 1,
+      "failed": 0
+    },
+    "A04": {
+      "status": "NOT_IMPLEMENTED"
+    }
+  },
+  "remote": {
+    "mode": "READ_ONLY",
+    "pending": [
+      "202610170010_independent_orientation"
+    ],
+    "applied": false
+  },
+  "official_evals": {
+    "file": "evals/casos.csv",
+    "designed": 20,
+    "execution_status_in_file": "DISEÑADO_NO_EJECUTADO",
+    "is_this_report_the_15_semantic_evals": false
+  },
+  "limits": [
+    "No global claim that all agents are validated",
+    "No three-agent correlated production trace",
+    "No new audio/image/OCR implementation",
+    "No remote schema changes",
+    "No commit push or freeze tag"
+  ]
+}

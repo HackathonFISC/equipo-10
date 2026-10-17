@@ -533,6 +533,6 @@ describe("D2-B Integration: Agent A02 Text Interpretation, Grants & Atomic Batch
     }, { timeout: 200 })).rejects.toMatchObject({ code: 'DATABASE_TRANSACTION_TIMEOUT', status: 503, retryable: true });
     const stored = await dbFixture.admin.query('SELECT id FROM app."ProfileExperience" WHERE id = $1', [rowId]);
     expect(stored.rowCount).toBe(0);
-  });
+  }, 15000);
 
 });

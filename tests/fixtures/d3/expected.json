@@ -1,0 +1,676 @@
+[
+  {
+    "id": "CASE-D3-01-VIABLE-KNOWN",
+    "name": "Viable conocido completo",
+    "description": "El candidato cumple todos los requisitos esenciales de entrada, los deseables, y la logística (salario ofrecido >= mínimo, traslado <= máx, horario compatible) es plenamente compatible.",
+    "input": {
+      "candidate": {
+        "display_name": "Juan Pérez",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 2, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 3, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 4, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 5, "start_minute": 480, "end_minute": 1020 }
+        ]
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "schedule_summary": "Lunes a Viernes 08:00 - 17:00",
+        "schedule_windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 2, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 3, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 4, "start_minute": 480, "end_minute": 1020 },
+          { "weekday": 5, "start_minute": 480, "end_minute": 1020 }
+        ],
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 40
+      }
+    },
+    "expected": {
+      "status": "VIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-02-SALARY-INCOMPATIBLE",
+    "name": "Salario incompatible",
+    "description": "Misma moneda y periodo, pero el salario ofrecido por la vacante es menor que la expectativa mínima del candidato. Violación dura -> INVIABLE.",
+    "input": {
+      "candidate": {
+        "display_name": "María Castillo",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "750.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 1020 }
+        ]
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 30
+      }
+    },
+    "expected": {
+      "status": "INVIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "NO_CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-03-CURRENCY-PERIOD-INCOMPARABLE",
+    "name": "Moneda o periodo incomparables",
+    "description": "Candidato exige en USD/MONTH pero la vacante publica en USD/HOUR sin horas semanales especificadas (o monedas disímiles). No se inventa conversión -> DESCONOCIDO y PENDIENTE.",
+    "input": {
+      "candidate": {
+        "display_name": "Carlos Ruiz",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Operario Temporal",
+        "salary_amount": "3.50",
+        "salary_currency": "USD",
+        "salary_period": "HOUR",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 25
+      }
+    },
+    "expected": {
+      "status": "PENDIENTE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "DESCONOCIDO",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": ["logistics.salary_period_incomparable"],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-04-COMMUTE-EXCESSIVE",
+    "name": "Traslado excesivo",
+    "description": "El tiempo estimado de viaje (75 min) supera el límite máximo de traslado del candidato (60 min). Violación dura -> INVIABLE.",
+    "input": {
+      "candidate": {
+        "display_name": "Ana Gómez",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 75
+      }
+    },
+    "expected": {
+      "status": "INVIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "NO_CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-05-COMMUTE-UNKNOWN",
+    "name": "Traslado desconocido",
+    "description": "Candidato tiene límite de traslado KNOWN (45 min), pero no se suministra estimación de trayecto en assumptions y la ubicación no tiene estimación -> DESCONOCIDO y PENDIENTE.",
+    "input": {
+      "candidate": {
+        "display_name": "Roberto Morales",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 45,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "location": "Tocumen",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {}
+    },
+    "expected": {
+      "status": "PENDIENTE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "DESCONOCIDO",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": ["logistics.commute_minutes_unknown"],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-06-SCHEDULE-INCOMPATIBLE",
+    "name": "Horario incompatible",
+    "description": "El horario requerido por la vacante (turno nocturno o fines de semana) colisiona frontalmente con las ventanas confirmadas del candidato -> INVIABLE.",
+    "input": {
+      "candidate": {
+        "display_name": "Sofía Chen",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 720 }
+        ]
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega Turno Completo",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "schedule_windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 1020 }
+        ],
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 20
+      }
+    },
+    "expected": {
+      "status": "INVIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "NO_CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-07-SCHEDULE-UNKNOWN",
+    "name": "Horario desconocido",
+    "description": "La vacante exige horario fijo pero el candidato tiene disponibilidad UNKNOWN y no tiene ventanas registradas -> PENDIENTE.",
+    "input": {
+      "candidate": {
+        "display_name": "Luis Vega",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "UNKNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "schedule_windows": [
+          { "weekday": 1, "start_minute": 480, "end_minute": 1020 }
+        ],
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de entradas y salidas", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 30
+      }
+    },
+    "expected": {
+      "status": "PENDIENTE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 1,
+      "coverage_percent": 100.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "DESCONOCIDO"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": ["availability.windows_unknown"],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-08-ESSENTIAL-ENTRY-UNMET",
+    "name": "Esencial ENTRY incumplido",
+    "description": "La vacante exige un requisito ESSENTIAL ENTRY (ej. Licencia de Conducir o Manejo de Montacargas) que el candidato comprobadamente no tiene. Violación dura -> INVIABLE.",
+    "input": {
+      "candidate": {
+        "display_name": "David Batista",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "has_evidence": true },
+          { "competency_code": "COMP-FORK-02", "competency_name": "Operación de montacargas certificado", "decision": "REJECTED", "has_evidence": false }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Operador de Montacargas",
+        "salary_amount": "700.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "requirement_type": "ESSENTIAL", "stage": "ENTRY" },
+          { "competency_code": "COMP-FORK-02", "competency_name": "Operación de montacargas certificado", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 25
+      }
+    },
+    "expected": {
+      "status": "INVIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 2,
+      "coverage_percent": 50.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": ["COMP-FORK-02"],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-09-ESSENTIAL-ENTRY-UNKNOWN",
+    "name": "Esencial ENTRY desconocido",
+    "description": "Requisito ESSENTIAL ENTRY no evaluable en perfil por falta de declaración explícita de incompetencia o competencia -> DESCONOCIDO y PENDIENTE.",
+    "input": {
+      "candidate": {
+        "display_name": "Elena Ríos",
+        "claims": [],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "requirement_type": "ESSENTIAL", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 30
+      }
+    },
+    "expected": {
+      "status": "PENDIENTE",
+      "coverage_numerator": 0,
+      "coverage_denominator": 0,
+      "coverage_percent": null,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": ["COMP-INV-01"],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-10-DESIRABLE-PENDING",
+    "name": "Deseable pendiente",
+    "description": "Cumple los requisitos esenciales ENTRY y la logística. Un requisito DESIRABLE ENTRY no se cumple -> Sigue siendo VIABLE pero con cobertura parcial y brecha deseable identificada.",
+    "input": {
+      "candidate": {
+        "display_name": "Jorge Arango",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "has_evidence": true },
+          { "competency_code": "COMP-OFFICE-01", "competency_name": "Excel básico", "decision": "REJECTED", "has_evidence": false }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "requirement_type": "ESSENTIAL", "stage": "ENTRY" },
+          { "competency_code": "COMP-OFFICE-01", "competency_name": "Excel básico", "requirement_type": "DESIRABLE", "stage": "ENTRY" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 25
+      }
+    },
+    "expected": {
+      "status": "VIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 2,
+      "coverage_percent": 50.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-11-TRAINABLE-NOT-ACQUIRED",
+    "name": "Entrenable no adquirido",
+    "description": "Un requisito ESSENTIAL con stage TRAINABLE no está adquirido hoy por el candidato. Como es entrenable en el puesto, NO vuelve inviable la vacante; es VIABLE con brecha entrenable.",
+    "input": {
+      "candidate": {
+        "display_name": "Raquel Díaz",
+        "claims": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "has_evidence": true }
+        ],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Auxiliar de Bodega",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": [
+          { "competency_code": "COMP-INV-01", "competency_name": "Registro de inventario", "requirement_type": "ESSENTIAL", "stage": "ENTRY" },
+          { "competency_code": "COMP-SAFETY-01", "competency_name": "Normas de seguridad en estibas", "requirement_type": "ESSENTIAL", "stage": "TRAINABLE" }
+        ]
+      },
+      "assumptions": {
+        "commute_minutes": 20
+      }
+    },
+    "expected": {
+      "status": "VIABLE",
+      "coverage_numerator": 1,
+      "coverage_denominator": 2,
+      "coverage_percent": 50.0,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": ["COMP-SAFETY-01"],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-12-NO-EVALUABLE-REQUIREMENTS",
+    "name": "Ningún requisito evaluable",
+    "description": "La vacante no tiene requisitos de competencias especificados (o todos son desconocidos). Denominador es 0 -> Cobertura debe ser estrictamente null, nunca 0% o 100%.",
+    "input": {
+      "candidate": {
+        "display_name": "Pedro Alarcón",
+        "claims": [],
+        "constraints": {
+          "salary_state": "KNOWN",
+          "minimum_salary": "600.00",
+          "salary_currency": "USD",
+          "salary_period": "MONTH",
+          "travel_limit_state": "KNOWN",
+          "max_one_way_minutes": 60,
+          "availability_state": "KNOWN"
+        },
+        "windows": []
+      },
+      "vacancy": {
+        "title": "Ayudante General de Limpieza",
+        "salary_amount": "650.00",
+        "salary_currency": "USD",
+        "salary_period": "MONTH",
+        "requirements": []
+      },
+      "assumptions": {
+        "commute_minutes": 30
+      }
+    },
+    "expected": {
+      "status": "VIABLE",
+      "coverage_numerator": 0,
+      "coverage_denominator": 0,
+      "coverage_percent": null,
+      "logistics": {
+        "salary_status": "CUMPLE",
+        "commute_status": "CUMPLE",
+        "schedule_status": "CUMPLE"
+      },
+      "essential_entry_gaps": [],
+      "trainable_gaps": [],
+      "unknowns": [],
+      "outdated": false
+    }
+  },
+  {
+    "id": "CASE-D3-13-VERSION-CHANGE-OUTDATED",
+    "name": "Cambio de versión obsoleto",
+    "description": "Una comparación guardada hace referencia a revision_id o opportunity_version anterior. Cuando se consulta, el sistema marca dinámicamente outdated: true.",
+    "input": {
+      "comparison": {
+        "revision_id": "prev-revision-id",
+        "opportunity_version": 1
+      },
+      "current_confirmed_revision_id": "new-revision-id",
+      "current_opportunity_version": 2
+    },
+    "expected": {
+      "outdated": true
+    }
+  },
+  {
+    "id": "CASE-D3-14-CROSS-TENANT-ACCESS-DENIED",
+    "name": "Acceso ajeno denegado",
+    "description": "El usuario B intenta consultar una comparación de oportunidad realizada por el usuario A -> El sistema debe denegar el acceso (404 / 403).",
+    "input": {
+      "comparison_owner_user_id": "user-a-id",
+      "requester_user_id": "user-b-id"
+    },
+    "expected": {
+      "http_status": 404,
+      "error_code": "COMPARISON_NOT_FOUND"
+    }
+  },
+  {
+    "id": "CASE-D3-15-COUNTERFACTUAL-FAIRNESS",
+    "name": "Contrafactual nombre, género o residencia con logística constante",
+    "description": "Al cambiar únicamente el nombre (ej. Juan a María o viceversa) o etiqueta residencial mientras la distancia/tiempo en minutos permanece constante, C01 entrega exactamente la misma factibilidad y cobertura porcentual.",
+    "input": {
+      "scenario_a": {
+        "display_name": "Juan Martínez",
+        "claims": [{ "competency_code": "COMP-INV-01", "has_evidence": true }],
+        "constraints": { "minimum_salary": "600.00", "salary_currency": "USD", "salary_period": "MONTH", "max_one_way_minutes": 60 },
+        "commute_minutes": 35
+      },
+      "scenario_b": {
+        "display_name": "María Martínez",
+        "claims": [{ "competency_code": "COMP-INV-01", "has_evidence": true }],
+        "constraints": { "minimum_salary": "600.00", "salary_currency": "USD", "salary_period": "MONTH", "max_one_way_minutes": 60 },
+        "commute_minutes": 35
+      }
+    },
+    "expected": {
+      "identical_status": true,
+      "identical_coverage": true
+    }
+  }
+]

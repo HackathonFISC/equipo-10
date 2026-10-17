@@ -1,0 +1,4 @@
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 25px; letter-spacing: -0.8px; line-height: 1; color: var(--color-text); }
+.mark { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--color-divider); border-radius: var(--radius-card); background: var(--color-notice-bg); color: var(--color-action); }
+.ai { color: var(--color-action); font-weight: 800; }
+.dot { color: var(--color-action); }

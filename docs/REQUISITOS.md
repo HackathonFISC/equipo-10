@@ -1,6 +1,12 @@
 # Requisitos del reto 3: Empleabilidad
 
-Estado: análisis del enunciado; producto aún sin implementar. Fuente: `magi/contexto/RETO_OFICIAL.md`, documento aportado por el equipo. Referencias por sección y página impresa. No convertir sugerencias en obligaciones textuales.
+Estado: matriz de obligaciones y alcance del enunciado. Fuente: `magi/contexto/RETO_OFICIAL.md`, documento aportado por el equipo. Referencias por sección y página impresa. No convertir sugerencias en obligaciones textuales. Las filas de planificación se contrastan con la [cobertura actual de CU](CASOS_DE_USO.md#cobertura-actual-por-caso) y los informes de verificación; no significan que el producto siga sin implementar ni que el cumplimiento formal esté aprobado. Entrada del paquete: [README](../README.md).
+
+## Alcance de formatos confirmado para esta entrega — 2026-10-17
+
+Decisión humana: admitir texto escrito/pegado y PDF; excluir audio, notas de voz, imágenes y fotografías de esta entrega. No tratarlos como tareas necesarias para el cierre actual ni reabrirlos sin nueva decisión. Conservar las menciones del enunciado como referencia original, sin afirmar que la organización las retiró.
+
+Precisión verificada en código: el parser usa pdfjs getTextContent para extraer la capa de texto del PDF; no ejecuta OCR propio. Un PDF que ya tenga una capa de texto creada por OCR puede aprovecharla. Un escaneo sin capa de texto sigue sin extracción utilizable y requiere alternativa manual; no prometer OCR integrado ni compatibilidad universal.
 
 ## Marco oficial
 

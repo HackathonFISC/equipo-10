@@ -1,147 +1,109 @@
-# Documento de Metodología y Funcionamiento del Sistema
+# Metodología, arquitectura y operación de AImpulsa
 
-**Competencia:** Hackathon FISC AI Agents 2026 — CONTECS 2026  
-**Reto Oficial:** Reto 3 — Empleabilidad Juvenil  
-**Equipo:** Mainor Villarreal (@tlegend7) y Giovanny Arpaia (@giovaar)  
-**Entregable Oficial:** D07 (§6 p. 7; rúbrica §7 p. 8)  
-**Estado:** Etapa D1 desplegada y verificada; especificaciones vigentes para D2–D9.
+Actualizado: 2026-10-17. Reto 3 — Empleabilidad. Equipo: Mainor Villarreal y Giovanny Arpaia.
 
----
+Este documento describe el prototipo implementado y sus límites. No declara cerrados todos los CU ni los evals del reto. Estado técnico: [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md).
 
-## 1. Introducción y Enfoque del Reto
+## 1. Problema, actores y alcance
+La solución conecta tres lados: jóvenes que necesitan expresar experiencia y encontrar oportunidades, empresas que necesitan requisitos claros y centros que ofrecen formación con condiciones concretas. El orientador es una persona independiente que ayuda al joven autorizado, sin facultades empresariales.
 
-El desempleo juvenil en Panamá supera con creces el promedio nacional y alimenta la informalidad laboral. La problemática central es una desconexión tripartita caracterizada por asimetría y dispersión de información:
-- **Jóvenes:** Carecen con frecuencia de un currículum tradicional formal; poseen experiencia informal valiosa pero no estructurada (apoyo en microempresas familiares, actividades comunitarias), y enfrentan restricciones críticas de movilidad urbana (rutas y tiempos de MiBus / Metro de Panamá), presupuesto y disponibilidad horaria.
-- **Empresas:** Reciben volúmenes masivos de postulaciones desalineadas y publican ofertas con requisitos vagos o potencialmente discriminatorios (sesgos por edad, género o zona de residencia).
-- **Centros de Formación (INADEH y afines):** Ofrecen programas técnicos con cupos y cronogramas fijos que frecuentemente no coinciden en tiempo y lugar con las brechas reales del mercado laboral.
+[El catálogo CU01–CU17](CASOS_DE_USO.md) presenta objetivos y actores. [Las especificaciones](ESPECIFICACION_CASOS_USO.md) contienen entradas, reglas RGN, permisos, alternos y aceptación. Un CU describe una obligación funcional; su existencia en un documento no acredita implementación.
 
-Para resolver esto sin recurrir a un simple chatbot conversacional (cumpliendo la **Regla de Oro** de la competencia), diseñamos un **mercado agéntico de tres lados** con supervisión humana, soportado por un sistema híbrido donde la Inteligencia Artificial percibe, interpreta y sugiere, mientras componentes determinísticos de código ejecutan cálculos, verificaciones de viabilidad y persistencia de datos auditables.
+Entrada actual: texto y CV PDF con capa de texto. Sin audio, fotos/imágenes ni OCR propio en esta entrega. El prototipo combina funciones implementadas, funciones parciales y ampliaciones aplazadas, señaladas en la matriz de CU.
 
----
+## 2. Arquitectura de tres capas
+AImpulsa usa una separación lógica de **presentación, aplicación/negocio y datos**, desplegada actualmente como web local + API local + Supabase. La API es un monolito modular.
 
-## 2. Arquitectura Agéntica e Híbrida del Sistema
-
-La solución integra **5 agentes de producto especializados** y **3 controladores determinísticos en código**, asegurando roles definidos, trazabilidad de decisiones y control humano:
-
-```mermaid
+~~~mermaid
 flowchart TD
-    subgraph Actores["Actores Humanos"]
-        Joven["Joven Candidato"]
-        Empresa["Reclutador Empresa"]
-        Centro["Centro de Formación"]
-        Orientador["Orientador Humano (Independiente)"]
-    end
+    H[Actores humanos] --> W[Presentación: React y TSX]
+    W -->|HTTP autenticado y DTO Zod| C[API: controladores Hono]
+    C --> S[Servicios de casos de uso]
+    S --> A[Adaptadores A01 A02 A03 A05]
+    A -->|Herramientas autorizadas| S
+    A --> V[Vertex AI]
+    S --> K[C01 cálculo y controles C02 C03]
+    K --> P[Prisma y SQL parametrizado con withActor]
+    P --> D[PostgreSQL Supabase con RLS]
+    W --> U[Supabase Auth]
+    C -->|Valida sesión| U
+    S --> F[Archivos privados del servidor]
+~~~
 
-    subgraph Agentes["Agentes de IA del Producto"]
-        A01["A01: Inteligencia de Mercado<br/>(Normalización ESCO, Detección Sesgos)"]
-        A02["A02: Perfil y Aprendizaje<br/>(Extracción de Exp. Informal, Sin CV)"]
-        A03["A03: Matching y Compatibilidad<br/>(Cruce de Habilidades y Brechas)"]
-        A04["A04: Postulación y Práctica<br/>(Cartas y Simulación de Entrevistas)"]
-        A05["A05: Rutas Formativas<br/>(Recomendación Cursos INADEH)"]
-    end
+Los controladores HTTP pertenecen al límite de presentación de la API; se organizan físicamente en apps/api. Los servicios concentran reglas y orquestación. Prisma/SQL y el almacenamiento implementan persistencia. Frontend/API son aplicaciones, y controller/service/module son responsabilidades internas: no se cuentan como tres capas adicionales.
 
-    subgraph Deterministas["Componentes Determinísticos (Código)"]
-        C01["C01: Solver y Cálculos<br/>(Transporte, Tiempo, Salario Mínimo)"]
-        C02["C02: Guardrails y Seguridad<br/>(Bloqueo Sesgos, Zod, Inyección Prompts)"]
-        C03["C03: Coordinador y Recibos<br/>(Transacciones Atómicas, OperationReceipt)"]
-    end
+No se introducen microservicios, un repositorio genérico sobre Prisma ni un bus de agentes. [Reglas de componentes/capas](REGLAS_COMPONENTES_CAPAS.md) y [stack](STACK_TECNICO.md).
 
-    subgraph Persistencia["Persistencia y Seguridad (Supabase / PostgreSQL)"]
-        RLS["27 Políticas Row Level Security"]
-        Roles["Roles: equipo10_api (LOGIN) / equipo10_runtime (NOLOGIN)"]
-        Audit["Tabla app.audit_events (Trazabilidad)"]
-    end
+## 3. Organización del código y lenguajes
+| Elemento | Organización |
+|---|---|
+| Interfaz | apps/web/src/features por función; componentes reutilizables, hooks y CSS Modules |
+| API | apps/api/src/modules por dominio: identidad, perfil, oportunidades, formación, planificación, reservas, empresa y orientación |
+| Módulo | Registra rutas y dependencias; no ejecuta el caso de uso |
+| Controlador | Obtiene identidad, valida DTO y traduce respuesta/error HTTP |
+| Servicio | Autoriza por objeto, aplica reglas, coordina agente/cálculo y persiste efectos |
+| Contratos | packages/contracts: Zod y tipos TypeScript compartidos |
+| Datos | prisma/schema.prisma y migraciones SQL incrementales |
+| Verificación | tests/api, tests/e2e y evals; tienen objetivos distintos |
 
-    Joven <--> A02
-    Empresa <--> A01
-    A02 & A01 --> A03
-    A03 --> C01
-    C01 --> A05
-    A03 --> A04
-    Agentes --> C02
-    C02 --> C03
-    C03 --> RLS
-    RLS --> Roles
-    Roles --> Audit
-    Orientador -.->|"Acompañamiento Autorizado (CU14)"| Joven
-```
+TypeScript es el lenguaje principal; TSX expresa componentes React, CSS Modules los estilos y SQL las migraciones/políticas. JavaScript se usa en scripts. Runtime Bun, framework HTTP Hono, ORM Prisma/adapter-pg, frontend React/Vite y PostgreSQL/Auth Supabase. Las versiones exactas están en los manifiestos y lockfile.
 
-### 2.1 Agentes de IA del Producto
-1. **A01 — Inteligencia de Mercado:** Procesa ofertas y temarios de cursos; normaliza requerimientos contra la taxonomía de habilidades (ESCO / O*NET); audita términos discriminatorios.
-2. **A02 — Perfil y Aprendizaje:** Entrevista conversacionalmente al joven para modelar su perfil, capturando experiencia informal, intereses y competencias observables sin exigir un CV en formato PDF.
-3. **A03 — Matching y Compatibilidad:** Evalúa el ajuste candidato-vacante. Identifica brechas técnicas y entrega insumos al solver de movilidad geográfica y económica.
-4. **A04 — Postulación y Preparación:** Genera borradores de postulación consentida y conduce simulaciones de entrevistas con retroalimentación cualitativa.
-5. **A05 — Rutas de Formación:** Genera planes formativos optimizados para cerrar brechas específicas en coordinación con la oferta de centros de capacitación.
+## 4. Agentes, prompts y colaboración
+A01 interpreta vacantes/temarios; A02 propone perfil y bancos de preguntas; A03 explica comparaciones; A05 explica rutas. A04 permanece aplazado. No se cuentan MAGI, desarrolladores Codex/Antigravity ni C01–C03 como agentes LLM del producto.
 
-### 2.2 Componentes Determinísticos de Código (No LLM)
-- **C01 (Cálculos y Solver):** Algoritmos determinísticos que calculan tiempos de viaje en transporte público metropolitano (red MiBus y Metro), costos de pasaje, compatibilidad de turnos y verificación de salario mínimo legal. Ninguna estimación numérica o de viabilidad física es delegada al modelo de lenguaje.
-- **C02 (Guardrails y Equidad):** Filtros sintácticos y semánticos contra *prompt injection*, evasión de restricciones y pruebas contrafactuales de sesgo (verificando que la evaluación no varíe por nombre, género o corregimiento).
-- **C03 (Acción y Recibos):** Manejo de transacciones atómicas con emisión de comprobantes inmutables (`OperationReceipt`). Toda reserva de cupo o postulación requiere confirmación humana expresa.
+El código envía instrucciones de sistema, declara herramientas y procesa sus llamadas con límites. La información de CV/temario/vacante es entrada no confiable, no instrucciones del desarrollador. El servidor delimita ámbito y efectos. Las propuestas requieren revisión humana donde corresponda.
 
-### 2.3 Humano en el Ciclo (Human-in-the-Loop)
-- **Confirmación del Candidato:** El joven aprueba explícitamente su perfil antes de que sea visible y autoriza de forma individual cada postulación laboral.
-- **Orientador Humano Independiente (CU14):** Cuenta con vista de acompañamiento autorizada para supervisar a jóvenes vulnerables, corregir recomendaciones y garantizar un proceso libre de sesgos.
-- **Empresas y Centros:** Mantienen control total sobre la publicación de vacantes y cupos disponibles, recibiendo únicamente postulaciones consentidas.
+La colaboración utiliza resultados confirmados y versionados, no conversaciones libres entre modelos. A01 → mapa confirmado → A02 banco es un vínculo concreto. Perfil propuesto A02 → confirmación juvenil → perfil consultado por A03 es otro. A05 también puede calcular desde el perfil y los requisitos de la vacante sin invocar A03. No afirmar un encadenamiento automático diferente al código.
 
----
+[COLABORACION_AGENTES.md](COLABORACION_AGENTES.md) detalla prompts, herramientas, archivos, ejemplos y evidencia pendiente. La traza correlacionada de tres agentes de un mismo caso todavía debe incorporarse como evidencia de entrega.
 
-## 3. Despliegue e Infraestructura de Datos
+## 5. Cálculos y decisiones humanas
+C01 compara requisitos, disponibilidad, mínimo salarial declarado y supuestos de traslado; en formación explora combinaciones acotadas de ediciones, costo de matrícula, sesiones y prerrequisitos. No se promete óptimo global fuera de la muestra.
 
-El sistema se apoya en una arquitectura moderna, desacoplada y orientada a microservicios sobre la nube de **Supabase** y ejecución local de alto rendimiento:
+La IA no calcula porcentajes, descuenta cupos, acredita competencias ni emite certificados. C02 representa validación, permisos y guardrails de código; C03 representa servicios de acción y recibos, no componentes LLM separados.
 
-### 3.1 Base de Datos PostgreSQL 17 y Seguridad Multi-Tenant
-- **Catálogo de Datos:** 27 tablas relacionales y 18 enums estructurados bajo el esquema aislado `app`, garantizando segregación frente al esquema `public` o esquemas internos de Supabase (`auth`, `storage`).
-- **Segregación de Roles PostgreSQL:**
-  - `equipo10_api`: Rol de conexión (`LOGIN`, `NOINHERIT`) configurado sin privilegios de bypass (`NOBYPASSRLS`).
-  - `equipo10_runtime`: Rol transaccional de datos (`NOLOGIN`, `NOINHERIT`). Toda transacción API establece el contexto del actor mediante la variable GUC `app.current_actor_id` (`SET LOCAL ROLE equipo10_runtime`).
-- **Políticas de Seguridad a Nivel de Fila (RLS):** 27 políticas RLS activas que impiden fugas de datos entre candidatos, empresas y organizaciones.
-- **Conectividad TLS Estricta:** La base de datos requiere TLS v1.3 verificado contra el certificado CA público de Supabase (`certs/supabase-prod-ca-2021.crt`) con `rejectUnauthorized: true`.
+Una propuesta de plan no matricula; una candidatura no ocupa plaza laboral. Confirmar reserva es un efecto transaccional/idempotente. La finalización del centro, el certificado adjunto y el resultado de un ejercicio son registros distintos. Una declaración aceptada sin evidencia no se convierte en demostración.
 
-### 3.2 Automatización de Despliegues Idempotentes
-El aprovisionamiento y verificación de la base de datos se realiza mediante `scripts/deploy-d1.mjs`:
-- `--check`: Valida credenciales, conectividad TLS y ausencia de privilegios de superusuario en el rol de runtime.
-- `--apply`: Aplica migraciones DDL de Prisma (`prisma/migrations/`) y reglas de seguridad (`prisma/runtime-access.sql`).
-- `--verify`: Ejecuta pruebas transaccionales con rollback automático (`ROLLBACK`), verificando que los permisos funcionen sin dejar registros residuales ni modificar datos de producción.
+Se usan tiempos de traslado aportados/supuestos explícitos; no hay una integración acreditada de rutas/tarifas MiBus/Metro. El salario se contrasta con el mínimo declarado del perfil, no con una tabla legal de salario mínimo. La evaluación integral de costo de transporte sigue limitada.
 
----
+## 6. Datos, identidad y privacidad
+Supabase Auth identifica la cuenta; la API valida su sesión y resuelve AppUser. Membresías delimitan empresa/centro. El orientador tiene habilitación independiente y acceso por acompañamiento autorizado.
 
-## 4. Stack Técnico y Gobernanza de Código
+Prisma/SQL ejecuta con rol runtime y contexto de actor bajo RLS. El navegador no recibe conexiones de BD ni ADC. La autorización se comprueba también por objeto; un rol enviado por el cliente o el LLM no la concede.
 
-La selección tecnológica (decisión formal ST01) garantiza velocidad de compilación, seguridad de tipos de extremo a extremo y ligereza:
+Catálogo, perfil confirmado, propuesta, banco/intento, plan, consentimiento/revisión y recibo tienen relaciones/versiones propias. Los esquemas y migraciones son la referencia para las tablas vigentes; las cifras antiguas de D1 no describen todo el producto.
 
-| Capa | Tecnología | Justificación y Rol en la Solución |
-|---|---|---|
-| **Runtime & Package Manager** | Bun 1.3.14 | Ejecución rápida de scripts, gestor de dependencias ultrarrápido y test runner nativo (`bun:test`). |
-| **Backend API** | Hono | Framework HTTP minimalista sobre estándares web, modularizado verticalmente por dominios (`identity`, `profile`). |
-| **Contratos de Datos** | Zod | Validación estricta de esquemas en tiempo de compilación y ejecución compartida entre cliente y servidor ([packages/contracts](file:///c:/Users/sebas/OneDrive%20-%20Universidad%20Tecnol%C3%B3gica%20de%20Panam%C3%A1/Documentos/Universidad/Hackaton/magi/solucion/equipo-10/packages/contracts)). |
-| **ORM y Migraciones** | Prisma 7 (`@prisma/adapter-pg`) | Tipado exhaustivo de consultas y control de migraciones versionadas con motor reproducible. |
-| **Frontend Web** | React 19 + Vite 8 | Interfaz reactiva optimizada con soporte completo de TypeScript. |
-| **Diseño y Estilos** | CSS Modules + Tokens Figma v2 | Paleta terracota/marfil/carbón/oliva con compatibilidad nativa para modo claro y oscuro sin dependencias pesadas. |
-| **Autenticación** | Supabase Auth (JWT) | Validación de tokens mediante `supabase.auth.getUser(token)`, disociando credenciales de la lógica interna de negocio. |
+Datos DEMO son sintéticos. No se declara cobertura completa de ESCO/O*NET, datos oficiales en vivo ni autenticidad académica de un PDF adjunto. Fuentes: [FUENTES.csv](FUENTES.csv).
 
----
+## 7. Desarrollo, IA y control de cambios
+1. Mainor y Giovanny aportan ideas, alcance y decisiones de producto.
+2. Se investigan fuentes y se definen actores, CU, reglas, entidades y contratos.
+3. Figma v2 guía navegación, componentes y temas; no sustituye aceptación funcional.
+4. Cada bloque vertical integra vista, API, datos y controles del mismo objetivo.
+5. Codex y Antigravity/Gemini aportan código/documentos según registro real, con integración/revisión y pruebas dirigidas.
+6. La bitácora distingue decisiones humanas, correcciones IA, herramientas/modelos y evidencia; no presupone cambios manuales.
 
-## 5. Metodología de Desarrollo y Gobernanza Ética
+[BITACORA_IA.csv](BITACORA_IA.csv) registra autoría por bloque. MAGI es herramienta externa de desarrollo; no forma parte de la aplicación entregable.
 
-1. **Distinción entre Entorno de Desarrollo y Producto:**  
-   Herramientas de orquestación y asistencia al desarrollo utilizadas por el equipo humano (como el entorno multi-modelo MAGI, scripts auxiliares de prueba y OpenCode) operan estrictamente en el plano de desarrollo y están excluidas de la entrega final del producto. El repositorio contiene exclusivamente el software del reto.
-2. **Cero Secretos y Privacidad de Datos:**  
-   Ninguna clave privada, token de servicio ni dato personal real se almacena en el control de versiones. Se utiliza `.env.example` como contrato público y `.gitignore` riguroso.
-3. **Trazabilidad en Bitácora de IA:**  
-   Cada intervención de modelos de lenguaje (Vertex AI Gemini 3.8 Flash, GPT-6 Sol medium, Codex) está registrada cronológicamente en [docs/BITACORA_IA.csv](file:///c:/Users/sebas/OneDrive%20-%20Universidad%20Tecnol%C3%B3gica%20de%20Panam%C3%A1/Documentos/Universidad/Hackaton/magi/solucion/equipo-10/docs/BITACORA_IA.csv), detallando el modelo, aporte exacto, archivos impactados y validación humana por parte de Mainor Villarreal y Giovanny Arpaia.
+## 8. Operación y recuperación
+El README describe instalación/arranque. Preparar variables, esquema y roles; generar cliente Prisma; ejecutar API y frontend. Cambiar código no aplica una migración a Supabase. Los actualizadores incrementales permiten check/apply/verify sobre destino autorizado; check no equivale a apply.
 
----
+Ante fallo de Vertex, conservar borrador/plan y ofrecer reintento/manual según el CU; no anunciar generación completada sin entrega. Evitar llamadas de red dentro de transacciones. Tras una escritura de resultado incierto, consultar el recibo antes de repetir el efecto.
 
-## 6. Manejo de Errores, Límites y Recuperación de Fallos
+Los certificados se almacenan en .local/certificates de una instancia privada. Conservar ese directorio al mover el servidor; no publicarlo como estático. Un despliegue multiinstancia necesita una solución de almacenamiento persistente adecuada.
 
-### 6.1 Resiliencia y Manejo de Entradas Inesperadas
-- **Entradas Maliciosas y Fuera de Dominio:** El componente C02 intercepta intentos de inyección o consultas ajenas a la intermediación laboral, respondiendo con códigos de error estructurados (`INVALID_INPUT`, `OUT_OF_SCOPE`) sin invocar agentes de inferencia costosos.
-- **Detección de Sesgo en Vacantes:** Si un reclutador introduce una vacante con términos discriminatorios (ej. restricciones de edad no fundamentadas o exigencias de apariencia física), A01 marca la oferta como no conforme y el sistema bloquea su publicación hasta revisión humana.
+## 9. Pruebas y límites de la evidencia
+- Unitarias: cálculos, contratos y fronteras sin infraestructura.
+- Integración: identidad, RLS, consentimiento, versiones, recibos y concurrencia en BD aislada.
+- Navegador: recorrido de interfaz, recarga, carga/error y navegación.
+- Live Vertex: acceso y conducta de un modo del agente con datos sintéticos.
+- Evals de calidad: entradas/gold, métrica, umbral y resultado; no se reemplazan por compilar o contar tests.
 
-### 6.2 Recuperación ante Fallos Técnicos
-- **Desconexión o Latencia de Base de Datos:** La API implementa verificación de salud en `/health` y reintentos automáticos en el pool de conexiones de Supabase.
-- **Rollback Transaccional:** Todas las operaciones compuestas (creación de perfil + evidencias + enlaces) se ejecutan dentro de bloques transaccionales atómicos; cualquier fallo aborta la operación completa impidiendo inconsistencias parciales.
-- **Aislamiento de Cuentas:** Si un usuario intenta acceder a recursos de otra organización o candidato sin autorización, las políticas RLS de PostgreSQL devuelven conjuntos vacíos o excepciones de acceso (`PERMISSION_DENIED`), protegiendo la privacidad de forma nativa a nivel de motor de datos.
+La verificación integral y la focal D8 son snapshots, no sumas acumulables. El banco A02 tuvo un timeout real; perfil A02 sí pasó. No se declara disponibilidad garantizada ni cierre de modos que no terminaron.
 
-### 6.3 Trazabilidad y Auditoría
-Cada acción relevante genera un registro en la tabla `app.audit_events`, almacenando el identificador del actor, la acción ejecutada, la marca temporal y el resultado, asegurando auditabilidad completa para los evaluadores.
+Siguen pendientes el caso focal de reserva independiente D8, cierre de su despliegue remoto, incorporación de evidencia E2E posterior, al menos 15 evals de calidad con resultados, traza de colaboración de tres agentes y aceptación con cuentas reales. La instalación limpia y el paquete final/PPT no están acreditados por estas pruebas.
+
+## 10. Entrega y explicación
+El README enlaza actores, CU y especificaciones. La presentación debe conectar problema, arquitectura, colaboración y acción real antes de mostrar tecnología o código. Usar capturas concretas de interfaz/resultados y referencias al código/prompts; no capturar secretos o expedientes personales.
+
+[Guía de presentación/evidencias](GUIA_PRESENTACION_Y_EVIDENCIAS.md), [guion de demo](DEMO_PPT_DISENO.md) y [entregables](ENTREGABLES.md). El equipo descartó video del plan de trabajo; no afirmar exención organizadora. No se retrofechan commits ni se crea final-24h sin la acción correspondiente.

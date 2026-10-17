@@ -1,6 +1,6 @@
 # Entregables y congelamiento
 
-Fuente: §6 p. 7; rúbrica §7 p. 8. Estado inicial: pendiente salvo repo existente y documentos de planificación. Las rutas son una propuesta del equipo, no nombres impuestos por la organización, excepto tag `final-24h`.
+Fuente: §6 p. 7; rúbrica §7 p. 8. Esta matriz conserva obligaciones y rutas de entrega; el producto y documentación ya existen con los límites de [la verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [la revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). Consultar [README](../README.md) como índice actual. Las rutas son una propuesta del equipo, no nombres impuestos por la organización, excepto tag `final-24h`.
 
 | ID | Entrega oficial | Ruta propuesta | Acumular desde ahora | Validar al cerrar | Plazo oficial |
 |---|---|---|---|---|---|
@@ -19,7 +19,7 @@ Todo entregar al cumplirse hora 24. Lo posterior no cuenta. Cualquier commit pos
 
 ## Presentación actual: demo y PPT
 
-Decisión humana confirmada: no realizar video. Demostrar el mismo caso alternando candidato, reclutador, centro y orientador; PPT explicará idea y módulos. Consultar [guion y dirección visual](DEMO_PPT_DISENO.md). No trasladar a demo en vivo el límite de180segundos que el enunciado asignaba al video. No se ha creado presentación, diseño ni producto.
+Decisión humana confirmada: no realizar video. Demostrar el mismo caso alternando candidato, reclutador, centro y orientador; PPT explicará idea y módulos. Consultar [guion](DEMO_PPT_DISENO.md) y [organización de exposición/evidencias](GUIA_PRESENTACION_Y_EVIDENCIAS.md). No trasladar a demo en vivo el límite de180segundos que el enunciado asignaba al video. El diseño Figma y el producto existen; el PPT y la aceptación final del recorrido no se consideran entregados por tener un guion.
 
 ## Control de cierre
 

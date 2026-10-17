@@ -61,7 +61,7 @@ Dependencia: D1. Agente: A02 modo perfil; C02/C03 desde la primera escritura.
 3. Registrar intereses de puesto, experiencia, formación declarada, disponibilidad, zona aproximada, movilidad, salario y presupuesto con unidades; desconocido es distinto de cero.
 4. Revisar sugerencias y permitir aceptar/rechazar/corregir; confirmar crea versión. Confirmar perfil no comparte con empresas ni orientador.
 5. Mostrar Inicio vacío y siguiente acción real; progreso de registro indica pasos completados, no porcentaje de empleabilidad. Retomar un borrador desde la etapa pendiente.
-6. Alcance de formatos de D2 decidido por el usuario el 2026-10-17: texto escrito o pegado y CV en PDF digital con texto seleccionable. Conservar revisión, fuente/versión y alternativa manual. Fotos, imágenes, PDF escaneado/OCR y audio quedan fuera del cierre D2 y pendientes de una ampliación posterior. Esta decisión acota la etapa; no elimina los requisitos originales de la hackathon ni los declara satisfechos.
+6. Alcance de formatos confirmado por el usuario el 2026-10-17 para esta entrega: texto escrito/pegado y PDF. Audio, notas de voz, fotos e imágenes quedan excluidos del cierre actual, sin trabajo adicional para incorporarlos. El parser extrae la capa de texto del PDF, incluida una capa OCR preexistente; no ejecuta OCR propio sobre escaneos sin texto. Conservar revisión, fuente/versión y alternativa manual. No reabrir formatos excluidos sin nueva decisión humana. Esta decisión acota el producto entregable; no altera el enunciado original ni afirma una dispensa organizadora.
 
 Salida: joven sin CV confirma y vuelve a consultar su perfil; sugerencia rechazada no reaparece como dato confirmado; candidato B no ve datos de A; caída de Vertex conserva borrador y permite continuar manualmente. Cubrir E12–E16 según formato implementado, X01/X13 e I02. Registrar prueba manual y automática por separado.
 
@@ -115,6 +115,8 @@ Salida: publicar oferta normalizada o bloquear alerta sin bypass; otra empresa n
 
 ### D7 — Centro, temario, banco y evidencia (CU11, CU13, CU02)
 
+Estado 2026-10-17: núcleo integrado en `equipo-10` con D5/D6 reducido; 66 pruebas de integración/seguridad/despliegue aprobadas, tipos/build/esquema aprobados y migraciones003–009 aplicadas/verificadas en Supabase. Ver [INTEGRACION_D5_D7.md](INTEGRACION_D5_D7.md). Preguntas abiertas y ampliaciones restantes no se declaran completadas.
+
 Dependencias: D4 y D1. Reemplazar fixtures por gestión real de la misma estructura.
 
 1. Centro gestiona contenido y ediciones propias; temario → unidad → resultado esperado → competencia con fragmento y versión. A01 propone, centro confirma mapa.
@@ -162,3 +164,7 @@ Estados de avance: pendiente → listo_para_implementar → en_desarrollo → en
 ## Avance de esquema y despliegue D1
 
 [Esquema inicial CU01 y migración](ESQUEMA_INICIAL.md), [permisos BD API](PERMISOS_BD_API.md) y [guía de despliegue](DESPLIEGUE_BD.md) completados. Autoría técnica de scripts de despliegue y documentación por Gemini 3.8 Flash Vertex, con delimitación y ejecución por Codex. Despliegue remoto en Supabase ejecutado y verificado exitosamente (2026-10-16): 25 tablas en esquema `app`, migración registrada en `_prisma_migrations`, 25 políticas RLS aplicadas, rol no-owner `equipo10_api` activo y prueba transaccional con rollback superada sin datos residuales. Pruebas locales: 30 de esquema PASS, 15 de runtime PASS y 11 de helpers PASS. Siguiente alcance D1: validación JWT, bootstrap de `AppUser` y servicio API HTTP. Storage de aplicación, UI y etapas D2-D9 pendientes.
+
+Orden operativa D3 preparada el 2026-10-17: consultar [PLAN_EJECUCION_D3.md](PLAN_EJECUCION_D3.md). Define D3-0 a D3-5 y separa contratos, catálogo/fixtures, C01, UI, A03 y cierre; planificación no acredita implementación ni pruebas de D3.
+
+Orden D4 del 2026-10-17: [PLAN_EJECUCION_D4.md](PLAN_EJECUCION_D4.md). Cuatro entregas: cursos; planner C01/A05; reservas/cancelacion; Mi ruta/Agenda y activacion. Definido, no desarrollado. La aplicacion de migracion remota se distingue de pruebas locales.

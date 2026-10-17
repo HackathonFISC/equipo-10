@@ -1,0 +1,323 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--color-secondary);
+  font-size: 16px;
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: 4px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: var(--radius-control);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface-subtle);
+}
+
+.tabActive {
+  color: var(--color-action);
+  background-color: var(--color-surface);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-action);
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.filterInput {
+  flex: 1 1 240px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-size: 15px;
+}
+
+.filterSelect {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.listGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: var(--color-action);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badgeDemo {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badgeMode {
+  background-color: var(--color-surface-subtle);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-divider);
+}
+
+.badgeSlots {
+  background-color: #ecfdf5;
+  color: #065f46;
+}
+
+.badgeSlotsEmpty {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 4px 0;
+}
+
+.orgName {
+  font-size: 14px;
+  color: var(--color-secondary);
+}
+
+.cardSummary {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-secondary);
+  padding-top: 8px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--color-secondary);
+  padding-top: 12px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.emptyState {
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-divider);
+  border-radius: var(--radius-card);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-secondary);
+}
+
+/* Detail page styles */
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-action);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.detailHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detailCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.outcomeList, .prereqList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.outcomeItem, .prereqItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: var(--radius-control);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-divider);
+  font-size: 14px;
+}
+
+.editionCard {
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  background-color: var(--color-surface-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sessionList {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sessionItem {
+  font-size: 13px;
+  color: var(--color-secondary);
+  background-color: var(--color-surface);
+  padding: 8px 12px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-divider);
+  display: flex;
+  justify-content: space-between;
+}

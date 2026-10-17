@@ -18,11 +18,13 @@ export interface AuthFixture {
   users: {
     a: SyntheticUser;
     b: SyntheticUser;
+    c: SyntheticUser;
     unverified: SyntheticUser;
   };
   tokens: {
     a: string;
     b: string;
+    c: string;
     expired: string;
     forged: string;
     unverified: string;
@@ -70,7 +72,7 @@ function verifyJwt(token: string, secret = SECRET): Record<string, unknown> | nu
   }
 }
 
-export function startAuthFixture(port = 0): AuthFixture {
+export function startAuthFixture(port = 0, extraOrigins: string[] = []): AuthFixture {
   let unavailable = false;
 
   const userA: SyntheticUser = {
@@ -90,6 +92,18 @@ export function startAuthFixture(port = 0): AuthFixture {
     aud: "authenticated",
     role: "authenticated",
     email: "bruno.demo@example.test",
+    email_confirmed_at: "2025-01-01T00:00:00Z",
+    created_at: "2025-01-01T00:00:00Z",
+    app_metadata: { provider: "email", providers: ["email"] },
+    user_metadata: {},
+    identities: [],
+  };
+
+  const userC: SyntheticUser = {
+    id: "44444444-4444-4444-8444-444444444444",
+    aud: "authenticated",
+    role: "authenticated",
+    email: "carla.demo@example.test",
     email_confirmed_at: "2025-01-01T00:00:00Z",
     created_at: "2025-01-01T00:00:00Z",
     app_metadata: { provider: "email", providers: ["email"] },
@@ -122,6 +136,7 @@ export function startAuthFixture(port = 0): AuthFixture {
 
   const tokenA = signJwt(makePayload(userA.id, userA.email));
   const tokenB = signJwt(makePayload(userB.id, userB.email));
+  const tokenC = signJwt(makePayload(userC.id, userC.email));
   const tokenExpired = signJwt(makePayload(userA.id, userA.email, now - 3600));
   const tokenForged = signJwt(makePayload(userA.id, userA.email), FORGED_SECRET);
   const tokenUnverified = signJwt(makePayload(userUnverified.id, userUnverified.email));
@@ -129,6 +144,7 @@ export function startAuthFixture(port = 0): AuthFixture {
   const userMap = new Map<string, SyntheticUser>([
     [userA.id, userA],
     [userB.id, userB],
+    [userC.id, userC],
     [userUnverified.id, userUnverified],
   ]);
 
@@ -138,7 +154,7 @@ export function startAuthFixture(port = 0): AuthFixture {
     async fetch(req) {
       const url = new URL(req.url);
       const origin = req.headers.get("origin");
-      const allowedOrigins = ["http://127.0.0.1:5173", "http://localhost:5173", "http://127.0.0.1:5175", "http://localhost:5175"];
+      const allowedOrigins = ["http://127.0.0.1:5173", "http://localhost:5173", "http://127.0.0.1:5175", "http://localhost:5175", ...extraOrigins];
 
       const headers = new Headers();
       if (origin && allowedOrigins.includes(origin)) {
@@ -201,6 +217,7 @@ export function startAuthFixture(port = 0): AuthFixture {
           let matchedUser: SyntheticUser | undefined;
           if (email === userA.email && password === "Demo-test-1234") matchedUser = userA;
           else if (email === userB.email && password === "Demo-test-1234") matchedUser = userB;
+          else if (email === userC.email && password === "Demo-test-1234") matchedUser = userC;
 
           if (!matchedUser) {
             return new Response(JSON.stringify({ error: "invalid_grant", error_description: "Invalid login credentials" }), {
@@ -227,6 +244,7 @@ export function startAuthFixture(port = 0): AuthFixture {
           let matchedUser: SyntheticUser | undefined;
           if (rt === `test-refresh-${userA.id}`) matchedUser = userA;
           else if (rt === `test-refresh-${userB.id}`) matchedUser = userB;
+          else if (rt === `test-refresh-${userC.id}`) matchedUser = userC;
 
           if (!matchedUser) {
             return new Response(JSON.stringify({ error: "invalid_grant", error_description: "Invalid refresh token" }), {
@@ -307,8 +325,8 @@ export function startAuthFixture(port = 0): AuthFixture {
   return {
     server,
     url,
-    users: { a: userA, b: userB, unverified: userUnverified },
-    tokens: { a: tokenA, b: tokenB, expired: tokenExpired, forged: tokenForged, unverified: tokenUnverified },
+    users: { a: userA, b: userB, c: userC, unverified: userUnverified },
+    tokens: { a: tokenA, b: tokenB, c: tokenC, expired: tokenExpired, forged: tokenForged, unverified: tokenUnverified },
     setUnavailable: (v: boolean) => {
       unavailable = v;
     },

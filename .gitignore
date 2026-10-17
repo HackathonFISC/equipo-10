@@ -54,3 +54,9 @@ docs/GUIA_IMPLEMENTACION_Y_REVISION.md
 .DS_Store
 Thumbs.db
 Desktop.ini
+/.local/
+/.playwright-cli/
+/output/playwright/
+
+# Preview de la copia D7: depende de la carpeta hermana y no es configuracion de entrega.
+/apps/web/vite.d7.config.ts

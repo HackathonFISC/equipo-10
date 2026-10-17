@@ -100,6 +100,29 @@ export async function setupTestDatabase(): Promise<DatabaseFixture> {
   const identitySql = readFileSync(resolve(rootDir, "prisma/migrations/202610160002_identity/migration.sql"), "utf-8");
   await admin.query(identitySql);
 
+  const opportunitiesSql = readFileSync(resolve(rootDir, "prisma/migrations/202610170001_opportunities/migration.sql"), "utf-8");
+  await admin.query(opportunitiesSql);
+
+  const coursesSql = readFileSync(resolve(rootDir, "prisma/migrations/202610170002_courses_and_reservations/migration.sql"), "utf-8");
+  await admin.query(coursesSql);
+
+  const recruitmentSql = readFileSync(resolve(rootDir, "prisma/migrations/202610170003_applications_and_recruitment/migration.sql"), "utf-8");
+  await admin.query(recruitmentSql);
+
+  const migs = [
+    "202610170004_training_center_access",
+    "202610170005_training_completion",
+    "202610170006_training_workspace",
+    "202610170007_training_assessments",
+    "202610170008_training_certificate",
+    "202610170009_company_scope",
+    "202610170010_independent_orientation",
+  ];
+  for (const m of migs) {
+    const sql = readFileSync(resolve(rootDir, `prisma/migrations/${m}/migration.sql`), "utf-8");
+    await admin.query(sql);
+  }
+
   const config = readConfig({
     NODE_ENV: "test",
     TEST_DATABASE_URL: "postgres://equipo10_api:d1-test-only-password@127.0.0.1:55435/equipo10_d1_test",

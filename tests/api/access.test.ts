@@ -177,7 +177,7 @@ describe("D1 Integration Access & Identity", () => {
     });
     expect(injection.status).toBe(400);
 
-    const oversizePayload = JSON.stringify({ dummy: "x".repeat(5000) });
+    const oversizePayload = JSON.stringify({ dummy: "x".repeat(64 * 1024) });
     const oversize = await app.request("/api/v1/me/candidate-profile", {
       method: "PUT",
       headers: { Authorization: `Bearer ${auth.tokens.a}`, "Content-Type": "application/json" },

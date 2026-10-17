@@ -1,5 +1,9 @@
 # Registro de evidencias por acumular
 
+## Lectura actual — 2026-10-17
+
+Este registro conserva notas históricas de preparación. Los párrafos que indican producto/diseño sin crear corresponden a sus etapas originales. Estado y cobertura actuales en [README](../README.md), [catálogo CU](CASOS_DE_USO.md), [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). Las pruebas técnicas no sustituyen los evals semánticos ni una traza correlacionada de tres agentes. [Colaboración y prompts](COLABORACION_AGENTES.md) y [guía de presentación](GUIA_PRESENTACION_Y_EVIDENCIAS.md) organizan la evidencia para entrega. Autoría y acciones posteriores se registran en BITACORA_IA.csv, sin borrar el historial ni inventar ejecución.
+
 ## Estado vigente tras revisión integral
 
 [Plan consolidado y dos referencias](REVISION_INTEGRAL_PLAN.md): Codex revisar documentos completos; BALTHASAR por Vertex revisar paquete acotado de extractos y síntesis. Intento amplio agotó tiempo; tarea acotada sí produjo informe con lectura/escritura verificadas. RC01–RC05 tratados y RC06 pendiente de decisiones. 17CU conservados,40comprobaciones documentales correctas, E01–E20/X01–X15/I01–I08sin ejecución de producto. Sin desarrollo, schema Prisma, migraciones ni cambios en Supabase. Tablero y anotaciones anteriores conservan contexto de cada etapa.

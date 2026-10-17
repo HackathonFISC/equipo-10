@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { useSession } from '../../app/session';
 import { ThemeSelect } from '../../app/theme';
 import { Button, Field, Notice, ProgressSteps } from '../../components/Controls';
+import { Brand } from '../../components/Brand';
 import styles from '../../styles/App.module.css';
 
 export function AccessPage() {
@@ -105,7 +106,7 @@ export function AccessPage() {
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
-        <Link to="/" className={styles.brand}>empleo /</Link>
+        <Link to="/" className={styles.brand} aria-label="AImpulsa, ir a Inicio"><Brand /></Link>
         <ThemeSelect />
       </header>
       <main id="contenido" className={styles.main}>

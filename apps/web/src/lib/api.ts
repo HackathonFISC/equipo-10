@@ -44,7 +44,13 @@ export async function fetchWithHeaders<T>(
     signal?: AbortSignal;
   } = {}
 ): Promise<FetchResponse<T>> {
-  if (!path.startsWith('/me') && !path.startsWith('/organizations/')) {
+  if (
+    !path.startsWith('/me') &&
+    !path.startsWith('/organizations/') &&
+    !path.startsWith('/opportunities') &&
+    !path.startsWith('/courses') &&
+    !path.startsWith('/learning-plans')
+  ) {
     throw new ApiClientError(400, 'INVALID_PATH', 'Ruta no permitida.', false);
   }
 

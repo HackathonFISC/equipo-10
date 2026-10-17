@@ -126,6 +126,88 @@ enum ReviewDecision {
   DEFERRED
   @@schema("app")
 }
+enum WorkplaceType {
+  REMOTE
+  ON_SITE
+  HYBRID
+  @@schema("app")
+}
+enum RequirementType {
+  ESSENTIAL
+  DESIRABLE
+  @@schema("app")
+}
+enum RequirementStage {
+  ENTRY
+  TRAINABLE
+  @@schema("app")
+}
+enum ComparisonFeasibility {
+  VIABLE
+  INVIABLE
+  PENDIENTE
+  @@schema("app")
+}
+enum PlanFeasibility {
+  VIABLE
+  CONDITIONAL
+  PENDING
+  INVIABLE
+  @@schema("app")
+}
+enum LearningPlanStatus {
+  DRAFT
+  CALCULATED
+  CONFIRMED
+  SUPERSEDED
+  CANCELLED
+  @@schema("app")
+}
+enum PlanStepType {
+  DIRECT
+  CONDITIONAL
+  @@schema("app")
+}
+enum ReservationStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  @@schema("app")
+}
+enum OpportunityDraftStatus {
+  DRAFT
+  READY_TO_PUBLISH
+  PUBLISHED
+  @@schema("app")
+}
+enum CandidateApplicationStatus {
+  ACTIVE
+  WITHDRAWN
+  @@schema("app")
+}
+enum OrientationRequestStatus {
+  REQUESTED
+  IN_REVIEW
+  CLARIFICATION_REQUESTED
+  APPROVED
+  REJECTED
+  OUTDATED
+  REVOKED
+  @@schema("app")
+}
+enum OrientationReviewDecision {
+  APPROVED
+  REJECTED
+  CLARIFICATION_NEEDED
+  @@schema("app")
+}
+enum ClarificationDecision {
+  PENDING
+  ACCEPTED
+  REJECTED
+  @@schema("app")
+}
+
 
 model AppUser {
   id            String     @id @default(uuid()) @db.Uuid
@@ -142,7 +224,15 @@ model AppUser {
   receipts      OperationReceipt[]
   auditEvents   AuditEvent[]
   memberships   OrganizationMembership[]
+  explanations  OpportunityExplanation[]
+  learningPlanExplanations LearningPlanExplanation[]
+  opportunityDrafts OpportunityDraft[]
   @@schema("app")
+  trainingCompletions TrainingCompletion[]
+  trainingCertificates TrainingCertificate[]
+  trainingAssessmentBanks TrainingAssessmentBank[]
+  orientationCounselor OrientationCounselor?
+  orientationReviews   OrientationReview[]
 }
 
 model Organization {
@@ -153,7 +243,12 @@ model Organization {
   createdAt   DateTime               @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime               @updatedAt @db.Timestamptz(3)
   memberships OrganizationMembership[]
+  opportunities Opportunity[]
+  courses     Course[]
+  opportunityDrafts OpportunityDraft[]
   @@schema("app")
+  trainingCompletions TrainingCompletion[]
+  trainingCertificates TrainingCertificate[]
 }
 
 model OrganizationMembership {
@@ -184,7 +279,14 @@ model CandidateProfile {
   evidence         ProfileEvidence[]
   receipts         OperationReceipt[]
   auditEvents      AuditEvent[]
+  comparisons      OpportunityComparison[]
+  learningPlans    LearningPlan[]
+  courseReservations CourseReservation[]
+  applications     CandidateApplication[]
   @@schema("app")
+  trainingAssessmentAttempts TrainingAssessmentAttempt[]
+  trainingAssessmentAssociations TrainingAssessmentAssociation[]
+  orientationEngagements OrientationEngagement[]
 }
 
 // One row is a mutable draft, then the SAME row becomes an immutable version.
@@ -223,6 +325,10 @@ model ProfileRevision {
   previews          ProfilePreview[]
   confirmation      ProfileConfirmation?
   auditEvents       AuditEvent[]
+  comparisons       OpportunityComparison[]
+  learningPlans     LearningPlan[]
+  applications      CandidateApplication[]
+  orientationEngagements OrientationEngagement[]
   @@unique([profileId, id])
   @@unique([profileId, versionNumber])
   @@index([profileId, status])
@@ -266,6 +372,8 @@ model CatalogVersion {
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
   occupations  OccupationEntry[]
   competencies CompetencyEntry[]
+  opportunities Opportunity[]
+  courseVersions CourseVersion[]
   @@schema("app")
 }
 model OccupationEntry {
@@ -278,6 +386,7 @@ model OccupationEntry {
   catalog          CatalogVersion @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
   interests        JobInterest[]
   aliases          OccupationAlias[]
+  opportunities    Opportunity[]
   @@id([id, catalogVersionId])
   @@unique([catalogVersionId, code])
   @@schema("app")
@@ -302,6 +411,9 @@ model CompetencyEntry {
   catalog          CatalogVersion @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
   claims           CompetencyClaim[]
   aliases          CompetencyAlias[]
+  opportunityRequirements OpportunityRequirement[]
+  courseLearningOutcomes CourseLearningOutcome[]
+  coursePrerequisites CoursePrerequisite[]
   @@id([id, catalogVersionId])
   @@unique([catalogVersionId, code])
   @@schema("app")
@@ -544,5 +656,548 @@ model AuditEvent {
   revision    ProfileRevision? @relation(fields: [revisionId], references: [id], onDelete: Restrict)
   operation   OperationReceipt? @relation(fields: [operationId], references: [id], onDelete: Restrict)
   @@index([profileId, recordedAt, id])
+  @@schema("app")
+}
+
+model Opportunity {
+  id               String           @id @default(uuid()) @db.Uuid
+  organizationId   String           @db.Uuid
+  title            String           @db.VarChar(160)
+  description      String           @db.VarChar(3000)
+  occupationId     String           @db.Uuid
+  catalogVersionId String           @db.Uuid
+  location         String           @db.VarChar(200)
+  workplaceType    WorkplaceType    @default(ON_SITE)
+  salaryAmount     Decimal?         @db.Decimal(14, 2)
+  salaryCurrency   String?          @db.VarChar(3)
+  salaryPeriod     MoneyPeriod?
+  scheduleSummary  String?          @db.VarChar(200)
+  availableSlots   Int              @default(1)
+  active           Boolean          @default(true)
+  isDemo           Boolean          @default(true)
+  version          Int              @default(1)
+  publishedAt      DateTime         @default(now()) @db.Timestamptz(3)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime         @updatedAt @db.Timestamptz(3)
+
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  occupation       OccupationEntry  @relation(fields: [occupationId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+  catalog          CatalogVersion   @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
+  requirements     OpportunityRequirement[]
+  comparisons      OpportunityComparison[]
+  learningPlans    LearningPlan[]
+  drafts           OpportunityDraft[]
+  applications     CandidateApplication[]
+  orientationEngagements OrientationEngagement[]
+
+  @@index([organizationId])
+  @@index([occupationId, catalogVersionId])
+  @@schema("app")
+}
+
+model OpportunityRequirement {
+  id               String           @id @default(uuid()) @db.Uuid
+  opportunityId    String           @db.Uuid
+  competencyId     String           @db.Uuid
+  catalogVersionId String           @db.Uuid
+  requirementType  RequirementType  @default(ESSENTIAL)
+  stage            RequirementStage @default(ENTRY)
+  description      String           @db.VarChar(1000)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+
+  opportunity      Opportunity      @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  competency       CompetencyEntry  @relation(fields: [competencyId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+
+  @@index([opportunityId])
+  @@index([competencyId, catalogVersionId])
+  @@schema("app")
+}
+
+model OpportunityComparison {
+  id                  String                @id @default(uuid()) @db.Uuid
+  profileId           String                @db.Uuid
+  revisionId          String                @db.Uuid
+  opportunityId       String                @db.Uuid
+  opportunityVersion  Int
+  status              ComparisonFeasibility
+  coverageNumerator   Int
+  coverageDenominator Int
+  coveragePercent     Decimal?              @db.Decimal(5, 2)
+  assumptionsJson     Json
+  breakdownJson       Json
+  reasons             String[]
+  outdated            Boolean               @default(false)
+  createdAt           DateTime              @default(now()) @db.Timestamptz(3)
+
+  profile             CandidateProfile      @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  revision            ProfileRevision       @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  opportunity         Opportunity           @relation(fields: [opportunityId], references: [id], onDelete: Restrict)
+  explanations        OpportunityExplanation[]
+
+  @@index([profileId, revisionId])
+  @@index([opportunityId])
+  @@schema("app")
+}
+
+model OpportunityExplanation {
+  id                String                @id @default(uuid()) @db.Uuid
+  comparisonId      String                @db.Uuid
+  actorUserId       String                @db.Uuid
+  agentId           String                @default("A03") @db.VarChar(20)
+  contractVersion   String                @default("agent-result/1") @db.VarChar(30)
+  status            String                @db.VarChar(30)
+  summary           String                @db.VarChar(2000)
+  decisionJson      Json
+  missingFieldsJson Json
+  questionsJson     Json
+  tokenUsage        Json?
+  consentGranted    Boolean               @default(true)
+  createdAt         DateTime              @default(now()) @db.Timestamptz(3)
+
+  comparison        OpportunityComparison @relation(fields: [comparisonId], references: [id], onDelete: Cascade)
+  actor             AppUser               @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+
+  @@index([comparisonId])
+  @@index([actorUserId])
+  @@schema("app")
+}
+
+model Course {
+  id               String           @id @default(uuid()) @db.Uuid
+  organizationId   String           @db.Uuid
+  code             String           @unique @db.VarChar(50)
+  title            String           @db.VarChar(160)
+  description      String           @db.VarChar(3000)
+  active           Boolean          @default(true)
+  isDemo           Boolean          @default(true)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime         @updatedAt @db.Timestamptz(3)
+
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  versions         CourseVersion[]
+
+  @@index([organizationId])
+  @@schema("app")
+  workspace        TrainingCourseWorkspace?
+}
+
+model CourseVersion {
+  id               String           @id @default(uuid()) @db.Uuid
+  courseId         String           @db.Uuid
+  catalogVersionId String           @db.Uuid
+  versionNumber    Int              @default(1)
+  syllabusText     String           @db.VarChar(5000)
+  durationHours    Int?
+  confirmedAt      DateTime         @default(now()) @db.Timestamptz(3)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+
+  course           Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  catalog          CatalogVersion   @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
+  learningOutcomes CourseLearningOutcome[]
+  prerequisites    CoursePrerequisite[]
+  editions         CourseEdition[]
+
+  @@unique([courseId, versionNumber])
+  @@index([catalogVersionId])
+  @@schema("app")
+  assessmentBanks  TrainingAssessmentBank[]
+}
+
+model CourseLearningOutcome {
+  id               String           @id @default(uuid()) @db.Uuid
+  courseVersionId  String           @db.Uuid
+  competencyId     String           @db.Uuid
+  catalogVersionId String           @db.Uuid
+  description      String           @db.VarChar(1000)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+
+  courseVersion    CourseVersion    @relation(fields: [courseVersionId], references: [id], onDelete: Cascade)
+  competency       CompetencyEntry  @relation(fields: [competencyId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+
+  @@index([courseVersionId])
+  @@index([competencyId, catalogVersionId])
+  @@schema("app")
+}
+
+model CoursePrerequisite {
+  id               String           @id @default(uuid()) @db.Uuid
+  courseVersionId  String           @db.Uuid
+  competencyId     String           @db.Uuid
+  catalogVersionId String           @db.Uuid
+  essential        Boolean          @default(true)
+  description      String           @db.VarChar(1000)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+
+  courseVersion    CourseVersion    @relation(fields: [courseVersionId], references: [id], onDelete: Cascade)
+  competency       CompetencyEntry  @relation(fields: [competencyId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+
+  @@index([courseVersionId])
+  @@index([competencyId, catalogVersionId])
+  @@schema("app")
+}
+
+model CourseEdition {
+  id               String           @id @default(uuid()) @db.Uuid
+  courseVersionId  String           @db.Uuid
+  modality         WorkplaceType    @default(ON_SITE)
+  location         String?          @db.VarChar(200)
+  startDate        DateTime         @db.Date
+  endDate          DateTime         @db.Date
+  totalSlots       Int              @default(1)
+  availableSlots   Int              @default(1)
+  costAmount       Decimal?         @db.Decimal(14, 2)
+  costCurrency     String?          @db.VarChar(3)
+  costPeriod       MoneyPeriod?
+  scheduleSummary  String           @db.VarChar(200)
+  active           Boolean          @default(true)
+  isDemo           Boolean          @default(true)
+  version          Int              @default(1)
+  publishedAt      DateTime         @default(now()) @db.Timestamptz(3)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime         @updatedAt @db.Timestamptz(3)
+
+  courseVersion    CourseVersion    @relation(fields: [courseVersionId], references: [id], onDelete: Restrict)
+  sessions         CourseSession[]
+  reservations     CourseReservation[]
+  planSteps        LearningPlanStep[]
+
+  @@index([courseVersionId])
+  @@schema("app")
+}
+
+model CourseSession {
+  id               String           @id @default(uuid()) @db.Uuid
+  editionId        String           @db.Uuid
+  weekday          Int              @db.SmallInt // 1..7 ISO
+  startMinute      Int              @db.SmallInt
+  endMinute        Int              @db.SmallInt
+  timezone         String           @default("America/Panama") @db.VarChar(50)
+  location         String?          @db.VarChar(200)
+  createdAt        DateTime         @default(now()) @db.Timestamptz(3)
+
+  edition          CourseEdition    @relation(fields: [editionId], references: [id], onDelete: Cascade)
+
+  @@index([editionId])
+  @@schema("app")
+}
+
+model LearningPlan {
+  id                  String                @id @default(uuid()) @db.Uuid
+  profileId           String                @db.Uuid
+  revisionId          String                @db.Uuid
+  targetOpportunityId String?               @db.Uuid
+  targetOccupationId  String?               @db.Uuid
+  catalogVersionId    String?               @db.Uuid
+  status              LearningPlanStatus    @default(CALCULATED)
+  feasibility         PlanFeasibility       @default(VIABLE)
+  coverageNumerator   Int                   @default(0)
+  coverageDenominator Int                   @default(0)
+  totalCostAmount     Decimal?              @db.Decimal(14, 2)
+  currency            String?               @db.VarChar(3)
+  residualGap         String[]
+  assumptionsJson     Json
+  reasons             String[]
+  outdated            Boolean               @default(false)
+  version             Int                   @default(1)
+  confirmedAt         DateTime?             @db.Timestamptz(3)
+  createdAt           DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime              @updatedAt @db.Timestamptz(3)
+
+  profile             CandidateProfile      @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  revision            ProfileRevision       @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  targetOpportunity   Opportunity?          @relation(fields: [targetOpportunityId], references: [id], onDelete: SetNull)
+  steps               LearningPlanStep[]
+  explanations        LearningPlanExplanation[]
+  reservations        CourseReservation[]
+  orientationEngagements OrientationEngagement[]
+
+  @@index([profileId, revisionId])
+  @@schema("app")
+}
+
+model LearningPlanStep {
+  id                                String        @id @default(uuid()) @db.Uuid
+  planId                            String        @db.Uuid
+  editionId                         String        @db.Uuid
+  stepOrder                         Int           @db.SmallInt
+  stepType                          PlanStepType  @default(DIRECT)
+  conditionalPrerequisiteDescription String?       @db.VarChar(500)
+  createdAt                         DateTime      @default(now()) @db.Timestamptz(3)
+
+  plan                              LearningPlan  @relation(fields: [planId], references: [id], onDelete: Cascade)
+  edition                           CourseEdition @relation(fields: [editionId], references: [id], onDelete: Restrict)
+
+  @@unique([planId, stepOrder])
+  @@index([editionId])
+  @@schema("app")
+}
+
+model LearningPlanExplanation {
+  id                String                @id @default(uuid()) @db.Uuid
+  planId            String                @db.Uuid
+  actorUserId       String                @db.Uuid
+  agentId           String                @default("A05") @db.VarChar(20)
+  contractVersion   String                @default("agent-result/1") @db.VarChar(30)
+  status            String                @db.VarChar(30)
+  summary           String                @db.VarChar(2000)
+  decisionJson      Json
+  missingFieldsJson Json
+  questionsJson     Json
+  tokenUsage        Json?
+  consentGranted    Boolean               @default(true)
+  createdAt         DateTime              @default(now()) @db.Timestamptz(3)
+
+  plan              LearningPlan          @relation(fields: [planId], references: [id], onDelete: Cascade)
+  actor             AppUser               @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+
+  @@index([planId])
+  @@index([actorUserId])
+  @@schema("app")
+}
+
+model CourseReservation {
+  id                 String             @id @default(uuid()) @db.Uuid
+  profileId          String             @db.Uuid
+  editionId          String             @db.Uuid
+  planId             String?            @db.Uuid
+  status             ReservationStatus  @default(CONFIRMED)
+  reservationNumber  String             @unique @db.VarChar(40)
+  cancellationReason String?            @db.VarChar(500)
+  cancelledAt        DateTime?          @db.Timestamptz(3)
+  createdAt          DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime           @updatedAt @db.Timestamptz(3)
+
+  profile            CandidateProfile   @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  edition            CourseEdition      @relation(fields: [editionId], references: [id], onDelete: Restrict)
+  plan               LearningPlan?      @relation(fields: [planId], references: [id], onDelete: SetNull)
+
+  @@index([profileId])
+  @@index([editionId])
+  @@schema("app")
+  trainingCompletion TrainingCompletion?
+}
+
+model OpportunityDraft {
+  id                    String                 @id @default(uuid()) @db.Uuid
+  organizationId        String                 @db.Uuid
+  authorUserId          String                 @db.Uuid
+  rawText               String                 @db.VarChar(5000)
+  title                 String?                @db.VarChar(160)
+  occupationId          String?                @db.Uuid
+  catalogVersionId      String?                @db.Uuid
+  location              String?                @db.VarChar(200)
+  workplaceType         WorkplaceType          @default(ON_SITE)
+  salaryAmount          Decimal?               @db.Decimal(14, 2)
+  salaryCurrency        String?                @db.VarChar(3)
+  salaryPeriod          MoneyPeriod?
+  scheduleSummary       String?                @db.VarChar(200)
+  availableSlots        Int                    @default(1)
+  proposedRequirements  Json?
+  clarificationQuestions Json?
+  clarificationAnswers  Json?
+  discriminatoryWarnings Json?
+  hasBlockingIssues     Boolean                @default(false)
+  status                OpportunityDraftStatus @default(DRAFT)
+  publishedOpportunityId String?               @db.Uuid
+  createdAt             DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime               @updatedAt @db.Timestamptz(3)
+
+  organization          Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  author                AppUser                @relation(fields: [authorUserId], references: [id], onDelete: Restrict)
+  publishedOpportunity  Opportunity?           @relation(fields: [publishedOpportunityId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([authorUserId])
+  @@schema("app")
+}
+
+model CandidateApplication {
+  id                  String                     @id @default(uuid()) @db.Uuid
+  opportunityId       String                     @db.Uuid
+  candidateProfileId  String                     @db.Uuid
+  profileRevisionId   String                     @db.Uuid
+  status              CandidateApplicationStatus @default(ACTIVE)
+  receiptNumber       String                     @unique @db.VarChar(100)
+  consentGivenAt      DateTime                   @default(now()) @db.Timestamptz(3)
+  withdrawnAt         DateTime?                  @db.Timestamptz(3)
+  withdrawalReason    String?                    @db.VarChar(500)
+  createdAt           DateTime                   @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime                   @updatedAt @db.Timestamptz(3)
+
+  opportunity         Opportunity                @relation(fields: [opportunityId], references: [id], onDelete: Restrict)
+  candidateProfile    CandidateProfile           @relation(fields: [candidateProfileId], references: [id], onDelete: Restrict)
+  profileRevision     ProfileRevision            @relation(fields: [profileRevisionId], references: [id], onDelete: Restrict)
+
+  @@unique([candidateProfileId, opportunityId])
+  @@index([opportunityId, status])
+  @@index([candidateProfileId])
+  @@schema("app")
+}
+
+
+model TrainingCompletion {
+  id             String @id @db.Uuid
+  reservationId  String @unique @db.Uuid
+  organizationId String @db.Uuid
+  actorUserId    String @db.Uuid
+  decision       String @db.VarChar(20)
+  completedOn    DateTime @db.Date
+  reason         String @db.VarChar(1000)
+  revision       Int @default(1)
+  recordedAt     DateTime @default(now()) @db.Timestamptz(6)
+  reservation    CourseReservation @relation(fields: [reservationId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  actor          AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  certificate    TrainingCertificate?
+  @@index([organizationId, recordedAt], map: "TrainingCompletion_organization_recorded_idx")
+  @@schema("app")
+}
+
+model TrainingCourseWorkspace {
+  courseId  String @id @db.Uuid
+  payload   Json @db.JsonB
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
+  course    Course @relation(fields: [courseId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@schema("app")
+}
+
+model TrainingAssessmentBank {
+  id              String @id @db.Uuid
+  courseVersionId String @db.Uuid
+  createdBy       String @db.Uuid
+  snapshot        Json @db.JsonB
+  createdAt       DateTime @default(now()) @db.Timestamptz(6)
+  courseVersion   CourseVersion @relation(fields: [courseVersionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  creator         AppUser @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  attempts        TrainingAssessmentAttempt[]
+  @@index([courseVersionId, createdAt, id])
+  @@schema("app")
+}
+
+model TrainingAssessmentAttempt {
+  id          String @id @db.Uuid
+  bankId      String @db.Uuid
+  profileId   String @db.Uuid
+  snapshot    Json @db.JsonB
+  answers     Json? @db.JsonB
+  result      Json? @db.JsonB
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  submittedAt DateTime? @db.Timestamptz(6)
+  bank        TrainingAssessmentBank @relation(fields: [bankId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  profile     CandidateProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  association TrainingAssessmentAssociation?
+  @@index([profileId, createdAt])
+  @@schema("app")
+}
+
+model TrainingAssessmentAssociation {
+  id        String @id @db.Uuid
+  attemptId String @unique @db.Uuid
+  profileId String @db.Uuid
+  snapshot  Json @db.JsonB
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  attempt   TrainingAssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  profile   CandidateProfile @relation(fields: [profileId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@schema("app")
+}
+
+model TrainingCertificate {
+  id               String @id @db.Uuid
+  completionId     String @unique @db.Uuid
+  organizationId   String @db.Uuid
+  actorUserId      String @db.Uuid
+  originalFilename String @db.VarChar(160)
+  contentType      String @db.VarChar(40)
+  sizeBytes        Int
+  sha256           String @db.VarChar(64)
+  recordedAt       DateTime @default(now()) @db.Timestamptz(6)
+  completion       TrainingCompletion @relation(fields: [completionId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  actor            AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@schema("app")
+}
+
+model OrientationCounselor {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @db.Uuid
+  displayName String   @db.VarChar(160)
+  specialty   String   @db.VarChar(200)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamptz(3)
+
+  user        AppUser  @relation(fields: [userId], references: [id], onDelete: Restrict)
+  engagements OrientationEngagement[]
+
+  @@schema("app")
+}
+
+model OrientationEngagement {
+  id                  String                   @id @default(uuid()) @db.Uuid
+  candidateProfileId  String                   @db.Uuid
+  counselorId         String                   @db.Uuid
+  planId              String                   @db.Uuid
+  planVersion         Int
+  revisionId          String                   @db.Uuid
+  targetOpportunityId      String?                  @db.Uuid
+  targetOpportunityVersion Int?
+  purpose                  String?                  @db.VarChar(500)
+  status                   OrientationRequestStatus @default(REQUESTED)
+  statusReason             String?                  @db.VarChar(500)
+  requestedAt              DateTime                 @default(now()) @db.Timestamptz(3)
+  respondedAt              DateTime?                @db.Timestamptz(3)
+  revokedAt                DateTime?                @db.Timestamptz(3)
+  revocationReason         String?                  @db.VarChar(500)
+  receiptNumber            String                   @unique @db.VarChar(100)
+  createdAt                DateTime                 @default(now()) @db.Timestamptz(3)
+  updatedAt                DateTime                 @default(now()) @updatedAt @db.Timestamptz(3)
+
+  candidateProfile         CandidateProfile         @relation(fields: [candidateProfileId], references: [id], onDelete: Restrict)
+  counselor                OrientationCounselor     @relation(fields: [counselorId], references: [id], onDelete: Restrict)
+  plan                     LearningPlan             @relation(fields: [planId], references: [id], onDelete: Restrict)
+  profileRevision          ProfileRevision          @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  targetOpportunity        Opportunity?             @relation(fields: [targetOpportunityId], references: [id], onDelete: SetNull)
+  reviews                  OrientationReview[]
+  clarifications      OrientationClarification[]
+
+  @@index([candidateProfileId, status])
+  @@index([counselorId, status])
+  @@index([planId, planVersion])
+  @@schema("app")
+}
+
+model OrientationReview {
+  id                String                    @id @default(uuid()) @db.Uuid
+  engagementId      String                    @db.Uuid
+  counselorUserId   String                    @db.Uuid
+  planId            String                    @db.Uuid
+  planVersion       Int
+  revisionId        String                    @db.Uuid
+  decision          OrientationReviewDecision
+  motivation        String                    @db.VarChar(2000)
+  reasons           Json                      @db.JsonB
+  reviewedAt        DateTime                  @default(now()) @db.Timestamptz(3)
+
+  engagement        OrientationEngagement     @relation(fields: [engagementId], references: [id], onDelete: Restrict)
+  counselorUser     AppUser                   @relation(fields: [counselorUserId], references: [id], onDelete: Restrict)
+
+  @@index([engagementId])
+  @@index([planId, planVersion])
+  @@schema("app")
+}
+
+model OrientationClarification {
+  id                 String                @id @default(uuid()) @db.Uuid
+  engagementId       String                @db.Uuid
+  question           String                @db.VarChar(1000)
+  proposedCorrection String?               @db.VarChar(1000)
+  youthDecision      ClarificationDecision @default(PENDING)
+  youthResponse      String?               @db.VarChar(1000)
+  createdAt          DateTime              @default(now()) @db.Timestamptz(3)
+  respondedAt        DateTime?             @db.Timestamptz(3)
+
+  engagement         OrientationEngagement @relation(fields: [engagementId], references: [id], onDelete: Restrict)
+
+  @@index([engagementId, youthDecision])
   @@schema("app")
 }

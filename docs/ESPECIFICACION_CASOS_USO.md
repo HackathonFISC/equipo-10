@@ -1,8 +1,10 @@
-# Especificación de casos de uso — etapa 2
+# Especificación de casos de uso de AImpulsa
 
-Fecha: 2026-10-16. Estado: especificación documental para revisión del equipo; no implementación ni aceptación humana global. Ideas principales: Mainor Villarreal y Giovanny Arpaia. Organización y fichas: Codex; apoyo de BALTHASAR por Vertex se documenta separadamente en la bitácora según resultado real. Fuentes: [catálogo](CASOS_DE_USO.md), [requisitos](REQUISITOS.md), [ideas humanas](IDEAS_EQUIPO.md) y [evals diseñados](../evals/casos.csv).
+Actualizado: 2026-10-17. Ideas y acuerdos funcionales: Mainor Villarreal y Giovanny Arpaia. Redacción, mapeo y actualización asistidos por IA según [bitácora](BITACORA_IA.csv).
 
-Acuerdos humanos adicionales de datos/acceso: Supabase Auth, registro propio de candidatos e invitaciones controladas para organizaciones, reserva interna inmediata con descuento de un cupo bajo controles vigentes. Ver [modelo de datos](MODELO_DATOS_MODULOS_PROPUESTA.md). Acuerdos humanos previos: orientador independiente que ayuda al joven, sin representar a empresa; adjuntar certificado del centro sin generarlo; postulaciones, reservas y citas internas con aprobación y persistencia. Las políticas operativas siguientes son propuestas de diseño para concretar los flujos. Reparto vigente en [AGENTES.md](AGENTES.md), [arquitectura revisión 2](ARQUITECTURA_AGENTES.md) y [mapeo completo](MAPEO_CASOS_AGENTES.md): A01 vacantes/contenido, A02 perfil/aprendizaje, A03 compatibilidad, A04 postulación/práctica, A05 formación. El antiguo A05 Auditor migra a C02. Modelos/stack pendientes.
+Cada ficha presenta objetivo/actores, disparador, precondiciones, entradas, flujo principal, alternos, estados, reglas, intervención humana, herramientas y criterios de aceptación. La nota de cobertura distingue implementación de diseño y ampliaciones. Consultar la [matriz de cobertura](CASOS_DE_USO.md#cobertura-actual-por-caso), [metodología](METODOLOGIA.md) y [colaboración de agentes](COLABORACION_AGENTES.md). Ninguna nota documental reemplaza una prueba ejecutada.
+
+Acuerdos vigentes: Supabase Auth, candidato dueño de su perfil, organizaciones mediante cuentas/invitaciones controladas, orientador independiente autorizado, postulación/reserva interna con confirmación y certificado existente adjunto del centro. Se mantiene el alcance texto/PDF con capa de texto; audio, fotos/imágenes y OCR propio están fuera. A04 y los recorridos aplazados no son funcionalidades acreditadas por conservar su especificación.
 
 ## Contrato transversal de todas las fichas
 
@@ -10,7 +12,7 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 - **RGN01 — Ámbito:** candidato solo sus datos; reclutador/administrador solo su empresa y funciones concedidas; centro solo su organización. Orientador solo jóvenes que autoricen específicamente su acompañamiento; respuestas privadas/borradores requieren alcance explícito adicional, no acceso automático por acompañar; no contratar, entrevistar por empresa, alterar cupos/vacantes ni consultar toda la base. Revocar acompañamiento corta consultas futuras e invalida revisiones pendientes, sin deshacer reservas independientes ya confirmadas.
 - **RGN02 — Confirmación:** extracción, etiquetas, traducción y correcciones son borradores con fuente/versión. Su dueño confirma; orientador propone, joven confirma cambios propios. No inventar salario, habilidades, transporte, experiencia ni resultados. Mostrar habilidad declarada/documentada/demostrada con evidencia concreta; microevaluación no certifica.
-- **RGN03 — Ingesta:** validar tamaño/tipo/contenido con límites configurados y visibles; texto, mensaje pegado, PDF y foto se extraen; voz se transcribe y confirma. Conservar original/referencia y fragmento de origen. Ilegible, ambiguo o fallo de proveedor permite corregir manualmente o continuar con desconocidos; no declarar equivalencia multimodal implementada hasta probar cada formato. WhatsApp pegado no implica API WhatsApp.
+- **RGN03 — Ingesta:** la entrega actual admite texto escrito/pegado y PDF con capa de texto; validar tamaño, tipo y contenido, conservar fuente/fragmentos y permitir corrección manual. Un PDF con capa OCR preexistente se puede leer; el sistema no ejecuta OCR propio sobre escaneos. Audio, fotos e imágenes quedan fuera de la entrega. Las entradas ilegibles o el fallo de proveedor no autorizan inventar datos. WhatsApp pegado es texto aportado, no integración con la API de WhatsApp.
 - **RGN04 — Factibilidad:** código comprueba restricciones esenciales, agenda con traslados, salario, presupuesto, requisitos y disponibilidad. Datos esenciales desconocidos → pendiente; violación dura → inviable. Tiempo en minutos por trayecto, ida/vuelta y frecuencia; dinero con moneda/periodo; horarios con zona America/Panama y fechas de vigencia. No asumir mudanza, transporte empresarial ni tipo de cambio. Capacidad y horarios se vuelven a comprobar al actuar.
 - **RGN05 — Puntuación/objetivo:** cobertura = satisfechos/evaluables con numerador, denominador y desconocidos visibles; esenciales incumplidos o desconocidos no se ocultan en el porcentaje. No es probabilidad de empleo. Propuesta determinística: filtrar restricciones, maximizar asignaciones internas viables a plazas de selección expresamente configuradas; entre soluciones de igual cobertura de requisitos esenciales, minimizar costo total comparable, luego traslado y desempatar por ID estable. Formación: cubrir el conjunto objetivo de habilidades esperadas mediante ediciones compatibles; minimizar costo total incluido transporte, luego duración y desempatar por ID; si no cubre todo, mostrar brecha residual sin declarar plan completo. No afirmar óptimo sin evidencia del algoritmo; estrategia definitiva se decide en arquitectura.
 - **RGN06 — Capacidades distintas:** una postulación NO consume una plaza de contratación. La empresa declara vacantes de empleo; puede configurar por separado capacidad de selección interna y cupos de entrevista. El solver no asigna más plazas de selección que las disponibles; lista corta no equivale contratación. Curso/edición separados; solo reserva confirmada descuenta cupo de edición. Confirmar contratación es una decisión registrada por empresa, no del orientador ni del LLM.
@@ -33,7 +35,9 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU01 — Completar y confirmar perfil, con o sin CV
 
-**Objetivo/actores/permisos:** joven construir su perfil; orientador solo puede sugerir si hay acompañamiento autorizado. **Origen/prioridad:** R04/R06/R07, S02, O07; A. **Disparador:** crear/editar perfil. **Precondiciones:** cuenta propia; confirmar tratamiento antes de procesar con IA. **Entradas/validaciones:** CV opcional texto/PDF/foto o entrevista texto/voz; experiencia informal, intereses/puesto meta con texto original e ID de catálogo si confirmado, formación, zona aproximada, horarios, movilidad, presupuesto y salario según RGN02–04/14.
+**Cobertura actual — Implementado con alcance acotado:** Texto y PDF con capa de texto; propuestas A02 revisadas por el joven, confirmación y consulta del perfil. No incluye audio, foto ni OCR propio. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
+**Objetivo/actores/permisos:** joven construir su perfil; orientador solo puede sugerir si hay acompañamiento autorizado. **Origen/prioridad:** R04/R06/R07, S02, O07; A. **Disparador:** crear/editar perfil. **Precondiciones:** cuenta propia; confirmar tratamiento antes de procesar con IA. **Entradas/validaciones:** CV opcional en texto/PDF con capa de texto o relato escrito sin CV; experiencia informal, intereses/puesto meta con texto original e ID de catálogo si confirmado, formación, zona aproximada, horarios, movilidad, presupuesto y salario según RGN02–04/14.
 
 **Flujo principal:** 1. Joven elige importar o responder sin CV. 2. A02 propone extracción/preguntas y marca fuente, incertidumbres y posibles habilidades. 3. Joven aclara tareas y ejemplos, confirma intereses de puesto sin que ello acredite aptitud; revisa transcripción/etiquetas y su vínculo a catálogo/fuente. 4. Joven confirma cambios y pendientes; herramienta guarda versión. 5. Sistema muestra resumen, sin compartir a empresas.
 
@@ -42,6 +46,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** joven confirma, A02 interpreta; guardar_perfil con evidencia/versiones, RGN12. **Vista:** perfil/entrevista, V con revisar y rechazar sugerencias. **Aceptación/evals:** sin CV producir perfil confirmado; ninguna habilidad rechazada se publica; cambio de perfil invalida propuestas dependientes; acceso ajeno denegado. E12–E16, X01.
 
 ## CU02 — Registrar formación previa y aclarar aprendizaje
+
+**Cobertura actual — Parcial:** Registro formativo, banco objetivo ligado a mapa confirmado, intento privado y asociación voluntaria. Abiertas y diagnóstico de curso externo sin temario quedan fuera del núcleo. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** joven documentar formación propia, distinta de CU13 del centro. **Origen/prioridad:** R04, S02/S04; A. **Disparador:** añadir curso realizado. **Precondiciones:** perfil propio; curso previo no necesita existir en catálogo. **Entradas/validaciones:** nombre, proveedor, fechas, temario/evidencia opcional, documento existente y respuestas; fechas coherentes, fuente y estado declarados.
 
@@ -53,6 +59,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU03 — Explorar vacantes viables y entender brechas
 
+**Cobertura actual — Implementado con límites:** Catálogo, comparación C01 y explicación A03. No se acredita solver global de asignación con capacidades ni cálculo automático de tarifas/rutas de transporte. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** candidato consultar opciones propias; no exponerlo a empresas. **Origen/prioridad:** R03/R08, S03, O03; A. **Disparador:** buscar oportunidades. **Precondiciones:** perfil confirmado/parcial; vacantes publicadas; explicar datos faltantes. **Entradas/validaciones:** perfil/versiones, puestos de interés y vacante con título original/puesto canónico confirmado, competencias/requisitos de esa vacante, salario/logística con periodo, horarios/plazas y fuente de estimaciones.
 
 **Flujo principal:** 1. Joven elige filtros/objetivo; alias de puesto ambiguo se aclara, sin imponer requisitos genéricos del catálogo a una vacante. 2. Código clasifica cada vacante viable/inviable/pendiente por restricciones. 3. Solver calcula propuestas de selección sin sobrepasar capacidad; no reserva por explorar. 4. A03 explica motivos, cobertura con desconocidos y brechas. 5. Joven elige preparar postulación o plan formativo.
@@ -62,6 +70,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** joven decide; A03 consulta motor/solver, C02 aplica auditoría y bloqueos; trazar reglas, fuente y versiones, no solo texto. **Vista:** oportunidades/detalle/comparación, V. **Aceptación/evals:** ninguna solución con solapamiento, exceso de costo/traslado o salario incompatible; mismo nombre/género cambiado mantiene decisión; desconocidos visibles. E01/E04–E08/E17–E18.
 
 ## CU04 — Definir puesto objetivo y ruta formativa
+
+**Cobertura actual — Implementado con observaciones:** Planificador C01 y explicación A05; datos logísticos desconocidos quedan pendientes. Confirmar plan no reserva. Restricciones de transporte y revisión D8 conservan límites documentados. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** joven planificar brechas; orientador acompaña solo con autorización; centro controla ediciones. **Origen/prioridad:** S04, R02/R03, O03/O04; A. **Disparador:** elegir meta. **Precondiciones:** perfil, requisitos objetivo y ediciones disponibles identificadas; no asumir que curso garantiza empleo. **Entradas/validaciones:** puesto/meta o vacante y requisitos confirmados, resultados esperados y prerrequisitos de curso separados con fuente/versiones, evidencias del perfil, cupos, costos/traslados, calendario y presupuesto comparables.
 
@@ -73,6 +83,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU05 — Revisar materiales y presentar postulación
 
+**Cobertura actual — Parcial: alcance reducido:** Candidatura consentida, consulta y retirada implementadas. Generar/adaptar CV y carta con A04 sigue aplazado; no contar el CRUD de candidatura como ese agente. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** joven postular con datos autorizados a empresa/vacante concreta, tenga o no CV previo. **Origen/prioridad:** S05, R06, O02/O04/O05; A. **Disparador:** elegir postular. **Precondiciones:** vacante vigente no bloqueada; perfil confirmado revisable. No exigir CV previo. **Entradas/validaciones:** oferta, perfil confirmado, CV fuente opcional, versión generada/adaptada, carta, autorización específica y clave única.
 
 **Flujo principal:** 1. Joven consulta oportunidad y datos que se compartirán. 2. A04 adapta CV existente o, si no existe, genera un primer CV borrador a partir exclusivamente del perfil y experiencia informal confirmados en CU01; propone carta sustentada, conserva procedencia y no modifica originales. 3. Joven corrige, confirma materiales y autoriza empresa/vacante. 4. Herramienta revalida versiones, consentimiento y estado de oferta; guarda una postulación interna y habilita acceso limitado de empresa. 5. Sistema muestra estado y opción retirar.
@@ -82,6 +94,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** candidato autoriza; A04 con C02; C03 presentar_postulacion/retirar_postulacion con materiales/versiones, RGN12. **Vista:** preparación/postulaciones, V. **Aceptación/evals:** joven sin CV genera, revisa y presenta primer CV desde perfil sin afirmaciones inventadas; reintento genera una solicitud; sin permiso empresa no ve perfil; retirar corta acceso futuro; postular no consume plaza de empleo. E02/E03/E14/E19/E20, X03.
 
 ## CU06 — Practicar entrevista y consultar retroalimentación
+
+**Cobertura actual — Aplazado:** Práctica privada y retroalimentación A04 no se implementaron en esta entrega. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** joven practicar de forma privada; empresa no ve respuestas por consentir postulación. **Origen/prioridad:** S06; B, ficha completa. **Disparador:** iniciar práctica. **Precondiciones:** puesto/oferta identificada y aceptación del procesamiento. **Entradas/validaciones:** oferta/versiones, experiencia confirmada y respuestas texto/voz; transcripción revisable.
 
@@ -93,6 +107,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU07 — Publicar o actualizar una vacante
 
+**Cobertura actual — Parcial:** Vacante desde texto con A01, catálogo, revisión y publicación. No se declara importación de PDF/foto de oferta ni gestión completa de versiones posteriores. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** reclutador autorizado gestionar vacante de su empresa; orientador no publica ni corrige por ella. **Origen/prioridad:** R04/R05, S01/S07, O07; A. **Disparador:** crear/editar/cerrar oferta. **Precondiciones:** membresía activa y permiso. **Entradas/validaciones:** texto/PDF/foto/mensaje pegado, fuente, título original, puesto propuesto/confirmado y catálogo/versiones, tareas, competencias/requisitos confirmados con clasificación vigente, salario/periodo, turnos, sede, plazas de empleo y capacidad de selección separada.
 
 **Flujo principal:** 1. Reclutador aporta original y datos. 2. A01 propone puesto canónico a partir de tareas/título original y competencias de requisitos, con fragmentos; detecta alias ambiguos y alertas, sin asumir requisitos generales del puesto ni duplicar catálogo automáticamente. 3. Reclutador aclara y confirma datos/correcciones. 4. C02 aplica bloqueos por validadores y alertas semánticas A01 de discriminación/faltantes críticos o permiten publicación de versión. 5. Herramienta guarda y marca propuestas dependientes para reevaluar ante cambios/cierre.
@@ -102,6 +118,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** reclutador confirma, A01 interpreta y C02 controla; C03 guardar/publicar/cerrar_vacante con fuente y motivos. **Vista:** editor/revisión vacantes, V. **Aceptación/evals:** alerta bloquea aunque no haya orientador; no inventar salario; fuente y etiquetas confirmadas; otra empresa denegada. E11–E15/E17/E18, X01.
 
 ## CU08 — Gestionar reclutadores de una empresa
+
+**Cobertura actual — Parcial:** Identidad, membresías y consulta de contexto organizativo. No se declara gestión completa de invitaciones/altas/bajas desde interfaz. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** administrador gestionar membresías exclusivamente propias; no autoridad global. **Origen/prioridad:** R01, guardrail O07; B. **Disparador:** invitar/cambiar/desactivar miembro. **Precondiciones:** cuenta con facultad de administrar empresa; cuentas iniciales de demo preparadas de forma controlada, sin registro que autoasigne administración. **Entradas/validaciones:** cuenta invitada, empresa, rol/vacantes, identidad única y permisos permitidos.
 
@@ -113,6 +131,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU09 — Revisar postulaciones y gestionar lista corta
 
+**Cobertura actual — Parcial: alcance reducido:** Empresa consulta habilidades/brechas de candidaturas consentidas con minimización. Selección global avanzada/lista corta con capacidades sigue aplazada. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** reclutador seleccionar candidatos consentidos de su vacante; orientador no decide por empresa. **Origen/prioridad:** S03/S05, R03, O03/O04; A. **Disparador:** revisar postulaciones. **Precondiciones:** oferta propia, permiso activo y autorización candidato vigente. **Entradas/validaciones:** requisitos, evidencias autorizadas, versiones y capacidad de selección distinta de empleo.
 
 **Flujo principal:** 1. Reclutador consulta solicitudes autorizadas. 2. Código filtra restricciones y solver propone lista explicada con capacidad de selección. 3. Reclutador revisa motivos/brechas, confirma lista o rechaza con motivo. 4. Herramienta revalida consentimientos y asigna plazas de selección indivisiblemente, muestra estado al joven. 5. Puede proponer CU10.
@@ -122,6 +142,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** empresa confirma, A03 propone y revisa semánticamente, C02 controla y A04 coordina registro C03; confirmar_lista con justificación y capacidad. **Vista:** candidatos de vacante, V. **Aceptación/evals:** asignaciones no exceden selección; nombres/género no alteran cálculo; retirada quita acceso y asignación activa; sin postulación autorizada no hay perfil visible. E04/E17–E19, X03/X05.
 
 ## CU10 — Acordar y registrar entrevista laboral
+
+**Cobertura actual — Aplazado:** Entrevista bilateral y agenda empresarial no implementadas en el alcance reducido. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** candidato y reclutador de empresa acordar cita; solo reclutador registra evaluación empresarial. **Origen/prioridad:** R02/R03, S05, O02/O04; A. **Disparador:** proponer entrevista. **Precondiciones:** postulación autorizada y activa; participantes legítimos. **Entradas/validaciones:** fecha, duración, zona, modalidad/lugar/enlace, disponibilidad de ambos y traslados/capacidad de agenda.
 
@@ -133,6 +155,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU11 — Gestionar catálogo y ediciones de cursos
 
+**Cobertura actual — Núcleo implementado:** Curso, temario/mapa A01, edición inicial y banco revisado. Nuevas versiones/ediciones y gestión histórica ampliada siguen pendientes. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** centro gestionar propios cursos/ediciones. **Origen/prioridad:** R01/R04, S04; A. **Disparador:** crear/editar/publicar edición. **Precondiciones:** representante autorizado. **Entradas/validaciones:** curso/temario/resultados esperados, edición con fecha, horarios, modalidad, sede, requisitos, precio/moneda/periodo y cupo entero no negativo; fuente/vigencia.
 
 **Flujo principal:** 1. Centro aporta temario/fuentes y resultados esperados. 2. A01 propone mapa unidad/fragmento→resultado→conocimiento/habilidad canónica y prerrequisitos; centro confirma. 3. Centro configura edición real. 4. C01 valida calendario/precio/capacidad. 5. Centro confirma publicación; C03 guarda curso/mapa/edición y habilita reserva RGN10. 6. Centro solicita A02 banco/rúbricas sobre mapa confirmado, revisa fuentes/preguntas y confirma banco para CU02; banco pendiente no impide publicar curso, pero no verifica ese curso.
@@ -142,6 +166,10 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** centro confirma mapa, banco y edición propios; A01 interpreta, A02 propone preguntas; C01/C03 validar/guardar_edicion/mapa/banco; fuente/unidad/etiqueta/rúbrica/versiones y afectados trazados. **Vista:** editor curso/edición/cupos, V. **Aceptación/evals:** reservar en una edición no altera otra; cupo desconocido no habilita reserva; temario no demuestra habilidad del joven; preguntas solo sobre mapa/banco revisados con fuente localizable. E09/E13, X02/X05/X09–X11.
 
 ## CU12 — Confirmar reserva de plaza en formación
+
+**Cobertura actual — Implementado con observación D8:** Reserva interna, cupo, agenda, cancelación e idempotencia probados. La reserva independiente de la misma edición tras revocar acompañamiento conserva un fallo documentado. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
+**Frontera de integración vigente:** después de revocar acompañamiento, distinguir la acción derivada de esa ruta de una nueva reserva independiente explícitamente iniciada por el joven. La independencia no elude controles de una acción de ruta ni bloquea permanentemente la misma edición por aparecer en una ruta histórica. Verificar MISMA edición y OTRA edición; conservar cupos, agenda, prerrequisitos, confirmación y recibo.
 
 **Objetivo/actores/permisos:** joven reservar edición publicada; centro ya autorizó oferta, orientador solo revisa plan acompañado. **Origen/prioridad:** R02/R03, S04, O02–O04; A. **Disparador:** aceptar curso. **Precondiciones:** datos esenciales conocidos, restricciones viables, plan revisado si se sometió a acompañamiento. **Entradas/validaciones:** edición/plan/perfil y versiones, autorizaciones, calendario, costo y clave de solicitud.
 
@@ -153,6 +181,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU13 — Registrar finalización y certificado
 
+**Cobertura actual — Núcleo implementado:** Centro registra finalización y adjunta PDF existente privado. No genera certificados ni acredita por sí solo competencias; correcciones históricas ampliadas aplazadas. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** centro registrar resultado de su edición y adjuntar certificado emitido por él. **Origen/prioridad:** R04, S04; B, acuerdo humano de certificado. **Disparador:** cierre/evaluación del curso. **Precondiciones:** representante autorizado y participación interna identificada. **Entradas/validaciones:** alumno/edición, fecha, estado, evidencia, documento opcional validado por tipo/tamaño/procedencia.
 
 **Flujo principal:** 1. Centro consulta participante y estado. 2. Registra completado/no completado y motivo/evidencia. 3. Adjunta certificado existente si corresponde. 4. Confirma; herramienta guarda resultado y adjunto con versión. 5. Joven consulta y puede vincularlo a CU02.
@@ -162,6 +192,10 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** centro confirma; no requiere decisión LLM, registrar_finalizacion/adjuntar_certificado; trazar emisor, fuente, versión y corrección. **Vista:** participantes/finalización, V. **Aceptación/evals:** joven/orientador no certifican por centro; certificado no se fabrica; finalización sin adjunto posible; reintento no duplica. X02/X07.
 
 ## CU14 — Revisar y aprobar el plan del joven acompañado
+
+**Cobertura actual — Implementado; cierre condicionado:** Solicitud, aclaraciones, revisión motivada y revocación; 17 pruebas focales pasan. Falta cerrar la frontera de reserva independiente y verificar el entorno final. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
+**Frontera de integración vigente:** después de revocar acompañamiento, distinguir la acción derivada de esa ruta de una nueva reserva independiente explícitamente iniciada por el joven. La independencia no elude controles de una acción de ruta ni bloquea permanentemente la misma edición por aparecer en una ruta histórica. Verificar MISMA edición y OTRA edición; conservar cupos, agenda, prerrequisitos, confirmación y recibo.
 
 **Objetivo/actores/permisos:** orientador independiente ayudar al joven a decidir, sin relación representativa con empresa. **Origen/prioridad:** O04/O05, R01/R03, S07; A. **Disparador:** joven solicita acompañamiento y revisión. **Precondiciones:** consentimiento vigente a orientador identificado; propuesta versionada; información necesaria accesible en ese ámbito. **Entradas/validaciones:** plan, motivos, restricciones, evidencia, alertas y alcance de autorización.
 
@@ -173,6 +207,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU15 — Consultar agenda, cancelar y reacomodar
 
+**Cobertura actual — Parcial:** Agenda y cancelación de reservas formativas. Reacomodo completo de entrevistas/cambios bilaterales no acreditado. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** joven sus compromisos; empresa sus entrevistas; centro sus ediciones. Orientador propone alternativas, no cancela en nombre ajeno. **Origen/prioridad:** R02/R03, O02–O05; A. **Disparador:** cancelación/cambio/retirada. **Precondiciones:** evento existente y permiso. **Entradas/validaciones:** evento/versiones, cambio, motivo y clave única.
 
 **Flujo principal:** 1. Actor consulta evento y efectos permitidos. 2. Confirma cancelación/cambio. 3. Herramienta valida versión, registra cambio e historial; libera una plaza solo de reserva/selección activa cancelada. 4. Invalida propuestas dependientes y código calcula alternativas actuales. 5. A03 explica; joven/contraparte y orientador del plan si aplica confirman alternativa mediante CU10/CU12, con nueva revisión pertinente.
@@ -183,6 +219,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU16 — Revisar alertas y trazas de decisiones
 
+**Cobertura actual — Parcial:** Explicaciones, guardrails, eventos y trazas por ámbitos implementados. No se declara consola de auditoría completa ni traza correlacionada de tres agentes validada. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+
 **Objetivo/actores/permisos:** joven sus procesos, orientador solo acompañados, empresa/centro propio ámbito. **Origen/prioridad:** O05/O07, S07; A. **Disparador:** consultar explicación/alerta o auditar decisión. **Precondiciones:** permiso a objeto, trazas disponibles. **Entradas/validaciones:** caso/decisión, versiones, evidencia y reglas; no acceso por conocer ID.
 
 **Flujo principal:** 1. Actor abre decisión autorizada. 2. Sistema muestra agentes/herramientas, reglas, fuentes, aprobaciones y efectos sanitizados. 3. Actor propone corrección dentro de facultades; dueño confirma datos. 4. C02/código y agente de origen reevalúan y registran resolución o pendiente; nuevas acciones pasan controles normales.
@@ -192,6 +230,8 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 **Humano/agente/herramienta/traza:** dueño corrige, orientador acompaña; C02 y verificador contrafactual determinístico; agentes explican solo sus decisiones autorizadas; consultar_traza/registrar_resolucion sin privilegios nuevos. **Vista:** motivos/alertas por ámbito, V. **Aceptación/evals:** sin revelación entre organizaciones; cambio solo nombre/género/etiqueta residencial conserva decisión con logística fija; error de auditor no desbloquea oferta. E11/E12/E17–E19, X01.
 
 ## CU17 — Consultar tendencias agregadas de habilidades
+
+**Cobertura actual — Aplazado:** Tendencias agregadas del mercado no implementadas; no presentar estadísticas nacionales ni datos operativos reales. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Objetivo/actores/permisos:** reclutador y orientador consultar agregados útiles, sin perfiles nominales ni acceso a organizaciones ajenas. **Origen/prioridad:** S01; B. **Disparador:** elegir panel de tendencias. **Precondiciones:** conjunto de ofertas publicadas habilitado para agregación; permisos y periodo conocidos. **Entradas/validaciones:** periodo, familia de habilidades, cobertura/fuentes y taxonomía versionada.
 

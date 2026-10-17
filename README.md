@@ -1,138 +1,201 @@
 # Inserción Laboral Juvenil - Equipo 10
 
-> **ESTADO VIGENTE (2026-10-16)**: El repositorio se encuentra en etapa D1 **IMPLEMENTADA Y VERIFICADA EN PERSISTENCIA Y LOCALMENTE; ACEPTACIÓN LIVE DE SUPABASE AUTH PENDIENTE DE VALIDACIÓN MANUAL**. Informe de cierre completo en [docs/D1_BASE_IMPLEMENTADA.md](docs/D1_BASE_IMPLEMENTADA.md). Base de datos con 27 tablas, 18 enums y 27 políticas RLS en Supabase, desplegadas mediante `scripts/deploy-d1.mjs` (`--check`, `--apply`, `--verify`) como actualizador sobre base existente. API en Hono/Bun autentica vía `supabase.auth.getUser(token)` con roles `equipo10_api` (`LOGIN`) y `equipo10_runtime` (`NOLOGIN`). 21 pruebas de integración API pasando, typecheck en 0 errores y build verificado.
+## AImpulsa
+**Mainor Villarreal y Giovanny Arpaia**
 
 <!-- Cambia el 0 por el número de su reto y deja la línea tal cual ("Reto: N"):
        1 = Agua · 2 = Educación · 3 = Empleabilidad
      No cambien de reto sin autorización de los organizadores. -->
 Reto: 3
 
-## Equipo
+AImpulsa conecta jóvenes, empresas y centros de formación. Convierte experiencia y contenido laboral/formativo en información revisable, compara requisitos con reglas de código y permite confirmar postulaciones y reservas internas. El orientador humano acompaña al joven con autorización específica.
 
+## Equipo
 - Mainor Villarreal (@tlegend7)
 - Giovanny Arpaia (@giovaar)
 
+Proyecto construido mediante colaboración iterativa del equipo humano con Codex y Antigravity/Gemini. Las ideas y decisiones del producto son humanas; la IA participó en investigación, diseño, documentación, código, integración y pruebas. Ver [aportes y autoría por etapa](docs/COLABORACION_HUMANO_IA.md).
+
 ## Problema
+Los jóvenes, especialmente quienes buscan su primera experiencia, pueden tener conocimientos adquiridos en estudios, trabajos informales, voluntariado y proyectos que no logran expresar en el lenguaje de una vacante. Las empresas describen requisitos heterogéneos y los cursos no siempre explican qué brecha laboral ayudan a cubrir. Además, horarios y traslado pueden hacer inviable una oportunidad aunque existan habilidades compatibles.
 
-La transición de los estudios al primer empleo es uno de los momentos más críticos para los jóvenes panameños, con tasas de desempleo juvenil muy por encima de la media nacional e informalidad recurrente. El sistema aborda una desconexión tripartita:
-1. **Jóvenes:** Carecen de experiencia formal o de un CV tradicional estructurado; tienen dificultades para traducir su experiencia informal (apoyo en negocios familiares, voluntariados) a competencias laborales, y enfrentan severas restricciones de transporte, tiempo y dinero que vuelven inviables ciertas ofertas geográficamente distantes.
-2. **Empresas:** Reciben postulaciones masivas sin ajuste a sus vacantes, y publican ofertas con requisitos ambiguos o discriminatorios (género, edad, apariencia).
-3. **Centros de formación (INADEH y afines):** Cursos con cupos y horarios fijos que no siempre se alinean a la demanda de habilidades ni llegan a los jóvenes con mayores brechas.
+AImpulsa ayuda al joven a construir y confirmar su perfil desde texto o PDF; a la empresa, a traducir vacantes a puestos y habilidades revisables; y al centro, a relacionar temarios con competencias y evaluaciones. Compara condiciones conocidas, explica brechas y permite gestionar formación y postulaciones con consentimiento. Un orientador independiente acompaña al joven cuando este lo autoriza.
 
-Nuestra solución implementa un **mercado agéntico de tres lados** con supervisión humana (orientador independiente), donde los agentes extraen competencias, resuelven compatibilidad mediante solvers determinísticos considerando transporte metropolitano, y recomiendan rutas formativas y postulaciones transparentes.
+Se trabaja con perfiles consentidos, catálogos acotados y vacantes/cursos sintéticos de demostración. La cobertura de requisitos no se presenta como probabilidad de contratación, ni la IA acredita por sí sola habilidades o certificados.
+
+## Estado y alcance de la entrega
+Actualizado: 2026-10-17. D1–D4, el alcance reducido D5/D6 y el núcleo D7 están implementados. Antigravity registra D8 corregido y verificado localmente, incluida la reserva independiente de la misma edición tras revocación. Esta actualización documental no reejecutó esas pruebas. Posteriormente, Codex aplicó y verificó la migración D8 en Supabase por autorización del equipo: sin migraciones pendientes, con verificación del rol runtime y sin cambios en los conteos de registros existentes comprobados.
+
+Ver [migración aplicada y preparación del repositorio](docs/CIERRE_MIGRACIONES_REPOSITORIO.md). Consultar el [cierre posterior D8 de Antigravity](docs/D8_ENTREGA.md), la [revisión focal previa de Codex](docs/REVISION_D8_CIERRE_FOCAL.md) y la [verificación integral](docs/VERIFICACION_INTEGRAL_D1_D8.md). Son evidencias de momentos distintos: el fallo histórico motivó la corrección posterior.
+
+Se admiten **texto escrito/pegado y CV PDF con capa de texto**. Audio, fotos e imágenes están fuera de esta entrega. Se aprovecha una capa OCR preexistente en un PDF; no se implementó OCR propio sobre escaneos. A04, CV/carta adaptados, práctica de entrevista y agenda bilateral de entrevistas siguen aplazados. No se afirma cálculo de tarifas/rutas MiBus/Metro, verificación de salario mínimo legal ni equivalencia completa con ESCO.
+
+## Documentación: por dónde empezar
+| Documento | Qué explica |
+|---|---|
+| [Catálogo de casos de uso](docs/CASOS_DE_USO.md) | Actores, objetivos y recorrido de CU01–CU17; estado por función |
+| [Especificaciones de casos de uso](docs/ESPECIFICACION_CASOS_USO.md) | Precondiciones, entradas, pasos, alternos, estados, permisos y aceptación |
+| [Metodología](docs/METODOLOGIA.md) | Tres capas, modularización, operación y proceso de desarrollo |
+| [Arquitectura de agentes](docs/ARQUITECTURA_AGENTES.md) | Roles, datos, herramientas y decisiones humanas |
+| [Colaboración, prompts y código](docs/COLABORACION_AGENTES.md) | Cómo se transfieren resultados; dónde están instrucciones y herramientas reales |
+| [Guía de presentación y evidencias](docs/GUIA_PRESENTACION_Y_EVIDENCIAS.md) | Orden para explicar el proyecto y elegir capturas |
+| [Colaboración humana e IA](docs/COLABORACION_HUMANO_IA.md) | Ideas y decisiones del equipo; aportes de Codex, Antigravity y MAGI por etapa |
+| [Bitácora de IA](docs/BITACORA_IA.csv) | Autoría humana/IA, herramientas, cambios y verificaciones |
+| [Entregables](docs/ENTREGABLES.md) | Paquete oficial, congelamiento y plan de demo/PPT del equipo |
+
+## Actores y decisiones humanas
+| Actor | Responsabilidad y límite |
+|---|---|
+| Joven/candidato | Confirma su perfil, decide qué compartir y autoriza postulaciones/reservas; sus datos no son públicos |
+| Reclutador de empresa | Publica vacantes propias y consulta candidaturas consentidas; no recibe toda la base de jóvenes |
+| Responsable de centro | Gestiona cursos propios, revisa mapas/bancos y registra finalización y certificado existente |
+| Orientador independiente | Revisa la ruta autorizada y propone aclaraciones; no representa a empresa/centro ni actúa por el joven |
+| Administrador de organización | Opera dentro de las facultades de su membresía; no obtiene autoridad global |
 
 ## Arquitectura de agentes
 
-Sistema multiagente e híbrido diseñado conforme a los requisitos oficiales (mínimo 3 agentes, herramientas con acción real, componentes determinísticos y humano en el ciclo):
+### Arquitectura de software en tres capas
+El lenguaje principal es **TypeScript**; la interfaz usa **TSX**, los estilos **CSS Modules** y la persistencia **SQL/PostgreSQL**. Scripts auxiliares usan JavaScript. Bun es el runtime y gestor de paquetes; no un lenguaje.
 
-- **A01 - Inteligencia de mercado:** Normaliza vacantes contra taxonomías de ocupaciones y competencias (ESCO / O*NET), identifica tendencias y detecta requisitos potencialmente discriminatorios.
-- **A02 - Perfil y aprendizaje:** Modela la identidad del joven mediante conversación estructurada; extrae habilidades no declaradas a partir de experiencia informal (sin obligar a contar con un CV en PDF) y mapea evidencia verificable.
-- **A03 - Matching y compatibilidad:** Evalúa la viabilidad entre candidato y vacante cruzando habilidades requeridas contra restricciones duras de movilidad (tiempo de traslado y costo de transporte MiBus/Metro), disponibilidad horaria y salario mínimo legal.
-- **A04 - Postulación y preparación:** Asiste en la postulación consentida, adaptación de cartas y simulación de entrevistas laborales con retroalimentación formativa.
-- **A05 - Rutas de formación:** Recomienda y agenda cursos pertinentes en centros de formación para cerrar brechas específicas de habilidades detectadas por A03.
-- **Componentes determinísticos de código (no delegados al LLM):**
-  - **C01 (Cálculos y Solver):** Algoritmos determinísticos de optimización de rutas, evaluación de elegibilidad y cálculo estricto de tiempos y tarifas.
-  - **C02 (Guardrails y Seguridad):** Detección y bloqueo de sesgo (pruebas contrafactuales de nombre/género/zona), validación de esquemas Zod y control de inyecciones de prompts.
-  - **C03 (Acción y Recibos):** Persistencia transaccional con generación de recibos auditables (`OperationReceipt`), garantizando que ninguna acción externa o reserva se ejecute sin consentimiento humano.
+| Capa | Implementación |
+|---|---|
+| Presentación | React 19 + React Router + Vite 8; componentes, hooks y tokens claro/oscuro en apps/web |
+| Aplicación/negocio | Hono sobre Bun 1.3; módulos, controladores, servicios, agentes y controles en apps/api |
+| Datos | Prisma 7 + adapter-pg + PostgreSQL/Supabase; acceso de servidor bajo RLS y transacciones |
 
-Detalles y contratos en [docs/ARQUITECTURA_AGENTES.md](docs/ARQUITECTURA_AGENTES.md) y [docs/METODOLOGIA.md](docs/METODOLOGIA.md).
+Son frontend y API separados dentro de un monorepo Bun; la API es un **monolito modular**, no un conjunto de microservicios. Dentro de cada módulo, el controlador valida HTTP, el servicio ejecuta el caso de uso y Prisma/SQL persiste. El módulo ensambla rutas/dependencias: no es una cuarta capa.
+
+Contratos Zod compartidos: [packages/contracts](packages/contracts). Versiones fijadas: [package.json](package.json), [web](apps/web/package.json), [API](apps/api/package.json) y [bun.lock](bun.lock).
+
+### Agentes, herramientas y colaboración
+| ID | Función implementada o prevista |
+|---|---|
+| A01 | Propone normalización de vacantes y mapas de temario contra el catálogo del producto |
+| A02 | Propone perfil desde fuentes y preguntas sobre mapas formativos confirmados |
+| A03 | Explica compatibilidad y brechas calculadas por C01 |
+| A05 | Explica rutas formativas; consulta datos y cálculo C01 |
+| A04 | Postulación asistida/materiales/práctica: **aplazado**, no contar como implementado |
+
+Los agentes implementados usan Gemini por **Vertex AI**, con ADC en el servidor; las pruebas registradas usaron gemini-3.8-flash. C01 calcula; los controles C02 autorizan y validan; C03 representa coordinación de acciones/recibos en servicios. Estos componentes de código no son agentes LLM adicionales.
+
+**Ejemplo de colaboración:** A01 propone el mapa de un curso → el centro lo confirma → la BD conserva su versión → A02 consulta ese mapa y propone preguntas → el centro revisa el banco → el joven responde → C01 corrige objetivas → el joven decide asociar el resultado. En el perfil, las propuestas A02 solo llegan a la comparación A03 después de confirmación del joven.
+
+A03 y A05 leen perfil/objetivo/catálogos autorizados; actualmente el planificador puede leer directamente los requisitos de la vacante. No afirmar una llamada automática A03 → A05 ni un bus de mensajes que no existe. La colaboración está mediada por servicios y datos versionados. Falta incorporar una traza de un mismo caso con tres agentes reales para acreditar ese criterio de entrega. Ver [detalle y fuentes](docs/COLABORACION_AGENTES.md).
+
+
+### Diagrama de arquitectura y puntos de intervención humana
+
+~~~mermaid
+flowchart TD
+  U["Joven · empresa · centro · orientador independiente"] --> WEB["Presentación: React / TSX"]
+  WEB --> API["API Hono: módulos, controladores y servicios"]
+  API --> C["Reglas C01 · permisos C02 · acciones C03"]
+  API --> A01["A01: normalizar vacante y temario"]
+  API --> A02["A02: interpretar perfil y proponer preguntas"]
+  API --> A03["A03: explicar compatibilidad"]
+  API --> A05["A05: explicar rutas formativas"]
+  A01 --> V["Gemini mediante Vertex AI"]
+  A02 --> V
+  A03 --> V
+  A05 --> V
+  A01 --> H["Revisión y confirmación humana según actor"]
+  A02 --> H
+  A03 --> H
+  A05 --> H
+  H --> API
+  API --> DB["Datos: Prisma / PostgreSQL Supabase · RLS"]
+  C --> DB
+  API --> AUTH["Supabase Auth"]
+~~~
+
+Las flechas muestran responsabilidades y dependencias, no una conversación automática entre todos los agentes. Sus herramientas acceden a información autorizada mediante servicios; las propuestas se validan antes de persistir o ejecutar acciones. El joven confirma perfil y acciones, la empresa revisa vacantes y el centro confirma mapas y bancos de preguntas. El orientador interviene solo dentro del acompañamiento autorizado.
 
 ## Tecnologías y fuentes de datos
 
-- **Frontend:** React 19, TypeScript, Vite 8, CSS Modules y sistema de diseño extraído de Figma v2 (tokens de color terracota/marfil/carbón/oliva con soporte nativo para tema claro y oscuro).
-- **Backend API:** Hono sobre Bun 1.3, estructurado en módulos verticales (`identity`, `profile`) bajo validación de esquemas Zod compartidos ([packages/contracts](packages/contracts)).
-- **Base de Datos y Seguridad:** PostgreSQL 17 en Supabase, Prisma 7 (`@prisma/adapter-pg`), 27 tablas en esquema `app`, 18 enums y 27 políticas de Row Level Security (RLS) activas.
-- **Segregación de Roles PostgreSQL:** Rol de conexión `equipo10_api` (`LOGIN`, sin privilegios de bypass) y rol transaccional de datos `equipo10_runtime` (`NOLOGIN`, ejecución controlada por GUC de actor y políticas RLS). Conexión TLS obligatoria con CA oficial verificado (`certs/supabase-prod-ca-2021.crt`).
-- **Fuentes de Datos Consultadas:** Taxonomía ocupacional ESCO / O*NET, portales oficiales de empleo de Panamá (MITRADEL / Empleos Panamá / Mi Primer Empleo), catálogo formativo de INADEH, datos de movilidad metropolitana (MiBus / Metro de Panamá) y lineamientos de protección de datos ANTAI. Catálogo completo en [docs/FUENTES.csv](docs/FUENTES.csv).
+| Elemento | Uso |
+|---|---|
+| TypeScript / TSX | Lenguaje principal de API, contratos e interfaz |
+| React, React Router, Vite y CSS Modules | Vistas, navegación, componentes y estilos reutilizables |
+| Bun y Hono | Ejecución, paquetes y API HTTP modular |
+| Prisma, PostgreSQL y Supabase | Persistencia, transacciones, autenticación y políticas de acceso |
+| Zod | Contratos y validación de entradas/salidas |
+| Gemini por Vertex AI | Interpretación y explicaciones con herramientas y salidas controladas |
+| PDF.js | Extracción de texto de PDF digital; no lectura del archivo binario como texto |
+| Bun Test, PGlite y Playwright | Pruebas de lógica, datos/permisos y recorridos del navegador |
+| Figma | Diseño de referencia, componentes, navegación y temas claro/oscuro |
+
+Fuentes: información aportada y confirmada por el usuario; catálogos internos de puestos/habilidades; vacantes, cursos y participantes sintéticos DEMO. La investigación de ESCO, formación y movilidad se registra en [FUENTES.csv](docs/FUENTES.csv). Investigar una fuente no implica que exista una integración automática con ella. MAGI/OpenCode se usó como apoyo externo de desarrollo y no forma parte del producto entregado.
 
 ## Instalación y ejecución
+Requiere Bun 1.3.14, Node.js 24 según engines, Git y acceso autorizado a una BD configurada. Las cuentas/credenciales y ADC no se incluyen en el repositorio.
 
-### Prerrequisitos
-- [Bun](https://bun.sh/) versión `>= 1.3.14` (o Node.js `>= 24.11.0`)
-- [Git](https://git-scm.com/)
+~~~powershell
+git clone https://github.com/HackathonFISC/equipo-10.git
+cd equipo-10
+bun install --frozen-lockfile
+Copy-Item .env.example .env
+~~~
 
-### Pasos de arranque local
+Completar .env sin publicar secretos. [La plantilla](.env.example) distingue credenciales del servidor y valores públicos del navegador. Para la IA, configurar ADC del servidor y proyecto/modelo Vertex según la configuración existente.
 
-1. **Clonar e instalar dependencias:**
-   ```bash
-   git clone https://github.com/HackathonFISC/equipo-10.git
-   cd equipo-10
-   bun install --frozen-lockfile
-   ```
+~~~powershell
+bun run setup:web
+bun run db:generate
+bun run dev:api
+~~~
 
-2. **Configuración de variables de entorno:**
-   Copiar la plantilla de entorno:
-   ```bash
-   cp .env.example .env
-   ```
-   Completar las variables requeridas en `.env` (URL y llave pública de Supabase, y credenciales de conexión de base de datos). Para conectividad segura TLS, se incluye el certificado público de la CA en `certs/supabase-prod-ca-2021.crt`.
+En otra terminal:
+~~~powershell
+bun run dev:web
+~~~
 
-3. **Preparar entorno web y generar cliente Prisma:**
-   ```bash
-   bun run setup:web      # Genera apps/web/.env.local con las variables públicas allowlisted
-   bun run db:generate    # Genera el cliente tipado de Prisma 7
-   ```
+Abrir http://127.0.0.1:5173; API en http://127.0.0.1:3001/health. Esto presupone esquema y permisos aprovisionados. Una web compilada no crea tablas.
 
-4. **Iniciar servicios en modo desarrollo:**
-   - **Backend API (Hono en Bun, puerto 3001):**
-     ```bash
-     bun run dev:api
-     ```
-     Verificación de salud: `curl http://127.0.0.1:3001/health`
-   - **Frontend Web (Vite + React, puerto 5173):**
-     ```bash
-     bun run dev:web
-     ```
-     Abrir navegador en `http://127.0.0.1:5173`
+Despliegue BD: [base](docs/DESPLIEGUE_BD.md), [D3](docs/D3_DESPLIEGUE_BD.md), [D4](docs/D4_DESPLIEGUE_BD.md), [integración D5–D7](docs/INTEGRACION_D5_D7.md) y [D8](docs/D8_ENTREGA.md). Usar actualizadores incrementales check/apply/verify sobre el destino autorizado; no sustituirlos por reset o db push. La instalación limpia desde clon todavía no se ha acreditado en los informes actuales.
 
-5. **Ejecutar suite de pruebas automatizadas:**
-   - Pruebas unitarias y de integración API (21 tests):
-     ```bash
-     bun test tests/api
-     ```
-   - Verificación de tipos TypeScript:
-     ```bash
-     bun run typecheck
-     ```
-   - Compilación del frontend web:
-     ```bash
-     bun run build
-     ```
-
-### Credenciales de Demo
-Para la demostración en vivo de la plataforma:
-- Se utiliza autenticación vía Supabase Auth.
-- La base de datos cuenta con segregación por roles de usuario (`AppUser`: candidato, reclutador de empresa, representante de centro formativo y orientador humano independiente).
-- Cuentas de demostración documentadas en [docs/DEMO_PPT_DISENO.md](docs/DEMO_PPT_DISENO.md). El archivo `.env.example` provee la configuración sintética limpia sin exponer claves privadas.
+El producto se ejecuta localmente con BD/Auth en Supabase. El despliegue público frontend/API es una etapa posterior; Netlify no está declarado desplegado.
 
 ## Evals
 
-El set de evaluación de robustez agéntica comprende **20 casos de prueba formalmente diseñados** en [evals/casos.csv](evals/casos.csv), cubriendo:
-- **E01–E05:** Manejo de entradas maliciosas, intentos de inyección de prompts y peticiones fuera de alcance.
-- **E06–E10:** Detección de ofertas discriminatorias (restricciones de edad, género o apariencia) y pruebas contrafactuales de equidad.
-- **E11–E15:** Asignación determinística, compatibilidad de transporte metropolitano (costo y duración de traslado) y horarios viables.
-- **E16–E20:** Normalización y extracción de habilidades desde experiencia informal y notas de voz.
+Se distinguen las pruebas técnicas del software y las evaluaciones de calidad de los agentes. El requisito de entrega pide al menos 15 casos, métricas y resultados; tener casos diseñados no acredita haberlos ejecutado.
 
-Métricas de evaluación, criterios de éxito e invariantes se detallan en [docs/METODOLOGIA.md](docs/METODOLOGIA.md).
+### Pruebas técnicas y evidencia
+~~~powershell
+bun run typecheck
+bun run build
+bun run db:validate
+bun test tests/api/c01-matcher.test.ts tests/api/c01-planner.test.ts tests/api/a05-regression.test.ts
+~~~
+
+Las integraciones reinicializan bases **locales de prueba identificadas** y se ejecutan secuencialmente. El navegador tiene su propio servidor/fixture. Algunos casos live invocan Vertex; distinguirlos de mocks y no usar las URLs remotas como destinos de fixtures.
+
+La [verificación integral](docs/VERIFICACION_INTEGRAL_D1_D8.md) registró 267 API PASS, 56 controles de datos/permisos y 10 E2E PASS; detectó fronteras D8. La [revisión focal de Codex](docs/REVISION_D8_CIERRE_FOCAL.md) registró 17 D8 y 10 reservas PASS, y detectó un caso independiente fallido. El [cierre posterior de Antigravity](docs/D8_ENTREGA.md) registra su corrección y suites 17/17, 16/16, 10/10, 8/8 y 9/9 PASS, además de tipos, build y comprobación CLI. No se reejecutaron en esta actualización documental. Son snapshots distintos; no sumar sus resultados como pruebas únicas.
+
+[evals/casos.csv](evals/casos.csv) contiene 20 casos diseñados. Falta completar al menos 15 evals de calidad con entradas/gold, métricas y resultados reproducibles. [El resultado técnico JSON](evals/verificacion_d1_d8.json) no se presenta como esos 15 evals.
+
+## Datos, acceso demo y límites
+Se utiliza un catálogo acotado y datos sintéticos identificados como DEMO; no representan ofertas, matrículas ni certificados reales de instituciones externas. [Fuentes investigadas](docs/FUENTES.csv) no equivalen a integraciones activas o a datos vigentes importados.
+
+La demo requiere cuentas autenticadas y membresías/habilitación reales del servidor; cambiar un selector visual no concede permisos. Las identidades de los fixtures son sintéticas y no constituyen credenciales Supabase de producción.
+
+Certificados adjuntos se conservan en almacenamiento local privado .local/certificates; requieren sesión y respaldo al mover el servidor. No es almacenamiento multiinstancia. No publicar .env, ADC, MAGI, documentos personales ni registros privados.
 
 ## Bitácora de IA
 
-El uso de Inteligencia Artificial en el ciclo de ingeniería se documenta con estricta transparencia y trazabilidad en [docs/BITACORA_IA.csv](docs/BITACORA_IA.csv).
-- **Herramientas y Modelos empleados:** Gemini 3.8 Flash (Vertex AI), GPT-6 Sol medium y Codex.
-- **Aportes de IA:** Generación de esquemas DDL, borradores de políticas RLS, suites de pruebas automatizadas y asistencia en arquitectura documental.
-- **Aportes y Validaciones Humanas:** Dirección del problema, autoría de las ideas iniciales, reglas de negocio, selección del reto y aprobación de cada etapa por Mainor Villarreal y Giovanny Arpaia.
-- **Límites éticos:** Ningún secreto, token de producción o dato personal real fue procesado o incluido en el repositorio.
+**Mainor Villarreal y Giovanny Arpaia trabajaron en colaboración activa con la IA:** plantearon la idea, discutieron y corrigieron las definiciones, eligieron alcance y diseño, probaron recorridos y comunicaron fallos. Su participación no se limitó a aprobar una entrega automática.
+
+**Codex** investigó fuentes, convirtió los acuerdos en requisitos y 17 CU/especificaciones, definió arquitectura y contratos, construyó y revisó el diseño Figma, preparó planes para Gemini, integró aportes y también escribió código: correcciones de D2, marca AImpulsa, integración D7 y arreglos A05. Ejecutó verificaciones, investigó errores de BD y documentó hallazgos y límites.
+
+**Antigravity/Gemini** implementó buena parte de D2–D6 y D8 y corrigió entregas tras las revisiones. **MAGI/BALTHASAR y otros modelos por OpenCode** aportaron investigación, propuestas y revisión en etapas anteriores. El detalle y los matices de autoría por bloque están en [Colaboración humana e IA](docs/COLABORACION_HUMANO_IA.md) y en el registro original [BITACORA_IA.csv](docs/BITACORA_IA.csv).
+
+La bitácora identifica fecha, bloque, herramienta/modelo, aporte IA, intervención humana confirmada, archivos y evidencia. Se conservan intentos fallidos y resultados históricos. No se atribuye a los integrantes edición manual de código sin confirmación; sus decisiones, pruebas y retroalimentación sí están registradas. Una ejecución del agente del producto no demuestra que ese modelo haya escrito el código. Cuando no se registró el modelo exacto de Codex, no se inventa.
+
+## Presentación y entrega
+
+Para explicar el proyecto: problema → actores/CU → tres capas → colaboración de agentes → demo → resultados y límites. [Guía de evidencias](docs/GUIA_PRESENTACION_Y_EVIDENCIAS.md). El equipo eligió demo en vivo y PPT; el video está excluido por decisión humana sin afirmar una exención organizadora. Registro, ventana oficial y tag final-24h requieren verificación administrativa.
+
 
 ---
+Entrega: tag de git `final-24h` sobre el último commit válido, al cumplirse la hora 24.
 
-## Documentación del Proyecto
-
-- [Documento de Metodología Oficial (D07)](docs/METODOLOGIA.md)
-- [Cierre de Etapa Base D1 Implementada](docs/D1_BASE_IMPLEMENTADA.md)
-- [Arquitectura de Agentes y Sistema Híbrido](docs/ARQUITECTURA_AGENTES.md)
-- [Especificación Completa de Casos de Uso (CU01–CU17)](docs/ESPECIFICACION_CASOS_USO.md)
-- [Guía y Resultados de Despliegue de Base de Datos](docs/DESPLIEGUE_BD.md)
-- [Handoff de Rediseño Figma v2](docs/ENTREGA_REDISENO_FIGMA_V2.md)
-- [Plan Maestro por Etapas (D1–D9)](docs/PLAN_DESARROLLO_ETAPAS.md)
-- [Plan de Demostración en Vivo y Presentación PPT](docs/DEMO_PPT_DISENO.md)
-- [Matriz de Entregables y Congelamiento oficial](docs/ENTREGABLES.md)
+Esta línea conserva la indicación de la plantilla; no afirma que el tag ya exista ni que se haya realizado la entrega administrativa.

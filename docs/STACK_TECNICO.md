@@ -1,5 +1,7 @@
 # Stack técnico cerrado — decisión ST01
 
+Actualización documental 2026-10-17: la selección ST01 ya se utiliza en el producto. El párrafo fechado siguiente registra la decisión inicial, no el estado de implementación actual. Ver [metodología y tres capas](METODOLOGIA.md) y [README](../README.md); no declarar microservicios ni contar module/controller/service como aplicaciones independientes.
+
 Fecha: 2026-10-16. Usuario solicita cerrar el stack; selección técnica de esta etapa, manteniendo React/TSX, Bun, Prisma, Supabase y tres capas. Cierra la opción de framework pendiente: **Hono con Bun**. No inicia aplicación ni migración. Sustituye las menciones anteriores de NestJS como candidato; conserva contratos CU01–CU17, roles y permisos. [Plan](PLAN_DESARROLLO_ETAPAS.md), [registro/perfil](CONTRATO_REGISTRO_PERFIL.md) y [TLS](CONEXION_SUPABASE_TLS.md).
 
 ## Selección por responsabilidad
@@ -36,7 +38,7 @@ Tres capas:
 
 En la estructura API, controller → service → Prisma/servicio de persistencia. `module` registra rutas/dependencias del dominio; no es capa adicional ni microservicio. No crear un repositorio genérico que replique Prisma sin una regla específica.
 
-## Estructura prevista, todavía sin crear
+## Estructura del producto
 
 ```text
 apps/
@@ -49,10 +51,10 @@ apps/
   api/src/
     app.ts                # composición Hono
     server.ts             # arranque Bun
-    modules/candidates/
-      candidates.module.ts
-      candidates.controller.ts
-      candidates.service.ts
+    modules/profile/      # ejemplo de módulo vertical real
+      profile.module.ts
+      profile.controller.ts
+      profile.service.ts
     infrastructure/       # Prisma, Storage, adaptador Vertex
     security/             # identidad, ámbito, consentimiento
 packages/contracts/       # esquemas Zod/DTO sin secretos ni modelos Prisma

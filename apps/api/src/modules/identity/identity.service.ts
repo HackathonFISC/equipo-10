@@ -186,6 +186,16 @@ export class IdentityService {
           },
         }));
 
+      const counselor = await tx.orientationCounselor.findUnique({
+        where: { userId: appUserId, active: true },
+        select: {
+          id: true,
+          userId: true,
+          displayName: true,
+          specialty: true,
+        },
+      });
+
       return {
         user: {
           id: user.id,
@@ -202,6 +212,14 @@ export class IdentityService {
             }
           : null,
         contexts,
+        counselor: counselor
+          ? {
+              id: counselor.id,
+              user_id: counselor.userId,
+              display_name: counselor.displayName,
+              specialty: counselor.specialty,
+            }
+          : null,
       };
     });
   }
