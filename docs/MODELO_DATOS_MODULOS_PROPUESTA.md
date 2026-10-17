@@ -1,5 +1,7 @@
 # Entidades, relaciones, estados y módulos — propuesta para cerrar
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Fecha: 2026-10-16. Estado: discusión de diseño, no aprobación global ni implementación. No hay schema Prisma, migraciones, conexiones nuevas ni cambios en Supabase. Base: [17 casos](CASOS_DE_USO.md), [fichas y reglas](ESPECIFICACION_CASOS_USO.md), [arquitectura de agentes](ARQUITECTURA_AGENTES.md) y [autonomía](AUTONOMIA_CONTRATOS_MODELOS.md). Mainor y Giovanny aportan ideas y decisiones; organización del modelo lógico por IA.
 
 ## Decisiones confirmadas por el usuario

@@ -1,5 +1,7 @@
 # Colaboración humana e IA en AImpulsa
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Fecha de revisión: 2026-10-17. Este documento sintetiza las 89 entradas existentes de [BITACORA_IA.csv](BITACORA_IA.csv) antes de registrar esta actualización. La bitácora conserva el detalle histórico de fechas, herramientas/modelos, archivos y verificaciones; esta síntesis no lo reemplaza.
 
 ## Cómo trabajamos
@@ -61,7 +63,7 @@ También implementó la base de D3 (oportunidades, comparación C01 y A03), D4 (
 - Los informes diferencian propuesta, implementación, inspección y ejecución. Un PASS de integración con respuestas simuladas no acredita por sí solo calidad del modelo ni autenticación real.
 - No se suman indiscriminadamente pruebas repetidas entre revisiones. Las 267 pruebas API, 56 controles de datos/permisos y 10 E2E del informe integral corresponden a ese estado y entorno.
 - El cierre posterior D8 de Antigravity registra correcciones y suites locales aprobadas, incluido el caso independiente detectado por Codex. En esta actualización documental se contrastó el informe y el CSV; **no se reejecutaron esas suites ni se aplicó una migración remota**.
-- Los 20 casos de [evals/casos.csv](../evals/casos.csv) están diseñados; siguen pendientes los resultados reproducibles de al menos 15 evals semánticos. Las pruebas técnicas no sustituyen ese entregable.
+- Los 20 casos de [evals/casos.csv](../evals/casos.csv) están diseñados; siguen pendientes al menos 15 casos con métricas y resultados publicados. Las pruebas técnicas pueden aportar si se mapean a los casos; el enunciado no exige 15 llamadas LLM ni se cumple solo contando pruebas.
 - Los formatos multimodales aparecen en la historia de desarrollo, pero el alcance final aceptado es **texto y PDF con capa de texto**. Audio e imágenes no se presentan como soportados.
 - No se inventa el modelo exacto de Codex cuando la bitácora no lo registra. La configuración de MAGI no prueba qué modelo escribió un archivo.
 

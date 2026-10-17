@@ -1,5 +1,7 @@
 # Cursos, puestos y habilidades: definición lógica propuesta
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Fecha: 2026-10-16. Estado: diseño para discusión, sin código ni esquema Prisma ni cambios en Supabase. Precisión humana: incluir cursos, etiquetas de puestos y etiquetas de habilidades en el cierre del modelo. Separación de entidades/campos/reglas organizada por IA; no equivale a aprobación de cada detalle.
 
 Complementa [modelo de datos y módulos](MODELO_DATOS_MODULOS_PROPUESTA.md), [fichas](ESPECIFICACION_CASOS_USO.md), [mapeo](MAPEO_CASOS_AGENTES.md) y [arquitectura](ARQUITECTURA_AGENTES.md). Se conservan Supabase Auth, invitaciones controladas y reserva inmediata ya confirmados por el usuario.

@@ -1,8 +1,10 @@
 # Metodología, arquitectura y operación de AImpulsa
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Actualizado: 2026-10-17. Reto 3 — Empleabilidad. Equipo: Mainor Villarreal y Giovanny Arpaia.
 
-Este documento describe el prototipo implementado y sus límites. No declara cerrados todos los CU ni los evals del reto. Estado técnico: [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md).
+Este documento describe el prototipo implementado y sus límites. No declara cerrados todos los CU ni los evals del reto. Estado técnico vigente en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md), [entrega D8](D8_ENTREGA.md) y [despliegue remoto](CIERRE_MIGRACIONES_REPOSITORIO.md). La verificación integral y focal anteriores son antecedentes.
 
 ## 1. Problema, actores y alcance
 La solución conecta tres lados: jóvenes que necesitan expresar experiencia y encontrar oportunidades, empresas que necesitan requisitos claros y centros que ofrecen formación con condiciones concretas. El orientador es una persona independiente que ayuda al joven autorizado, sin facultades empresariales.
@@ -101,7 +103,7 @@ Los certificados se almacenan en .local/certificates de una instancia privada. C
 
 La verificación integral y la focal D8 son snapshots, no sumas acumulables. El banco A02 tuvo un timeout real; perfil A02 sí pasó. No se declara disponibilidad garantizada ni cierre de modos que no terminaron.
 
-Siguen pendientes el caso focal de reserva independiente D8, cierre de su despliegue remoto, incorporación de evidencia E2E posterior, al menos 15 evals de calidad con resultados, traza de colaboración de tres agentes y aceptación con cuentas reales. La instalación limpia y el paquete final/PPT no están acreditados por estas pruebas.
+La reserva independiente D8 figura corregida en la entrega posterior de Antigravity; Codex aplicó y verificó la migración remota. Siguen pendientes un set publicado de al menos 15 evals con métricas/resultados, la traza de colaboración de tres agentes y la aceptación con cuentas reales. Pueden combinarse casos determinísticos, permisos, guardrails y calidad del modelo: el enunciado no exige 15 llamadas LLM. La instalación limpia y el paquete final/PPT no están acreditados por estas pruebas.
 
 ## 10. Entrega y explicación
 El README enlaza actores, CU y especificaciones. La presentación debe conectar problema, arquitectura, colaboración y acción real antes de mostrar tecnología o código. Usar capturas concretas de interfaz/resultados y referencias al código/prompts; no capturar secretos o expedientes personales.

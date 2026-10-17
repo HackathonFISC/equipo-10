@@ -1,5 +1,7 @@
 # Mapa Documental de Desarrollo y Gobernanza del Proyecto
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 **Estado:** Consolidación documental y alineación canónica (Planificación sin código).  
 **Rol/Autor:** BALTHASAR (`google-vertex/gemini-3.8-flash` en Vertex AI, proyecto `magi-511816/global`).  
 **Fecha de corte:** 2026-10-16.

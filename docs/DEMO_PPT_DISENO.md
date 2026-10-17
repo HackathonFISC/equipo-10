@@ -1,4 +1,6 @@
 # Guion de demo y PPT de AImpulsa
+
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
 Actualizado: 2026-10-17. Decisión humana: demo en vivo alternando perfiles y PPT de módulos; video fuera del plan. No se afirma dispensa organizadora del video ni una duración obligatoria de la demo derivada de aquel límite.
 
 El diseño Figma v2 y la aplicación existen. La presentación PPT y el ensayo final no se consideran creados por este guion. Nombre: **AImpulsa**, con AI destacado y cohete; temas claro/oscuro terracota, marfil, carbón y oliva. [Entrega visual](ENTREGA_REDISENO_FIGMA_V2.md).
@@ -12,7 +14,7 @@ El diseño Figma v2 y la aplicación existen. La presentación PPT y el ensayo f
 | Postulación | Joven y empresa | Consentir versión concreta → empresa consulta habilidades → retirar | DTO minimizado y pérdida de acceso; no mostrar CV/carta A04 como implementados |
 | Formación | Centro y joven | Mapa A01 confirmado → banco A02 revisado → intento privado → C01 → asociación voluntaria | Una pregunta no acredita todo un curso; mostrar estado real del proveedor |
 | Ruta y acción | Joven | Plan calculado/explicado por A05 → confirmación → reserva y agenda | Confirmar plan no reserva; recibo y cupo corresponden al efecto real |
-| Acompañamiento | Orientador y joven | Autorización → aclaración/revisión → respuesta juvenil → revocación | Usar únicamente caso D8 válido; pendiente el caso de reserva independiente de la misma edición |
+| Acompañamiento | Orientador y joven | Autorización → aclaración/revisión → respuesta juvenil → revocación | D8 corregido y migración verificada; ensayar revisión y reserva independiente con cuentas reales |
 | Finalización | Centro y joven | Resultado de participación y descarga de PDF existente privado | Si la reserva fue preparada como fixture, declararlo; no afirmar E2E íntegro sin ejecutarlo |
 
 No es necesario mostrar todas las escenas si no caben; acordar duración y priorizar una historia completa y verificable. Evitar escenas de funciones aplazadas: A04, práctica, entrevistas bilaterales, tendencias, audio e imágenes.
@@ -39,4 +41,4 @@ Ensayar recarga, reintento, revocación y al menos una denegación entre ámbito
 Incluir como respaldo una ficha por módulo/agente y referencias al código. [Guía de presentación y selección de capturas](GUIA_PRESENTACION_Y_EVIDENCIAS.md). No convertir el PPT en una lista de tecnologías ni llenar el README con capturas de código.
 
 ## Referencias de cierre
-[Casos de uso](CASOS_DE_USO.md), [especificaciones](ESPECIFICACION_CASOS_USO.md), [metodología](METODOLOGIA.md), [bitácora](BITACORA_IA.csv), [entregables](ENTREGABLES.md), [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [observación focal D8](REVISION_D8_CIERRE_FOCAL.md). El resultado E2E posterior se incorpora solo cuando termine y se contraste su evidencia.
+[Casos de uso](CASOS_DE_USO.md), [especificaciones](ESPECIFICACION_CASOS_USO.md), [metodología](METODOLOGIA.md), [bitácora](BITACORA_IA.csv), [entregables](ENTREGABLES.md), [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [observación focal D8](REVISION_D8_CIERRE_FOCAL.md). Para estado vigente consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue remoto](CIERRE_MIGRACIONES_REPOSITORIO.md). La aceptación con cuentas reales y el ensayo final siguen pendientes; no inferirlos de pruebas anteriores.

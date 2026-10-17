@@ -24,6 +24,7 @@ AImpulsa ayuda al joven a construir y confirmar su perfil desde texto o PDF; a l
 Se trabaja con perfiles consentidos, catálogos acotados y vacantes/cursos sintéticos de demostración. La cobertura de requisitos no se presenta como probabilidad de contratación, ni la IA acredita por sí sola habilidades o certificados.
 
 ## Estado y alcance de la entrega
+Consultar [ESTADO_ACTUAL.md](docs/ESTADO_ACTUAL.md) para el estado consolidado y la secuencia de evidencias.
 Actualizado: 2026-10-17. D1–D4, el alcance reducido D5/D6 y el núcleo D7 están implementados. Antigravity registra D8 corregido y verificado localmente, incluida la reserva independiente de la misma edición tras revocación. Esta actualización documental no reejecutó esas pruebas. Posteriormente, Codex aplicó y verificó la migración D8 en Supabase por autorización del equipo: sin migraciones pendientes, con verificación del rol runtime y sin cambios en los conteos de registros existentes comprobados.
 
 Ver [migración aplicada y preparación del repositorio](docs/CIERRE_MIGRACIONES_REPOSITORIO.md). Consultar el [cierre posterior D8 de Antigravity](docs/D8_ENTREGA.md), la [revisión focal previa de Codex](docs/REVISION_D8_CIERRE_FOCAL.md) y la [verificación integral](docs/VERIFICACION_INTEGRAL_D1_D8.md). Son evidencias de momentos distintos: el fallo histórico motivó la corrección posterior.
@@ -171,7 +172,7 @@ Las integraciones reinicializan bases **locales de prueba identificadas** y se e
 
 La [verificación integral](docs/VERIFICACION_INTEGRAL_D1_D8.md) registró 267 API PASS, 56 controles de datos/permisos y 10 E2E PASS; detectó fronteras D8. La [revisión focal de Codex](docs/REVISION_D8_CIERRE_FOCAL.md) registró 17 D8 y 10 reservas PASS, y detectó un caso independiente fallido. El [cierre posterior de Antigravity](docs/D8_ENTREGA.md) registra su corrección y suites 17/17, 16/16, 10/10, 8/8 y 9/9 PASS, además de tipos, build y comprobación CLI. No se reejecutaron en esta actualización documental. Son snapshots distintos; no sumar sus resultados como pruebas únicas.
 
-[evals/casos.csv](evals/casos.csv) contiene 20 casos diseñados. Falta completar al menos 15 evals de calidad con entradas/gold, métricas y resultados reproducibles. [El resultado técnico JSON](evals/verificacion_d1_d8.json) no se presenta como esos 15 evals.
+[evals/casos.csv](evals/casos.csv) contiene 20 casos diseñados. Falta publicar al menos 15 evals con entradas/expectativas, métricas y resultados reproducibles. Pueden combinar reglas, permisos, guardrails y calidad del modelo; el requisito no exige 15 llamadas LLM. [El resultado técnico JSON](evals/verificacion_d1_d8.json) no se presenta como esos 15 evals.
 
 ## Datos, acceso demo y límites
 Se utiliza un catálogo acotado y datos sintéticos identificados como DEMO; no representan ofertas, matrículas ni certificados reales de instituciones externas. [Fuentes investigadas](docs/FUENTES.csv) no equivalen a integraciones activas o a datos vigentes importados.

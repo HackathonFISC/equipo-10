@@ -1,5 +1,7 @@
 # Revisión de entrega D3 — 2026-10-17
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Resultado: NO APROBAR CIERRE D3 todavía. Inspección y reproducción por Codex; sin modificar código de producto. El informe de Antigravity es evidencia declarada, no ejecución independiente de todas sus pruebas.
 
 Verificado ahora: `bun test tests/api/c01-matcher.test.ts` 14 PASS; `bun run typecheck` exit0. No se ejecutaron suites BD/E2E ni Vertex en esta revisión. Los tests verdes actuales no detectan los siguientes fallos.

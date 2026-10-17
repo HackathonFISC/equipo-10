@@ -1,5 +1,7 @@
 # Revisión por bloques de D2 — 2026-10-17
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Revisor: Codex, modelo no registrado. Alcance acotado a integración, permisos, A02, formatos y evidencia; no auditoría exhaustiva archivo por archivo. Sin cambios en la implementación ni pruebas contra Supabase remoto. Los archivos podían seguir siendo editados por Antigravity durante la revisión.
 
 ## Veredicto

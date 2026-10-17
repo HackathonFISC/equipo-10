@@ -1,5 +1,7 @@
 # Plan de Ejecución D2 — Perfil Manual e Idempotencia (CU01 / CU16)
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 > Alcance vigente aprobado por el usuario, 2026-10-17: D2 solo admite texto escrito/pegado y PDF digital con texto seleccionable en el recorrido del candidato. Imágenes/fotos, PDF escaneado/OCR y audio quedan pendientes para una ampliación posterior; no bloquean el cierre acotado de D2 ni se declaran implementados. Distinguir validación de cabeceras de extracción/transcripción real. Las afirmaciones históricas de cobertura de todos los formatos no describen la aceptación vigente. Cierre funcional del recorrido real del usuario pendiente de confirmar guardado tras la corrección P2028 y confirmación final del perfil.
 
 Fecha: 2026-10-17. Estado: IMPLEMENTADO Y VERIFICADO EN PERSISTENCIA Y LOCALMENTE (D2-A1 a D2-A6, D2-B y D2-C1 a D2-C3 completados; 71 pruebas de API unitarias/de integración pasando, typecheck exit 0, build exit 0 y suite E2E Playwright lista). D2 no reabre el stack ni altera los contratos base.

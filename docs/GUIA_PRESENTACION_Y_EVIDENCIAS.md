@@ -1,4 +1,6 @@
 # Guía para explicar AImpulsa y organizar evidencias
+
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
 Actualizado: 2026-10-17. Organización propuesta para el README, la exposición y el PPT; no es un archivo PPT ya creado ni una aceptación de los pendientes.
 
 ## Orden recomendado
@@ -41,7 +43,7 @@ La fuente completa es el código enlazado en [COLABORACION_AGENTES](COLABORACION
 | Perfil asistido | Fuente → propuesta → revisión juvenil | Usar CV/texto sintético |
 | Vacante | Requisitos normalizados y corrección de alerta | No fingir que toda discriminación es detectada |
 | Comparación | Viable/inviable/pendiente y razones C01 | No presentar cobertura como probabilidad de contratación |
-| Ruta/reserva | Confirmar plan es distinto de reservar; recibo y agenda | Resolver primero el caso pendiente D8 |
+| Ruta/reserva | Confirmar plan es distinto de reservar; recibo y agenda | D8 corregido y desplegado; ensayar con cuentas reales |
 | Centro | Mapa/banco revisados, intento privado o finalización/PDF | No publicar soluciones previas ni fabricar certificados |
 | Orientador | Autorización, revisión y revocación | Datos mínimos del joven autorizado |
 | Prueba/traza | Herramienta, versión, confirmación y resultado | Sanitizar tokens, URLs privadas y datos personales |
@@ -51,4 +53,4 @@ Preparar una lámina de arquitectura y una de colaboración; no una diapositiva 
 ## Demo y cierre
 Usar sesiones separadas por actor y cuentas autenticadas con permisos reales. Mostrar una historia coherente y un intento bloqueado; distinguir datos preparados de acciones ejecutadas en vivo. No hacer llamadas IA para CRUD ni disparar todos los agentes para llenar tiempo.
 
-El usuario eligió demo y PPT; no producir video ni afirmar que el organizador lo dispensó. Mantener visibles los pendientes: frontera de reserva independiente D8, despliegue remoto D8 según última comprobación, resultados E2E posteriores por incorporar, 15 evals de calidad y traza correlacionada de tres agentes.
+El usuario eligió demo y PPT; no producir video ni afirmar que el organizador lo dispensó. Mantener visibles los pendientes vigentes: ensayo y aceptación con cuentas reales, publicación de al menos 15 evals con métricas/resultados, traza correlacionada de tres agentes, instalación limpia, PPT y cierre administrativo. La frontera de reserva independiente figura corregida y la migración remota D8 fue aplicada/verificada; consultar [estado actual](ESTADO_ACTUAL.md).

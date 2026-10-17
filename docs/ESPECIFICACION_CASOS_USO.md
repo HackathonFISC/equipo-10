@@ -1,5 +1,7 @@
 # Especificación de casos de uso de AImpulsa
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Actualizado: 2026-10-17. Ideas y acuerdos funcionales: Mainor Villarreal y Giovanny Arpaia. Redacción, mapeo y actualización asistidos por IA según [bitácora](BITACORA_IA.csv).
 
 Cada ficha presenta objetivo/actores, disparador, precondiciones, entradas, flujo principal, alternos, estados, reglas, intervención humana, herramientas y criterios de aceptación. La nota de cobertura distingue implementación de diseño y ampliaciones. Consultar la [matriz de cobertura](CASOS_DE_USO.md#cobertura-actual-por-caso), [metodología](METODOLOGIA.md) y [colaboración de agentes](COLABORACION_AGENTES.md). Ninguna nota documental reemplaza una prueba ejecutada.
@@ -31,7 +33,7 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 **V — Estados comunes de vista:** vacío/inicial, cargando/procesando, información incompleta, por confirmar, éxito consultable y error recuperable o acceso denegado. Los estados de dominio se especifican abajo. Mostrar motivos y pendientes, sin simular éxito durante una llamada.
 
-**Evaluación:** E01–E20 se refieren al CSV existente; X01–X15 son escenarios adicionales diseñados en [validación](VALIDACION_REQUISITOS_CASOS_USO.md). Todos pendientes de ejecución de producto. Criterios siguientes son resultados esperados, no resultados medidos.
+**Evaluación:** E01–E20 se refieren al CSV existente; X01–X15 son escenarios adicionales diseñados en [validación](VALIDACION_REQUISITOS_CASOS_USO.md). El CSV E01–E20 sigue sin resultados; X01–X15 no tienen un cierre consolidado publicado. Existen suites técnicas ejecutadas que cubren partes de estos escenarios, pero no se convierten automáticamente en resultados de todos los IDs. Criterios siguientes son resultados esperados, no resultados medidos.
 
 ## CU01 — Completar y confirmar perfil, con o sin CV
 
@@ -167,7 +169,7 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU12 — Confirmar reserva de plaza en formación
 
-**Cobertura actual — Implementado con observación D8:** Reserva interna, cupo, agenda, cancelación e idempotencia probados. La reserva independiente de la misma edición tras revocar acompañamiento conserva un fallo documentado. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+**Cobertura actual — Implementado con alcance acotado:** Reserva interna, cupo, agenda, cancelación e idempotencia probados. Antigravity registra corregida la reserva independiente de la misma edición tras revocación; migración D8 aplicada y verificada por Codex en Supabase. Falta aceptación del recorrido con cuentas reales. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Frontera de integración vigente:** después de revocar acompañamiento, distinguir la acción derivada de esa ruta de una nueva reserva independiente explícitamente iniciada por el joven. La independencia no elude controles de una acción de ruta ni bloquea permanentemente la misma edición por aparecer en una ruta histórica. Verificar MISMA edición y OTRA edición; conservar cupos, agenda, prerrequisitos, confirmación y recibo.
 
@@ -193,7 +195,7 @@ Cada ficha incorpora RGN01–RGN14, la garantía G y los estados de vista V; las
 
 ## CU14 — Revisar y aprobar el plan del joven acompañado
 
-**Cobertura actual — Implementado; cierre condicionado:** Solicitud, aclaraciones, revisión motivada y revocación; 17 pruebas focales pasan. Falta cerrar la frontera de reserva independiente y verificar el entorno final. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
+**Cobertura actual — Implementado con verificación local:** Solicitud, aclaraciones, revisión motivada y revocación implementadas; correcciones locales registradas en la entrega D8 y migración remota aplicada/verificada. La aceptación manual con cuentas reales permanece pendiente. Los pasos de ampliaciones aplazadas siguientes se conservan como especificación de diseño, no como implementación validada.
 
 **Frontera de integración vigente:** después de revocar acompañamiento, distinguir la acción derivada de esa ruta de una nueva reserva independiente explícitamente iniciada por el joven. La independencia no elude controles de una acción de ruta ni bloquea permanentemente la misma edición por aparecer en una ruta histórica. Verificar MISMA edición y OTRA edición; conservar cupos, agenda, prerrequisitos, confirmación y recibo.
 

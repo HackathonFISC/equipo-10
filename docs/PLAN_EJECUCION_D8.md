@@ -1,5 +1,7 @@
 # D8 — Orientador independiente: ejecución acotada
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Estado: PLAN PROPUESTO PARA IMPLEMENTAR. Preparado por Codex el 2026-10-17; no constituye ejecución ni verificación de D8.
 
 ## Resultado observable

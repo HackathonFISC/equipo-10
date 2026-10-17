@@ -1,5 +1,7 @@
 # Propuesta de Esquema Inicial D1–D2 (Prisma 7 / PostgreSQL) — CU01
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 **Autor:** BALTHASAR (Gemini por Vertex)  
 **Estado:** Propuesta de arquitectura de datos para Codex / Integración  
 **Alcance:** Ruta manual de registro y perfil (CU01). No incluye modelos A02 (runs, grants, sugerencias IA), los cuales se difieren a la migración subsiguiente.

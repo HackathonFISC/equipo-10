@@ -1,5 +1,7 @@
 # Revisión de navegación y progreso — propuesta visual
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Actualización: propuesta aceptada por el usuario e integrada en [rediseño Figma v2](ENTREGA_REDISENO_FIGMA_V2.md). Las frases de aprobación pendiente que siguen describen el antecedente.
 Fecha: 2026-10-16. Usuario acepta la dirección visual y solicita mejorar el sidebar e incorporar progreso al registro y cursos. Cuenta Mainor verificada. Página nueva: **08 Navegación y progreso**. La v1 conserva sus nodos y sigue disponible; esta propuesta aún no significa aprobación para sustituir globalmente toda la navegación.
 

@@ -11,7 +11,7 @@
 
 ## 1. Resumen Ejecutivo y Alcance
 
-Se ha completado y corregido la **Etapa D8 de AImpulsa** conforme a los lineamientos estrictos de [AGENTS.md](../AGENTS.md), [PLAN_EJECUCION_D8.md](PLAN_EJECUCION_D8.md), [CONTRATOS_D8.md](CONTRATOS_D8.md), [VERIFICACION_INTEGRAL_D1_D8.md](VERIFICACION_INTEGRAL_D1_D8.md), [REVISION_D8_CIERRE_FOCAL.md](REVISION_D8_CIERRE_FOCAL.md) y [ESPECIFICACION_CASOS_USO.md](ESPECIFICACION_CASOS_USO.md) (especialmente CU14 y CU16).
+Se ha completado y corregido la **Etapa D8 de AImpulsa** conforme a los lineamientos estrictos de AGENTS.md (`../AGENTS.md`, referencia interna no distribuida), [PLAN_EJECUCION_D8.md](PLAN_EJECUCION_D8.md), [CONTRATOS_D8.md](CONTRATOS_D8.md), [VERIFICACION_INTEGRAL_D1_D8.md](VERIFICACION_INTEGRAL_D1_D8.md), [REVISION_D8_CIERRE_FOCAL.md](REVISION_D8_CIERRE_FOCAL.md) y [ESPECIFICACION_CASOS_USO.md](ESPECIFICACION_CASOS_USO.md) (especialmente CU14 y CU16).
 
 ### Principios y Reglas de Negocio Implementadas y Corregidas
 1. **Orientador Independiente:** El orientador es una persona natural con rol profesional independiente; **no pertenece ni representa a empresas ni a centros formativos**.

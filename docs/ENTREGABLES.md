@@ -1,6 +1,8 @@
 # Entregables y congelamiento
 
-Fuente: §6 p. 7; rúbrica §7 p. 8. Esta matriz conserva obligaciones y rutas de entrega; el producto y documentación ya existen con los límites de [la verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [la revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). Consultar [README](../README.md) como índice actual. Las rutas son una propuesta del equipo, no nombres impuestos por la organización, excepto tag `final-24h`.
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
+Fuente: §6 p. 7; rúbrica §7 p. 8. Esta matriz conserva obligaciones y rutas de entrega; el producto y documentación ya existen con el alcance de [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [migración remota verificada](CIERRE_MIGRACIONES_REPOSITORIO.md). Los informes integral y focal anteriores son históricos. Consultar [README](../README.md) como índice actual. Las rutas son una propuesta del equipo, no nombres impuestos por la organización, excepto tag `final-24h`.
 
 | ID | Entrega oficial | Ruta propuesta | Acumular desde ahora | Validar al cerrar | Plazo oficial |
 |---|---|---|---|---|---|

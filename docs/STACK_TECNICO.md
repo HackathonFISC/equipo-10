@@ -1,5 +1,7 @@
 # Stack técnico cerrado — decisión ST01
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Actualización documental 2026-10-17: la selección ST01 ya se utiliza en el producto. El párrafo fechado siguiente registra la decisión inicial, no el estado de implementación actual. Ver [metodología y tres capas](METODOLOGIA.md) y [README](../README.md); no declarar microservicios ni contar module/controller/service como aplicaciones independientes.
 
 Fecha: 2026-10-16. Usuario solicita cerrar el stack; selección técnica de esta etapa, manteniendo React/TSX, Bun, Prisma, Supabase y tres capas. Cierra la opción de framework pendiente: **Hono con Bun**. No inicia aplicación ni migración. Sustituye las menciones anteriores de NestJS como candidato; conserva contratos CU01–CU17, roles y permisos. [Plan](PLAN_DESARROLLO_ETAPAS.md), [registro/perfil](CONTRATO_REGISTRO_PERFIL.md) y [TLS](CONEXION_SUPABASE_TLS.md).
@@ -16,9 +18,9 @@ Fecha: 2026-10-16. Usuario solicita cerrar el stack; selección técnica de esta
 | Contratos/validación | Zod compartido | DTO estrictos, errores y límites UI/API. Reglas/permiso/transacción siguen en servicios |
 | Persistencia | Prisma7 + @prisma/adapter-pg + pg | PostgreSQL Supabase, pool único por proceso, transacciones cortas, decimales y versiones; CA verificada |
 | Autenticación | Supabase Auth + supabase-js | Login/verificación/recuperación; API valida identidad y usuario activo; roles/propiedad en datos propios |
-| Archivos | Supabase Storage privado | CV/evidencias por propietario y propósito; acceso mediado/autorizado; implementación/políticas pendientes |
-| IA de producto | SDK oficial @google/genai, Vertex AI | Adaptador por servidor con contratos A01–A05 y herramientas C01–C03. Modelo propuesto del proyecto Gemini Flash3.8; acceso API real y calidad pendientes antes de activar agentes |
-| Unitarias/integración | bun:test | Reglas, validadores, servicios y HTTP Hono; BD de pruebas aislada cuando se defina |
+| Archivos | Almacenamiento local privado del servidor | Fuentes bajo StorageService y certificados en .local/certificates, mediados por autorización. Supabase Storage era una opción de diseño; no se declara implementado. Persistencia multiinstancia pendiente. |
+| IA de producto | API REST de Vertex AI mediante fetch y autenticación ADC del servidor | A01, A02, A03 y A05 implementados por modos; A04 aplazado. Las ejecuciones registradas identifican gemini-3.8-flash. No se requiere ni consta @google/genai como dependencia instalada del API actual; calidad y colaboración se evalúan por separado. |
+| Unitarias/integración | bun:test | Reglas, validadores, servicios y HTTP Hono; fixtures con BD local aislada. No ejecutar resets de tests sobre Supabase remoto. |
 | E2E | Playwright Test sobre Node | Navegador real, sesiones aisladas por perfil y evidencias; distinto de evals IA |
 | Herramientas | Bun para dependencias/workspaces/scripts; Node24 para CLIs compatibles | Fijar versiones y bun.lock al crear proyecto; no asumir que instalar con Bun ejecuta todo automáticamente en Bun |
 

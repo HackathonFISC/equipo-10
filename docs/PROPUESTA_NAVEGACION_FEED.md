@@ -1,5 +1,7 @@
 # Navegación adaptada e inicio con contenido relevante
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Actualización: propuesta aceptada por el usuario e integrada en [rediseño Figma v2](ENTREGA_REDISENO_FIGMA_V2.md). Las frases de aprobación pendiente que siguen describen el antecedente.
 Fecha: 2026-10-16. Estado: recomendación razonada y muestra visual de conversación, pendiente de revisión humana. No cambia todavía los frames de Figma ni introduce un feed social, nuevos agentes o funcionalidad de producto.
 

@@ -1,6 +1,8 @@
 # Plan de desarrollo por etapas
 
-> **ESTADO VIGENTE (2026-10-16)**: El bloque D1 está **IMPLEMENTADA Y VERIFICADA EN PERSISTENCIA Y LOCALMENTE; ACEPTACIÓN LIVE DE SUPABASE AUTH PENDIENTE DE VALIDACIÓN MANUAL**. Cualquier tabla o checklist posterior que muestre D1 en borrador o progreso queda supeditado a este estado vigente. Ver detalle en [D1_BASE_IMPLEMENTADA.md](D1_BASE_IMPLEMENTADA.md). Infraestructura consolidada: 27 tablas y 18 enums en Supabase real mediante `scripts/deploy-d1.mjs` (`--check`, `--apply`, `--verify`) en modalidad upgrade (scripts viejos con `--migrate`/`--runtime` archivados). En la API, la autenticación remota opera con `supabase.auth.getUser(token)`, rol de conexión `equipo10_api` (`LOGIN`) y rol de datos `equipo10_runtime` (`NOLOGIN`). El arranque se realiza con `bun run setup:web`, `bun run db:generate`, `bun run dev:api` y `bun run dev:web`. D2 a D9 y E01–E20 permanecen pendientes.
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
+> **ANTECEDENTE D1 (2026-10-16)**: El bloque D1 está **IMPLEMENTADA Y VERIFICADA EN PERSISTENCIA Y LOCALMENTE; ACEPTACIÓN LIVE DE SUPABASE AUTH PENDIENTE DE VALIDACIÓN MANUAL**. Cualquier tabla o checklist posterior que muestre D1 en borrador o progreso queda supeditado a este estado vigente. Ver detalle en [D1_BASE_IMPLEMENTADA.md](D1_BASE_IMPLEMENTADA.md). Infraestructura consolidada: 27 tablas y 18 enums en Supabase real mediante `scripts/deploy-d1.mjs` (`--check`, `--apply`, `--verify`) en modalidad upgrade (scripts viejos con `--migrate`/`--runtime` archivados). En la API, la autenticación remota opera con `supabase.auth.getUser(token)`, rol de conexión `equipo10_api` (`LOGIN`) y rol de datos `equipo10_runtime` (`NOLOGIN`). El arranque se realiza con `bun run setup:web`, `bun run db:generate`, `bun run dev:api` y `bun run dev:web`. En aquel corte D2–D9 y E01–E20 estaban pendientes; hoy D1–D8 están implementados con alcances parciales y los evals siguen sin resultados publicados. Ver la nota de conciliación.
 
 Fecha: 2026-10-16. Estado: D1 local autorizado y parcialmente desarrollado. Dependencias base instaladas (bun.lock creado), Prisma CLI 7.10.1 validate/generate verificado con PrismaClient funcional en Bun, esquema de 25 tablas y 15 enums con migración y guards probados localmente (30 PASS), y matriz RLS runtime de 25 tablas validada en PGlite (12 PASS). Despliegue DDL remoto a Supabase, aprovisionamiento de API y servicios de runtime/login permanecen pendientes. Sustituye el orden operativo histórico de FLUJO_TRABAJO.md; no supone que sigan quedando veinte horas ni fija una ventana oficial.
 
@@ -15,7 +17,7 @@ Para explorar desde el joven antes de construir la gestión empresarial usaremos
 1. Enunciado original local, requisitos oficiales y decisiones humanas expresas. Conservar las ideas humanas sin reescribirlas como si fueran propuestas IA.
 2. [Especificaciones CU01–CU17 y RGN01–RGN14](ESPECIFICACION_CASOS_USO.md): reglas funcionales transversales y aceptación. [Catálogo](CASOS_DE_USO.md) y [mapeo](MAPEO_CASOS_AGENTES.md) ayudan a localizar responsables.
 3. [Modelo lógico y módulos](MODELO_DATOS_MODULOS_PROPUESTA.md), [catálogos](CATALOGOS_CURSOS_PUESTOS_HABILIDADES.md), [arquitectura de agentes](ARQUITECTURA_AGENTES.md) y [contratos/autonomía](AUTONOMIA_CONTRATOS_MODELOS.md). Sus opciones abiertas siguen siendo propuestas.
-4. [Entrega Figma v2](ENTREGA_REDISENO_FIGMA_V2.md) y [plan aplicado](PLAN_REDISENO_FIGMA_V2.md) para estructura visual; [entrega v1](ENTREGA_FIGMA_V1.md) conserva IDs de vistas. Un éxito dibujado no define una operación ya ejecutada.
+4. [Entrega Figma v2](ENTREGA_REDISENO_FIGMA_V2.md) y [plan aplicado](PLAN_REDISENO_FIGMA_V2.md) para estructura visual; entrega v1 (`ENTREGA_FIGMA_V1.md`, referencia histórica no incluida) conserva IDs de vistas. Un éxito dibujado no define una operación ya ejecutada.
 5. Este plan organiza implementación, sin cambiar los requisitos anteriores. Registrar conflictos antes de alterar contratos. [Revisión documental](REVISION_PREVIA_DESARROLLO.md) identifica referencias históricas.
 
 ## Decisiones antes de codificar: bloque D0
@@ -37,7 +39,7 @@ Estas son recomendaciones, no aprobaciones retroactivas. El plan puede preparars
 
 ## Secuencia de ejecución y condiciones de salida
 
-Condición inicial del plan histórico: todos los bloques empezaban pendientes (ver estado vigente al cierre). Cada uno necesita una [orden concreta](PLANTILLA_TAREA_DESARROLLO.md), cambios revisables y evidencia de la versión actual. No asignar tareas a Mainor o Giovanny sin acordarlo.
+Condición inicial del plan histórico: todos los bloques empezaban pendientes (ver estado vigente al cierre). Cada uno necesita una orden concreta (`PLANTILLA_TAREA_DESARROLLO.md`, referencia interna no distribuida), cambios revisables y evidencia de la versión actual. No asignar tareas a Mainor o Giovanny sin acordarlo.
 
 ### D1 — Base común, acceso y entorno aislado
 
@@ -155,7 +157,7 @@ Salida: instalar y ejecutar la misma revisión evaluada; cero fallos críticos d
 
 ## Coordinación con Gemini y control de contexto
 
-Usar [guía de implementación y revisión](GUIA_IMPLEMENTACION_Y_REVISION.md). BALTHASAR está configurado en MAGI como `google-vertex/gemini-3.8-flash`; el producto necesita su adaptador propio y comprobación de acceso aparte. Configuración inspeccionada no es disponibilidad futura verificada. Las llamadas a Vertex REST efectivamente ejecutadas para redactar artefactos de despliegue y documentación se registraron en la bitácora; el plan histórico original pudo no requerir llamadas en su redacción inicial.
+Usar guía de implementación y revisión (`GUIA_IMPLEMENTACION_Y_REVISION.md`, referencia interna no distribuida). BALTHASAR está configurado en MAGI como `google-vertex/gemini-3.8-flash`; el producto necesita su adaptador propio y comprobación de acceso aparte. Configuración inspeccionada no es disponibilidad futura verificada. Las llamadas a Vertex REST efectivamente ejecutadas para redactar artefactos de despliegue y documentación se registraron en la bitácora; el plan histórico original pudo no requerir llamadas en su redacción inicial.
 
 Codex delimita contrato, bloque y archivos; Gemini escribe el aporte asignado; integrador ejecuta pruebas; revisión final contrasta cambios y evidencia en ejecución separada cuando se usa MAGI completo. El ejecutor existente reparte tres aportes entre MELCHIOR/BALTHASAR/CASPER: usarlo para bloques que realmente tengan tres unidades disjuntas; un encargo pequeño a BALTHASAR no se anuncia como ejecución completa de MAGI.
 

@@ -1,4 +1,6 @@
 # Cómo colaboran los agentes de IA
+
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
 Actualizado: 2026-10-17. Referencia de implementación para AImpulsa; no sustituye los contratos de API ni acredita una ejecución que no se haya registrado.
 
 ## 1. Qué significa colaborar en este sistema
@@ -43,7 +45,7 @@ La explicación no es una orden autorizada. El joven confirma postulación o res
 
 Código: [postulación y consentimiento](../apps/api/src/modules/recruitment/applications.service.ts), [reservas](../apps/api/src/modules/reservations/reservations.service.ts), [orientación](../apps/api/src/modules/orientation/orientation.service.ts), [withActor](../apps/api/src/infrastructure/database.ts).
 
-No contar este CRUD como A04. A04 materiales/práctica sigue aplazado. La revisión D8 mantiene un caso de reserva independiente sin cerrar.
+No contar este CRUD como A04. A04 materiales/práctica sigue aplazado. El caso de reserva independiente de la misma edición figura corregido en [D8_ENTREGA.md](D8_ENTREGA.md); el [despliegue remoto D8](CIERRE_MIGRACIONES_REPOSITORIO.md) está aplicado y verificado. Sigue pendiente demostrar el recorrido completo con cuentas reales.
 
 ## 3. Dónde están los prompts y las herramientas
 Las instrucciones se construyen en código; la referencia es el archivo y símbolo vigente, no una captura de una conversación de desarrollo. La columna «instrucción» es un resumen explicativo, no una copia literal del prompt completo.

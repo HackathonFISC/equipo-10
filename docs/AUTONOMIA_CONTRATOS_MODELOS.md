@@ -1,6 +1,8 @@
 # Autonomía, respuestas y propuesta de modelos
 
-Fecha: 2026-10-16. Diseño para revisión, no agentes del producto implementados. Complementa [arquitectura](ARQUITECTURA_AGENTES.md), [reparto](AGENTES.md), [mapeo](MAPEO_CASOS_AGENTES.md), [fichas](ESPECIFICACION_CASOS_USO.md) y [requisitos](REQUISITOS.md). El usuario pide asegurar responsabilidad individual, estructurar respuestas y proponer modelos. No confundir agentes del producto con desarrolladores MAGI.
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
+Fecha: 2026-10-16. Diseño para revisión, no agentes del producto implementados. Complementa [arquitectura](ARQUITECTURA_AGENTES.md), reparto (`AGENTES.md`, referencia interna no distribuida), [mapeo](MAPEO_CASOS_AGENTES.md), [fichas](ESPECIFICACION_CASOS_USO.md) y [requisitos](REQUISITOS.md). El usuario pide asegurar responsabilidad individual, estructurar respuestas y proponer modelos. No confundir agentes del producto con desarrolladores MAGI.
 
 ## Qué exige el enunciado y qué añadimos como criterio de diseño
 

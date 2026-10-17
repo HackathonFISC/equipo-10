@@ -1,5 +1,7 @@
 # Aceptación y orden D0-01 / D1–D2
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Estado: especificación escrita, casos diseñados sin ejecución del producto. [Diccionario y permisos](CONTRATO_REGISTRO_PERFIL.md), [API/A02](API_REGISTRO_PERFIL.md). Leer junto con CU01, RGN01–RGN14 e I02/I07; no sustituye las 20 evals existentes.
 
 ## 1. Recorridos y criterios observables
@@ -53,9 +55,9 @@ Habilitar cada formato tras verificar parser, límites y política de tratamient
 
 ## 3. Encargo para BALTHASAR cuando se autorice código
 
-Crear una orden desde [plantilla](PLANTILLA_TAREA_DESARROLLO.md), con uno de los subbloques anteriores, **archivos exactos disjuntos una vez definida la estructura del proyecto**, firmas/imports y aceptación. No inventar rutas de código antes de cerrar D1 ni encargar «implementar todo el perfil» en una llamada.
+Crear una orden desde plantilla (`PLANTILLA_TAREA_DESARROLLO.md`, referencia interna no distribuida), con uno de los subbloques anteriores, **archivos exactos disjuntos una vez definida la estructura del proyecto**, firmas/imports y aceptación. No inventar rutas de código antes de cerrar D1 ni encargar «implementar todo el perfil» en una llamada.
 
-Coordinador concreta; BALTHASAR (`google-vertex/gemini-3.8-flash`) escribe su aporte permitido, sin consola; integrador revisa y ejecuta pruebas; validador contrasta evidencia real. Compartir rutas/secciones/contratos MD/JSON compactos, no conversación completa. Seguir [guía](GUIA_IMPLEMENTACION_Y_REVISION.md) y skills del proyecto. No presentar esta preparación como llamada a Gemini o ciclo MAGI ya ejecutado.
+Coordinador concreta; BALTHASAR (`google-vertex/gemini-3.8-flash`) escribe su aporte permitido, sin consola; integrador revisa y ejecuta pruebas; validador contrasta evidencia real. Compartir rutas/secciones/contratos MD/JSON compactos, no conversación completa. Seguir guía (`GUIA_IMPLEMENTACION_Y_REVISION.md`, referencia interna no distribuida) y skills del proyecto. No presentar esta preparación como llamada a Gemini o ciclo MAGI ya ejecutado.
 
 Registro futuro de verificación por caso: revisión/huella, fixture/gold, entorno/DB aislada, comando y exit code, resultado medido, modelo/proveedor real si aplica, evidencia sanitizada, fallos y limitaciones. Pruebas mock de proveedor no prueban acceso Vertex ni calidad de interpretación.
 

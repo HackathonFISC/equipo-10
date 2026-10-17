@@ -1,5 +1,7 @@
 # Requisitos del reto 3: Empleabilidad
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Estado: matriz de obligaciones y alcance del enunciado. Fuente: `magi/contexto/RETO_OFICIAL.md`, documento aportado por el equipo. Referencias por sección y página impresa. No convertir sugerencias en obligaciones textuales. Las filas de planificación se contrastan con la [cobertura actual de CU](CASOS_DE_USO.md#cobertura-actual-por-caso) y los informes de verificación; no significan que el producto siga sin implementar ni que el cumplimiento formal esté aprobado. Entrada del paquete: [README](../README.md).
 
 ## Alcance de formatos confirmado para esta entrega — 2026-10-17
@@ -16,18 +18,18 @@ Precisión verificada en código: el parser usa pdfjs getTextContent para extrae
 - Fechas del enunciado: 9-10 octubre 2026. Sesión de preparación: 16 octubre 2026. Confirmar calendario y ventana oficial; no afirmar cumplimiento, retrofechar commits ni crear congelamiento por inferencia.
 - Equipo confirmado por el usuario: Mainor Villarreal y Giovanny Arpaia. No incorporar ni solicitar un tercer integrante. Conservar como dato del enunciado la mención de equipos de tres, sin alterar la composición confirmada. Verificar registro oficial del repositorio.
 
-## Obligaciones comunes: comprobar con evidencia
+## Obligaciones comunes: estado conciliado y evidencia
 
 | ID | Obligación oficial (§2, p. 2) | Criterio de aceptación del equipo | Evidencia prevista | Estado |
 |---|---|---|---|---|
-| O01 | Tres o más agentes con roles distintos y comunicación | Ejecutar flujo con al menos tres identidades de agente y mensajes relacionados por caso | Traza y definición de agentes | Pendiente |
-| O02 | Herramienta con acción real | Persistir asignación aprobada; mostrar cambio real consultable, no solo texto | Registro antes/después y prueba | Pendiente |
-| O03 | Cálculos/asignaciones/verificaciones con código | Resolver elegibilidad, capacidades, horarios y costos con reglas/solver determinísticos | Código y evals reproducibles | Pendiente |
-| O04 | Humano aprobar/corregir decisiones clave y explicación | Revisar propuesta y motivos; impedir ejecución sin aprobación vigente | Pantalla, evento de aprobación, prueba negativa | Pendiente |
-| O05 | Trazabilidad de decisiones por agente | Correlacionar entrada, decisión, herramienta, aprobación y resultado | Traza sanitizada | Pendiente |
-| O06 | Al menos 15 casos, métrica y resultados | Ejecutar set versionado y publicar resultados reales | evals/casos.csv y resultados | Pendiente |
-| O07 | Guardrails ante entradas maliciosas, fuera de alcance o absurdas | Rechazar/derivar sin actuar; explicar la causa | Casos adversarios y logs | Pendiente |
-| O08 | Sistema agéntico, no chat reemplazable por prompt | Completar ingreso → decisión → aprobación → acción → seguimiento | Demo de extremo a extremo | Pendiente |
+| O01 | Tres o más agentes con roles distintos y comunicación | Flujo de un caso con ≥3 agentes y artefactos/versiones relacionados | Definiciones y modos implementados; falta traza correlacionada | Evidencia de colaboración pendiente |
+| O02 | Herramienta con acción real | Persistir acción aprobada y consultar efecto/recibo | Servicios y pruebas de reservas/postulaciones; integración D5–D7 y entrega D8 | Implementado; demo real pendiente |
+| O03 | Cálculos/asignaciones/verificaciones con código | Cálculos con reglas de código y límites explícitos | C01 matcher/planner y suites; no solver global laboral | Implementado con alcance acotado |
+| O04 | Humano aprobar/corregir decisiones clave y explicación | Confirmación vigente, explicación y denegación sin aprobación | Revisión de propuestas, consentimientos y D8 corregido | Implementado y probado localmente; aceptación real pendiente |
+| O05 | Trazabilidad de decisiones por agente | Correlacionar agente, entrada, herramienta, aprobación y efecto | Trazas/eventos por ámbito; falta caso consolidado de tres agentes | Parcial; evidencia integrada pendiente |
+| O06 | Al menos 15 casos, métrica y resultados | 15+ casos con métrica y resultados reproducibles | 20 diseñados en evals/casos.csv; sin resultados registrados | Pendiente de ejecución/registro formal |
+| O07 | Guardrails ante entradas maliciosas, fuera de alcance o absurdas | Rechazar entradas inválidas o no autorizadas sin actuar | Guardrails y pruebas técnicas; falta consolidar evals adversarios y de modelo | Parcialmente verificado; evals pendientes |
+| O08 | Sistema agéntico, no chat reemplazable por prompt | Recorrido ingreso → decisión → aprobación → acción → consulta | E2E sintéticos y efectos reales locales; ensayo con cuentas reales pendiente | Implementado por bloques; demo final pendiente |
 
 Los agentes desarrolladores de MAGI no cuentan como agentes del producto. Las pruebas internas de MAGI no sustituyen los 15 evals del producto.
 
@@ -74,8 +76,8 @@ El documento titula esta lista «Agentes mínimos sugeridos». El mínimo inequ�
 
 ## Ambigüedades y decisiones pendientes
 
-Confirmar ventana oficial, registro del repo y exigencia sobre siete funciones/agentes. Elegir stack y modelos del producto, fuentes de ofertas/cursos/transporte, taxonomía y canales. No asumir que los modelos de desarrollo MAGI son los modelos de ejecución del producto. El texto remite a sección 6 para datos, pero esa sección contiene entregables; no aporta dataset ni enlaces: investigar y registrar fuentes, sin inventarlos.
+Confirmar ventana oficial, registro del repo y aceptación del alcance acotado de las funciones sugeridas. Stack cerrado y utilizado: React/TSX, Vite, Hono/Bun y Prisma/PostgreSQL/Supabase. Los agentes implementados usan Vertex mediante REST/ADC; sus ejecuciones registradas y límites están en ESTADO_ACTUAL.md. Catálogo acotado y datos DEMO; no hay integración automática de transporte ni equivalencia completa ESCO. No confundir modelos de desarrollo con agentes del producto. El texto remite a sección 6 para datos, pero esa sección contiene entregables; no aporta dataset ni enlaces: investigar y registrar fuentes, sin inventarlos.
 
-Consultar FLUJO_TRABAJO.md, AGENTES.md, ENTREGABLES.md y REGISTROS.md. Estados «pendiente» significan sin evidencia implementada.
+Consultar FLUJO_TRABAJO.md, AGENTES.md, ENTREGABLES.md y REGISTROS.md. La matriz vigente distingue implementación, verificación técnica y evidencia formal pendiente; no interpretar los pendientes administrativos o de eval como ausencia de todo el software.
 
-Revisión integral vigente: [dos referencias y plan por condiciones de salida](REVISION_INTEGRAL_PLAN.md), con CU/entidades/agentes y escenarios X13–X15. No cambiar requisitos oficiales por opiniones de modelos. Factibilidad del plan y ciclo/revisión separados; prerrequisitos se verifican por criterio/evidencia, sin dominio automático por curso terminado. Supabase Auth/alta controlada/reserva inmediata ya confirmados; otras decisiones técnicas pendientes.
+Revisión integral vigente: [dos referencias y plan por condiciones de salida](REVISION_INTEGRAL_PLAN.md), con CU/entidades/agentes y escenarios X13–X15. No cambiar requisitos oficiales por opiniones de modelos. Factibilidad del plan y ciclo/revisión separados; prerrequisitos se verifican por criterio/evidencia, sin dominio automático por curso terminado. Supabase Auth/alta controlada/reserva inmediata confirmados e implementados dentro del alcance documentado. Las decisiones de ampliaciones no implementadas permanecen separadas del estado actual.

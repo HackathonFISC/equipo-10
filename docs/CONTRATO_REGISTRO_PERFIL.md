@@ -1,5 +1,7 @@
 # Registro y perfil del joven — contrato funcional y de datos v1
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Fecha: 2026-10-16. Bloque D0-01, preparación de D1–D2. Especificación técnica definida para implementar; sin aplicación, esquema físico, migraciones ni pruebas funcionales ejecutadas. Las elecciones de este documento son concreciones de diseño, no declaraciones de nuevas aprobaciones humanas.
 
 Fuentes: [CU01 y RGN01–RGN14](ESPECIFICACION_CASOS_USO.md), [modelo lógico](MODELO_DATOS_MODULOS_PROPUESTA.md), [catálogos](CATALOGOS_CURSOS_PUESTOS_HABILIDADES.md), [autonomía A02](AUTONOMIA_CONTRATOS_MODELOS.md), [plan D0–D2](PLAN_DESARROLLO_ETAPAS.md) y [Figma v2](ENTREGA_REDISENO_FIGMA_V2.md). Complementos implementables: [API y A02](API_REGISTRO_PERFIL.md) y [aceptación/orden de trabajo](ACEPTACION_REGISTRO_PERFIL.md).

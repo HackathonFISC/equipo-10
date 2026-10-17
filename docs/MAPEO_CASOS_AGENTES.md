@@ -1,5 +1,7 @@
 # Mapeo de casos, actores y agentes — revisión 2
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Actualización 2026-10-17: esta matriz asigna responsabilidades del diseño a CU01–CU17; no declara que todas sus filas estén implementadas. Estado por caso en [la cobertura actual](CASOS_DE_USO.md#cobertura-actual-por-caso). Reparto de [arquitectura](ARQUITECTURA_AGENTES.md): A01 Vacantes/contenido; A02 Perfil/aprendizaje; A03 Compatibilidad/brechas; A05 Formación implementados por modos con los límites de sus informes. A04 Postulación/práctica/coordinación sigue aplazado. C01 cálculos, C02 seguridad/equidad/trazas y C03 flujo/acción son código, no agentes LLM adicionales. El antiguo A05 Auditor migra a C02. No se requiere IA para cada operación. [Colaboración real, prompts y herramientas](COLABORACION_AGENTES.md).
 
 Todos los casos incorporan C02 para permisos por objeto y trazas; solo los agentes listados participan cuando hay interpretación/generación. «Secundario» no implica acceso automático a datos personales; los permisos se delimitan por candidato, organización, consentimiento y propósito. Las fichas funcionales siguen en [especificación](ESPECIFICACION_CASOS_USO.md); los IDs CU se conservan.
@@ -35,7 +37,7 @@ Las colaboraciones son dependencias de información, no obligación de invocar t
 
 ## Compatibilidad con los requisitos
 
-O01 se demuestra con comunicación real, no con esta tabla: recorrido de demo A01 contenido/vacante → A02 perfil/evidencia → A03 brecha → A05 ruta → A04 postulación/agenda, según caso. O02/O03 se cumplen mediante C01/C03 ejecutados, O04 por confirmaciones y orientador cuando corresponde, O05/O07 mediante C02 y eventos. S07 no se elimina al quitar el agente Auditor independiente. Evals y diagrama final deberán mostrar herramientas y mensajes realmente implementados.
+O01 requiere evidencia de comunicación real, no esta tabla: preparar un caso con A02 perfil confirmado, A01 vacante confirmada y A03 comparación/explicación usando los mismos artefactos; A05 puede añadir la ruta sobre esos objetos. A04 está aplazado y no se incluye como ejecutado. Este orden describe un caso a demostrar, no llamadas automáticas entre agentes. O02/O03 se cumplen mediante C01/C03 ejecutados, O04 por confirmaciones y orientador cuando corresponde, O05/O07 mediante C02 y eventos. S07 no se elimina al quitar el agente Auditor independiente. Evals y diagrama final deberán mostrar herramientas y mensajes realmente implementados.
 
 Detalle de datos propuesto en [catálogos de puestos, competencias y cursos](CATALOGOS_CURSOS_PUESTOS_HABILIDADES.md): A01 distingue puesto canónico/título original de habilidades; mapa de curso conserva fuente y resultados esperados, A02 pregunta y documenta evidencia; los17casos mantienen sus IDs.
 

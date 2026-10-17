@@ -1,5 +1,7 @@
 # Arquitectura de agentes de AImpulsa — revisión 3
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 Actualizado: 2026-10-17. Esta revisión distingue implementación, evidencia y ampliaciones. Sustituye el estado histórico que describía todos los agentes como propuesta sin código; no declara cinco agentes terminados.
 
 ## Roles del producto
@@ -52,4 +54,4 @@ A05 puede planificar leyendo requisitos de la vacante directamente. No se repres
 ## Código, contratos y validación
 [Colaboración, prompts y herramientas](COLABORACION_AGENTES.md) contiene los enlaces al código y los pasos de intercambio. [Mapa CU/agentes](MAPEO_CASOS_AGENTES.md) conserva la asignación de diseño; sus ampliaciones no se cuentan como implementadas.
 
-[Metodología](METODOLOGIA.md) describe las tres capas físicas/lógicas y operación. [Catálogo](CASOS_DE_USO.md) y [especificación](ESPECIFICACION_CASOS_USO.md) señalan estado de cada CU. Evidencia: [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md), [corrección A05](CORRECCION_A05_EVIDENCIA_LOGISTICA.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). No se atribuye a MAGI ni a los desarrolladores el cumplimiento del mínimo de agentes del producto.
+[Metodología](METODOLOGIA.md) describe las tres capas lógicas y su operación en frontend/API/datos. [Catálogo](CASOS_DE_USO.md) y [especificación](ESPECIFICACION_CASOS_USO.md) señalan estado de cada CU. Evidencia: [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md), [corrección A05](CORRECCION_A05_EVIDENCIA_LOGISTICA.md) y [revisión focal D8 histórica](REVISION_D8_CIERRE_FOCAL.md), seguida de [D8 corregido](D8_ENTREGA.md) y [migración aplicada/verificada](CIERRE_MIGRACIONES_REPOSITORIO.md). No se atribuye a MAGI ni a los desarrolladores el cumplimiento del mínimo de agentes del producto.

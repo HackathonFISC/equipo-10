@@ -1,5 +1,7 @@
 # D4 — Cursos, mi ruta y reserva
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Fecha: 2026-10-17. Estado: orden definida para Gemini/Antigravity; implementación y pruebas D4 pendientes. Producto: AImpulsa.
 
 ## Alcance y experiencia

@@ -4,7 +4,7 @@ Autoría conceptual: **Mainor Villarreal y Giovanny Arpaia**, confirmada por el 
 
 Origen: archivo local `magi/contexto/IDEAS_RETO.md`. Registro: 2026-10-16. SHA256 original: `6eca29e75ff56ab033c0ae05df97df74d2371e233089071d7682b0526d3e64b6`.
 
-Intervención IA: guardar copia documental y añadir esta identificación de autoría. Conservar a continuación el texto original, sin atribuir su definición a IA. Análisis y mejoras de IA por separado en [ANALISIS_IDEAS.md](ANALISIS_IDEAS.md); no asumir que esas mejoras ya fueron aceptadas.
+Intervención IA: guardar copia documental y añadir esta identificación de autoría. Conservar a continuación el texto original, sin atribuir su definición a IA. Análisis y mejoras de IA por separado en ANALISIS_IDEAS.md (`ANALISIS_IDEAS.md`, referencia histórica no incluida); no asumir que esas mejoras ya fueron aceptadas.
 
 ## Texto aportado por el equipo
 

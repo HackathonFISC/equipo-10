@@ -1,5 +1,7 @@
 # Revisión de D1–D7, agentes y entregables
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Fecha: 2026-10-17. Revisor: Codex. Dictamen: **NO APROBAR todavía el cierre integral ni afirmar cinco agentes validados**. Hay producto funcional e integración previamente documentada, pero faltan evidencias obligatorias y se reprodujeron defectos del planificador/A05.
 
 Actualización de alcance posterior por decisión humana: audio, notas de voz, fotos e imágenes están excluidos de la entrega actual y no son tareas de cierre. Se mantienen texto y PDF con capa de texto, incluida una capa OCR preexistente. El parser no implementa OCR sobre escaneos sin texto. Las menciones históricas de formatos pendientes en este informe no ordenan implementarlos; H01–H05 y los entregables/evidencias restantes conservan su vigencia.

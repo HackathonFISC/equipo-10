@@ -1,6 +1,8 @@
 # Verificación integral D1–D8 — 2026-10-17
 
-**Dictamen: regresión existente aprobada; cierre D8 rechazado por fronteras no cubiertas por su suite original.** Este informe prevalece sobre una afirmación de cierre completo de D8. No se reparó código del producto durante esta revisión.
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
+**Dictamen: regresión existente aprobada; cierre D8 rechazado por fronteras no cubiertas por su suite original.** Este dictamen corresponde al árbol revisado entonces; la entrega corregida y el despliegue posteriores están enlazados en la nota de conciliación. No se reparó código del producto durante esta revisión.
 
 Resultados estructurados: [evals/verificacion_d1_d8.json](../evals/verificacion_d1_d8.json). HEAD de referencia `5e448e0`; se verificó el árbol de trabajo con cambios, no un commit final. La huella SHA256 del código, contratos, SQL, scripts y pruebas está en el JSON. Registros completos privados y pruebas adicionales generadas: `.local/verification-d1-d8/`, excluidos de Git.
 

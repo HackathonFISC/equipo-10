@@ -1,5 +1,7 @@
 # D8 — Revisión focal de cierre
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Fecha: 2026-10-17. Revisor: Codex. **Resultado: 27 pruebas focales PASS; un caso de reserva independiente todavía falla.** No se repitió E2E ni se modificó código del producto mientras Antigravity ejecutaba su recorrido.
 
 ## Verificado ahora
@@ -12,7 +14,7 @@ Fecha: 2026-10-17. Revisor: Codex. **Resultado: 27 pruebas focales PASS; un caso
 
 Las suites se ejecutaron secuencialmente en un **tercer contenedor dedicado a esta revisión**, localhost:55455/aimpulsa_d8_review. Se copiaron solamente fixtures/pruebas a `.local/verification-d8-final/` con destino restringido al contenedor nuevo y configuración explícita de pruebas; no se cambiaron las guardas de configuración del producto. No se tocaron las BD55435/55445 usadas por otros trabajos. Hubo intentos iniciales fallidos de preparación del contenedor/configuración del fixture; no se contabilizan como fallos funcionales del producto ni como PASS. Los resultados anteriores son las ejecuciones válidas finales.
 
-## Ajuste restante: reserva independiente de la MISMA edición
+## Hallazgo de aquella ejecución: reserva independiente de la MISMA edición
 
 Ubicación: `apps/api/src/modules/reservations/reservations.service.ts`, búsqueda de planIdToCheck al faltar body.plan_id, aproximadamente líneas177–203.
 

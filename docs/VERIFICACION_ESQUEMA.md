@@ -1,5 +1,7 @@
 # Verificación del esquema inicial
 
+> **Lectura histórica — conciliación 2026-10-17:** se conservan el alcance, resultados y autoría de la ejecución original. Los pendientes de aquel momento no describen automáticamente la entrega actual. Consultar [estado vigente](ESTADO_ACTUAL.md), [D8 corregido](D8_ENTREGA.md) y [despliegue aplicado/verificado](CIERRE_MIGRACIONES_REPOSITORIO.md). Esta nota no repite pruebas ni cambia resultados anteriores.
+
 Fecha: 2026-10-16. [Alcance y decisiones](ESQUEMA_INICIAL.md). Esquema válido con validador oficial del conjunto Prisma7.10.1: 25 modelos y 15 enumeraciones. Migración final generada con su motor de esquemas; no con Prisma6. Se añadió search_path app/pg_catalog explícito y guards SQL versionados.
 
 ## Ejecución local

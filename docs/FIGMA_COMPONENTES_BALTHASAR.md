@@ -1,6 +1,8 @@
 # Especificación de Biblioteca Mínima Figma — Handoff UI
 
-Estado actual (2026-10-16): diseño v1 construido en Figma con la cuenta Mainor. Ver [entrega, enlaces de nodos y validación](ENTREGA_FIGMA_V1.md). Las limitaciones de acceso descritas abajo son antecedentes, superadas mediante el servidor remoto oficial. Aplicación y pruebas funcionales todavía pendientes.
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
+Estado actual (2026-10-16): diseño v1 construido en Figma con la cuenta Mainor. Ver entrega, enlaces de nodos y validación (`ENTREGA_FIGMA_V1.md`, referencia histórica no incluida). Las limitaciones de acceso descritas abajo son antecedentes, superadas mediante el servidor remoto oficial. Aplicación y pruebas funcionales todavía pendientes.
 
 Fecha: 2026-10-16  
 Estado: Paquete de diseño contractual para handoff. Endpoint MCP local opera en modo solo lectura; no dar por creados frames ni variables en archivo remoto.

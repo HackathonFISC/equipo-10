@@ -1,5 +1,7 @@
 # Dos flujos de trabajo: Figma y desarrollo
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 Fecha: 2026-10-16. Estado: planificación; no archivo Figma, frontend ni PPT creados. Usuario solicita diseñar primero y programar después; evitar azul típico y proponer interfaz rectangular con personalidad. Dirección terracota con marfil/carbón/oliva y modos claro/oscuro confirmada después por el usuario; valores específicos son candidatos de diseño. Referencias: [demo](DEMO_PPT_DISENO.md), [CU](ESPECIFICACION_CASOS_USO.md), [plan](REVISION_INTEGRAL_PLAN.md) y [mapeo](MAPEO_CASOS_AGENTES.md).
 
 ## Dirección visual propuesta
@@ -69,4 +71,4 @@ Matriz común por vista: actor → CU → módulo → frame/versión → compone
 
 Terracota elegida por usuario en claro/oscuro; conservar marfil/carbón/oliva y acento terracota sin grandes fondos. Validar valores exactos y geometría propuesta. Después cerrar inventario de vistas y empezar bocetos Figma cuando se solicite crear/editar archivo. Identidad/nombre del producto, duración de demo y detalles pendientes del catálogo siguen por resolver; no asumir aceptación por ver la muestra.
 
-[Plan de Figma para «Diseño plataforma»](PLAN_FIGMA_DISENO_PLATAFORMA.md): bloquesF0–F7, biblioteca/temas,17CU y entrega a programación. Terracota claro/oscuro confirmada; MCP local responde con página vacía0:1, herramientas de lectura sin escritura expuesta. Nombre/URL de archivo aún no comprobados; lienzo no modificado.
+Plan de Figma para «Diseño plataforma» (`PLAN_FIGMA_DISENO_PLATAFORMA.md`, referencia histórica no incluida): bloquesF0–F7, biblioteca/temas,17CU y entrega a programación. Terracota claro/oscuro confirmada; MCP local responde con página vacía0:1, herramientas de lectura sin escritura expuesta. Nombre/URL de archivo aún no comprobados; lienzo no modificado.

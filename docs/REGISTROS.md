@@ -1,16 +1,18 @@
 # Registro de evidencias por acumular
 
+> **Estado conciliado — 2026-10-17:** consultar [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) para distinguir implementación, evidencia histórica y pendientes de entrega. D8 figura corregido localmente y su migración remota aplicada/verificada; la aceptación manual, los evals publicados y la traza de tres agentes siguen pendientes.
+
 ## Lectura actual — 2026-10-17
 
-Este registro conserva notas históricas de preparación. Los párrafos que indican producto/diseño sin crear corresponden a sus etapas originales. Estado y cobertura actuales en [README](../README.md), [catálogo CU](CASOS_DE_USO.md), [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). Las pruebas técnicas no sustituyen los evals semánticos ni una traza correlacionada de tres agentes. [Colaboración y prompts](COLABORACION_AGENTES.md) y [guía de presentación](GUIA_PRESENTACION_Y_EVIDENCIAS.md) organizan la evidencia para entrega. Autoría y acciones posteriores se registran en BITACORA_IA.csv, sin borrar el historial ni inventar ejecución.
+Este registro conserva notas históricas de preparación. Los párrafos que indican producto/diseño sin crear corresponden a sus etapas originales. Estado y cobertura actuales en [README](../README.md), [catálogo CU](CASOS_DE_USO.md), [verificación integral](VERIFICACION_INTEGRAL_D1_D8.md) y [revisión focal D8](REVISION_D8_CIERRE_FOCAL.md). Las pruebas técnicas pueden aportar al set de evals si se mapean a casos, métricas y resultados; su conteo aislado no sustituye esa publicación ni una traza correlacionada de tres agentes. [Colaboración y prompts](COLABORACION_AGENTES.md) y [guía de presentación](GUIA_PRESENTACION_Y_EVIDENCIAS.md) organizan la evidencia para entrega. Autoría y acciones posteriores se registran en BITACORA_IA.csv, sin borrar el historial ni inventar ejecución.
 
-## Estado vigente tras revisión integral
+## Antecedente: revisión integral de planificación
 
 [Plan consolidado y dos referencias](REVISION_INTEGRAL_PLAN.md): Codex revisar documentos completos; BALTHASAR por Vertex revisar paquete acotado de extractos y síntesis. Intento amplio agotó tiempo; tarea acotada sí produjo informe con lectura/escritura verificadas. RC01–RC05 tratados y RC06 pendiente de decisiones. 17CU conservados,40comprobaciones documentales correctas, E01–E20/X01–X15/I01–I08sin ejecución de producto. Sin desarrollo, schema Prisma, migraciones ni cambios en Supabase. Tablero y anotaciones anteriores conservan contexto de cada etapa.
 
 Regla: actualizar en cada bloque. «Planeado» no significar «implementado». No inventar ejecución, precisión, fuentes, usuarios o impacto.
 
-## Tablero inicial
+## Tablero inicial histórico
 
 | Ítem | Estado | Evidencia | Responsable |
 |---|---|---|---|
@@ -59,7 +61,7 @@ Umbrales son propuestas técnicas del equipo, no umbrales publicados por la orga
 
 ## Arquitectura de agentes compartidos, revisión 2
 
-[Arquitectura y contratos](ARQUITECTURA_AGENTES.md), [mapeo CU01–CU17](MAPEO_CASOS_AGENTES.md) y [reparto vigente](AGENTES.md): A01 Vacantes/contenido; A02 Perfil/aprendizaje; A03 Compatibilidad; A04 Postulación/práctica; A05 Formación. Auditoría antigua A05 migra a C02. Preguntas ligadas a temario/mapa/banco versionados, con permisos por actor. Estado de diseño; producto/evals todavía sin ejecutar.
+[Arquitectura y contratos](ARQUITECTURA_AGENTES.md), [mapeo CU01–CU17](MAPEO_CASOS_AGENTES.md) y reparto vigente (`AGENTES.md`, referencia interna no distribuida): A01 Vacantes/contenido; A02 Perfil/aprendizaje; A03 Compatibilidad; A04 Postulación/práctica; A05 Formación. Auditoría antigua A05 migra a C02. Preguntas ligadas a temario/mapa/banco versionados, con permisos por actor. Estado de diseño; producto/evals todavía sin ejecutar.
 
 Cierre documental de remapeo: 17 casos alineados, opinión de BALTHASAR por Vertex sobre arquitectura y mapeo incorporada, 38 comprobaciones estructurales correctas y validador MAGI aprueba sin observaciones. Quedan modelos/stack/contratos técnicos detallados y producto/evals por implementar/ejecutar.
 
@@ -73,13 +75,13 @@ Acuerdos humanos confirmados sobre datos/acceso: Supabase Auth; candidatos con r
 
 Presentación confirmada: **video descartado; demo en vivo alternando perfiles + PPT de módulos**. [Guion y dirección visual/skills propuestas](DEMO_PPT_DISENO.md). Pantallas/diseños/PPT aún no creados; dirección terracota claro/oscuro confirmada; duración por acordar.
 
-[Plan de Figma para «Diseño plataforma»](PLAN_FIGMA_DISENO_PLATAFORMA.md): bloquesF0–F7, biblioteca/temas,17CU y entrega a programación. Terracota claro/oscuro confirmada; MCP local responde con página vacía0:1, herramientas de lectura sin escritura expuesta. URL del destino aportada por usuario; identidad del archivo activo del MCP aún sin verificar; lienzo no modificado.
+Plan de Figma para «Diseño plataforma» (`PLAN_FIGMA_DISENO_PLATAFORMA.md`, referencia histórica no incluida): bloquesF0–F7, biblioteca/temas,17CU y entrega a programación. Terracota claro/oscuro confirmada; MCP local responde con página vacía0:1, herramientas de lectura sin escritura expuesta. URL del destino aportada por usuario; identidad del archivo activo del MCP aún sin verificar; lienzo no modificado.
 
-[Paquete inicial de Figma](FIGMA_PRIMER_BLOQUE.md): seis vistas y 18 tokens candidatos; [componentes BALTHASAR con revisión Codex](FIGMA_COMPONENTES_BALTHASAR.md). Destino confirmado por enlace del usuario: [Diseño plataforma](https://www.figma.com/design/cWPzNNsLPoUenKyfhf4Diu/Dise%C3%B1o-plataforma?node-id=0-1), archivo `cWPzNNsLPoUenKyfhf4Diu`, nodo `0:1`. El MCP local no expone la identidad del archivo activo ni herramientas de escritura; la coincidencia con este destino sigue sin verificarse. Lienzo sin modificar.
+Paquete inicial de Figma (`FIGMA_PRIMER_BLOQUE.md`, referencia histórica no incluida): seis vistas y 18 tokens candidatos; [componentes BALTHASAR con revisión Codex](FIGMA_COMPONENTES_BALTHASAR.md). Destino confirmado por enlace del usuario: [Diseño plataforma](https://www.figma.com/design/cWPzNNsLPoUenKyfhf4Diu/Dise%C3%B1o-plataforma?node-id=0-1), archivo `cWPzNNsLPoUenKyfhf4Diu`, nodo `0:1`. El MCP local no expone la identidad del archivo activo ni herramientas de escritura; la coincidencia con este destino sigue sin verificarse. Lienzo sin modificar.
 
 ## Diseño Figma v1 construido
 
-Estado actual (2026-10-16): diseño v1 construido en Figma con la cuenta Mainor. Ver [entrega, enlaces de nodos y validación](ENTREGA_FIGMA_V1.md). Las limitaciones de acceso descritas abajo son antecedentes, superadas mediante el servidor remoto oficial. Aplicación y pruebas funcionales todavía pendientes.
+Estado actual (2026-10-16): diseño v1 construido en Figma con la cuenta Mainor. Ver entrega, enlaces de nodos y validación (`ENTREGA_FIGMA_V1.md`, referencia histórica no incluida). Las limitaciones de acceso descritas abajo son antecedentes, superadas mediante el servidor remoto oficial. Aplicación y pruebas funcionales todavía pendientes.
 50frames de escritorio para25vistas/estados en claro y oscuro,6muestras adaptables y16pantallas del recorrido demo;49componentes principales,65variables y6estilos. Revisión estructural y visual representativa; sin ejecución de agentes/producto/BD ni push.
 
 [Revisión visual: navegación superior y progreso](REVISION_FIGMA_NAVEGACION_PROGRESO.md): registro por pasos, publicación de cursos y seguimiento del joven. Propuesta en página08; mantener referencia v1 hasta revisión humana.

@@ -1,5 +1,7 @@
 # Esquema inicial del joven — D1, revisión 1
 
+> **Diseño/plan de su etapa — conciliación 2026-10-17:** los pasos futuros y alternativas siguientes conservan su contexto original; no son una lista de todo lo que falta hoy. Implementación y pendientes vigentes en [ESTADO_ACTUAL.md](ESTADO_ACTUAL.md) y [cobertura CU](CASOS_DE_USO.md#cobertura-actual-por-caso). Los casos diseñados no se presentan como ejecutados.
+
 > **ESTADO VIGENTE (2026-10-16)**: Esquema de base de datos D1 **IMPLEMENTADA Y VERIFICADA EN PERSISTENCIA Y LOCALMENTE; ACEPTACIÓN LIVE DE SUPABASE AUTH PENDIENTE DE VALIDACIÓN MANUAL**. Todo contenido posterior representa la propuesta inicial histórica; este bloque rige el estado de persistencia. Documento de cierre: [D1_BASE_IMPLEMENTADA.md](D1_BASE_IMPLEMENTADA.md). El catálogo activo en PostgreSQL real comprende exactamente 27 tablas en esquema `app`, 18 enums y 27 políticas RLS activas. Las migraciones `202610160001_profile` y `202610160002_identity_orgs` fueron aplicadas mediante `scripts/deploy-d1.mjs` (`--check`, `--apply`, `--verify`) sobre base existente; los comandos antiguos `deploy-db.mjs` (`--migrate`/`--runtime`) están archivados. Separación estricta de roles: `equipo10_api` (`LOGIN`) y `equipo10_runtime` (`NOLOGIN`, `NOINHERIT`, `NOBYPASSRLS`).
 
 Fecha: 2026-10-16. Alcance: persistencia de CU01 manual y traza CU16; no toda la aplicación. Preparado con propuesta real de BALTHASAR/Gemini por Vertex y revisión/correcciones de Codex.
