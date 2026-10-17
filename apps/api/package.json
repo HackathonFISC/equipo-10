@@ -1,0 +1,11 @@
+{
+  "name": "@equipo10/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@equipo10/contracts": "workspace:*",
+    "@supabase/supabase-js": "2.118.0",
+    "hono": "4.13.13"
+  }
+}

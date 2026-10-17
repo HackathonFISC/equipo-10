@@ -1,0 +1,14 @@
+{
+  "name": "@equipo10/web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@equipo10/contracts": "workspace:*",
+    "@fontsource/source-sans-3": "5.3.1",
+    "@supabase/supabase-js": "2.118.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router": "8.4.0"
+  }
+}

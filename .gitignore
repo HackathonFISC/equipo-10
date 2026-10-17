@@ -1,0 +1,55 @@
+# Credenciales locales; conservar el ejemplo sin secretos.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+application_default_credentials.json
+service-account*.json
+
+# Dependencias, cliente Prisma y compilados reproducibles.
+node_modules/
+node_modules.*/
+generated/
+dist/
+*.tsbuildinfo
+
+# Resultados de pruebas y caches locales.
+playwright-report/
+test-results/
+coverage/
+.cache/
+.vite/
+.runtime/
+*.log
+
+# Herramientas y registros internos de desarrollo, fuera de la entrega.
+AGENTS.md
+GEMINI.md
+docs/AGENTES.md
+docs/ORDEN_D1_BASE.md
+docs/PLANTILLA_TAREA_DESARROLLO.md
+docs/GUIA_IMPLEMENTACION_Y_REVISION.md
+/.opencode/
+/.codex/
+/.agents/
+/magi/
+/runs/
+/contexto/
+
+# Respaldos locales y volcados; conservar prisma/migrations/*.sql.
+/backups/
+*.bak
+*.orig
+*.tmp
+*.dump
+*.sql.gz
+
+# Preferencias del equipo y archivos del sistema operativo.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

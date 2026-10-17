@@ -1,0 +1,548 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["app"]
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+  @@schema("app")
+}
+enum OrganizationType {
+  COMPANY
+  TRAINING_CENTER
+  @@schema("app")
+}
+enum MembershipRole {
+  ADMIN
+  RECRUITER
+  TRAINING_MANAGER
+  @@schema("app")
+}
+enum MembershipStatus {
+  ACTIVE
+  REVOKED
+  @@schema("app")
+}
+enum Theme {
+  SYSTEM
+  LIGHT
+  DARK
+  @@schema("app")
+}
+enum RevisionStatus {
+  DRAFT
+  CONFIRMED
+  DISCARDED
+  @@schema("app")
+}
+enum DeclarationStatus {
+  UNKNOWN
+  NONE
+  PROVIDED
+  @@schema("app")
+}
+enum KnowledgeState {
+  UNKNOWN
+  KNOWN
+  @@schema("app")
+}
+enum ExperienceKind {
+  FORMAL
+  INFORMAL
+  VOLUNTEER
+  PERSONAL_PROJECT
+  OTHER
+  @@schema("app")
+}
+enum CompetencyKind {
+  KNOWLEDGE
+  SKILL
+  @@schema("app")
+}
+enum ClaimDecision {
+  PROPOSED
+  ACCEPTED
+  REJECTED
+  DEFERRED
+  @@schema("app")
+}
+enum SourceKind {
+  MANUAL_TEXT
+  PDF
+  IMAGE
+  AUDIO
+  @@schema("app")
+}
+enum SourceStatus {
+  RECEIVED
+  VALIDATED
+  READY
+  FAILED
+  WITHDRAWN
+  @@schema("app")
+}
+// VERIFIED_EXERCISE is intentionally absent until CU02 supplies its verifier.
+enum EvidenceKind {
+  SELF_REPORT
+  DOCUMENT
+  @@schema("app")
+}
+enum MobilityMode {
+  BUS
+  METRO
+  WALKING
+  BICYCLE
+  PRIVATE_VEHICLE
+  OTHER
+  @@schema("app")
+}
+enum MoneyPeriod {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  TOTAL
+  @@schema("app")
+}
+enum ProfileSection {
+  ACCOUNT
+  EXPERIENCE
+  TRAINING
+  INTERESTS
+  COMPETENCIES
+  AVAILABILITY
+  CONSTRAINTS
+  FINAL_REVIEW
+  @@schema("app")
+}
+enum ReviewDecision {
+  REVIEWED
+  DEFERRED
+  @@schema("app")
+}
+
+model AppUser {
+  id            String     @id @default(uuid()) @db.Uuid
+  authSubject   String     @unique @db.Uuid
+  status        UserStatus @default(ACTIVE)
+  locale        String     @default("es") @db.VarChar(10)
+  theme         Theme      @default(SYSTEM)
+  createdAt     DateTime   @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime   @updatedAt @db.Timestamptz(3)
+  profile       CandidateProfile?
+  confirmed     ProfileRevision[] @relation("RevisionConfirmer")
+  reviews       SectionReview[]
+  confirmations ProfileConfirmation[]
+  receipts      OperationReceipt[]
+  auditEvents   AuditEvent[]
+  memberships   OrganizationMembership[]
+  @@schema("app")
+}
+
+model Organization {
+  id          String                 @id @default(uuid()) @db.Uuid
+  name        String                 @db.VarChar(120)
+  type        OrganizationType
+  active      Boolean                @default(true)
+  createdAt   DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime               @updatedAt @db.Timestamptz(3)
+  memberships OrganizationMembership[]
+  @@schema("app")
+}
+
+model OrganizationMembership {
+  id             String           @id @default(uuid()) @db.Uuid
+  userId         String           @db.Uuid
+  organizationId String           @db.Uuid
+  role           MembershipRole
+  status         MembershipStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime         @updatedAt @db.Timestamptz(3)
+  user           AppUser          @relation(fields: [userId], references: [id], onDelete: Restrict)
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  @@unique([userId, organizationId])
+  @@index([organizationId])
+  @@schema("app")
+}
+
+model CandidateProfile {
+  id               String   @id @default(uuid()) @db.Uuid
+  ownerUserId      String   @unique @db.Uuid
+  currentVersionId String?  @unique @db.Uuid
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  owner            AppUser @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+  currentVersion   ProfileRevision? @relation("CurrentVersion", fields: [currentVersionId], references: [id], onDelete: Restrict)
+  revisions        ProfileRevision[] @relation("ProfileHistory")
+  sources          ProfileSource[]
+  fragments        SourceFragment[]
+  evidence         ProfileEvidence[]
+  receipts         OperationReceipt[]
+  auditEvents      AuditEvent[]
+  @@schema("app")
+}
+
+// One row is a mutable draft, then the SAME row becomes an immutable version.
+// Partial DRAFT uniqueness, transitions and freezing children are SQL guards.
+model ProfileRevision {
+  id                String @id @default(uuid()) @db.Uuid
+  profileId         String @db.Uuid
+  baseVersionId     String? @db.Uuid
+  status            RevisionStatus @default(DRAFT)
+  revision          Int @default(1)
+  versionNumber     Int?
+  displayName       String? @db.VarChar(100)
+  headline          String? @db.VarChar(160)
+  experienceStatus  DeclarationStatus @default(UNKNOWN)
+  trainingStatus    DeclarationStatus @default(UNKNOWN)
+  interestsStatus   DeclarationStatus @default(UNKNOWN)
+  snapshotDigest    String? @db.VarChar(64)
+  confirmedAt       DateTime? @db.Timestamptz(3)
+  confirmedById     String? @db.Uuid
+  createdAt         DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime @updatedAt @db.Timestamptz(3)
+  profile           CandidateProfile @relation("ProfileHistory", fields: [profileId], references: [id], onDelete: Restrict)
+  currentFor        CandidateProfile? @relation("CurrentVersion")
+  baseVersion       ProfileRevision? @relation("Lineage", fields: [profileId, baseVersionId], references: [profileId, id], onDelete: Restrict)
+  derived           ProfileRevision[] @relation("Lineage")
+  confirmedBy       AppUser? @relation("RevisionConfirmer", fields: [confirmedById], references: [id], onDelete: Restrict)
+  experiences       ProfileExperience[]
+  trainings         TrainingDeclaration[]
+  interests         JobInterest[]
+  claims            CompetencyClaim[]
+  constraints       ProfileConstraints?
+  windows           AvailabilityWindow[]
+  exceptions        AvailabilityException[]
+  evidenceLinks     ProfileEvidenceLink[]
+  reviews           SectionReview[]
+  previews          ProfilePreview[]
+  confirmation      ProfileConfirmation?
+  auditEvents       AuditEvent[]
+  @@unique([profileId, id])
+  @@unique([profileId, versionNumber])
+  @@index([profileId, status])
+  @@schema("app")
+}
+
+model ProfileExperience {
+  id               String @id @default(uuid()) @db.Uuid
+  profileId        String @db.Uuid
+  revisionId       String @db.Uuid
+  kind             ExperienceKind
+  title            String @db.VarChar(120)
+  organizationName String? @db.VarChar(160)
+  description      String @db.VarChar(3000)
+  startMonth       String? @db.VarChar(7)
+  endMonth         String? @db.VarChar(7)
+  ongoing          Boolean @default(false)
+  revision         ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  evidenceLinks    ProfileEvidenceLink[] @relation("ExperienceEvidence")
+  @@unique([profileId, revisionId, id])
+  @@schema("app")
+}
+
+model TrainingDeclaration {
+  id            String @id @default(uuid()) @db.Uuid
+  profileId     String @db.Uuid
+  revisionId    String @db.Uuid
+  name          String @db.VarChar(160)
+  providerName  String? @db.VarChar(160)
+  completedOn   DateTime? @db.Date
+  revision      ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  evidenceLinks ProfileEvidenceLink[] @relation("TrainingEvidence")
+  @@unique([profileId, revisionId, id])
+  @@schema("app")
+}
+
+model CatalogVersion {
+  id           String @id @default(uuid()) @db.Uuid
+  code         String @unique @db.VarChar(50)
+  sourceLabel  String @db.VarChar(200)
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  occupations  OccupationEntry[]
+  competencies CompetencyEntry[]
+  @@schema("app")
+}
+model OccupationEntry {
+  id               String @db.Uuid
+  catalogVersionId String @db.Uuid
+  code             String @db.VarChar(80)
+  name             String @db.VarChar(160)
+  description      String @db.VarChar(2000)
+  active           Boolean @default(true)
+  catalog          CatalogVersion @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
+  interests        JobInterest[]
+  aliases          OccupationAlias[]
+  @@id([id, catalogVersionId])
+  @@unique([catalogVersionId, code])
+  @@schema("app")
+}
+model OccupationAlias {
+  id               String @id @default(uuid()) @db.Uuid
+  occupationId     String @db.Uuid
+  catalogVersionId String @db.Uuid
+  text             String @db.VarChar(160)
+  context          String @default("") @db.VarChar(200)
+  occupation       OccupationEntry @relation(fields: [occupationId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+  @@unique([occupationId, catalogVersionId, text, context])
+  @@schema("app")
+}
+model CompetencyEntry {
+  id               String @db.Uuid
+  catalogVersionId String @db.Uuid
+  code             String @db.VarChar(80)
+  name             String @db.VarChar(160)
+  description      String @db.VarChar(2000)
+  kind             CompetencyKind
+  catalog          CatalogVersion @relation(fields: [catalogVersionId], references: [id], onDelete: Restrict)
+  claims           CompetencyClaim[]
+  aliases          CompetencyAlias[]
+  @@id([id, catalogVersionId])
+  @@unique([catalogVersionId, code])
+  @@schema("app")
+}
+model CompetencyAlias {
+  id               String @id @default(uuid()) @db.Uuid
+  competencyId     String @db.Uuid
+  catalogVersionId String @db.Uuid
+  text             String @db.VarChar(160)
+  context          String @default("") @db.VarChar(200)
+  competency       CompetencyEntry @relation(fields: [competencyId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+  @@unique([competencyId, catalogVersionId, text, context])
+  @@schema("app")
+}
+model JobInterest {
+  id               String @id @default(uuid()) @db.Uuid
+  profileId        String @db.Uuid
+  revisionId       String @db.Uuid
+  originalText     String @db.VarChar(160)
+  occupationId     String? @db.Uuid
+  catalogVersionId String? @db.Uuid
+  revision         ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  occupation       OccupationEntry? @relation(fields: [occupationId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+  @@index([profileId, revisionId])
+  @@schema("app")
+}
+model CompetencyClaim {
+  id               String @id @default(uuid()) @db.Uuid
+  profileId        String @db.Uuid
+  revisionId       String @db.Uuid
+  competencyId     String @db.Uuid
+  catalogVersionId String @db.Uuid
+  originalText     String @db.VarChar(300)
+  criterion        String @db.VarChar(1000)
+  decision         ClaimDecision @default(PROPOSED)
+  revision         ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  competency       CompetencyEntry @relation(fields: [competencyId, catalogVersionId], references: [id, catalogVersionId], onDelete: Restrict)
+  evidenceLinks    ProfileEvidenceLink[] @relation("ClaimEvidence")
+  @@unique([profileId, revisionId, id])
+  @@unique([revisionId, competencyId, catalogVersionId])
+  @@schema("app")
+}
+
+model ProfileConstraints {
+  id                String @id @default(uuid()) @db.Uuid
+  profileId         String @db.Uuid
+  revisionId        String @unique @db.Uuid
+  locationState     KnowledgeState @default(UNKNOWN)
+  approximateZone   String? @db.VarChar(160)
+  availabilityState KnowledgeState @default(UNKNOWN)
+  mobilityState     KnowledgeState @default(UNKNOWN)
+  mobilityModes     MobilityMode[] @default([])
+  travelLimitState  KnowledgeState @default(UNKNOWN)
+  maxOneWayMinutes  Int?
+  salaryState       KnowledgeState @default(UNKNOWN)
+  minimumSalary     Decimal? @db.Decimal(14, 2)
+  salaryCurrency    String? @db.VarChar(3)
+  salaryPeriod      MoneyPeriod?
+  transportState    KnowledgeState @default(UNKNOWN)
+  transportBudget   Decimal? @db.Decimal(14, 2)
+  transportCurrency String? @db.VarChar(3)
+  transportPeriod   MoneyPeriod?
+  trainingState     KnowledgeState @default(UNKNOWN)
+  trainingBudget    Decimal? @db.Decimal(14, 2)
+  trainingCurrency  String? @db.VarChar(3)
+  trainingPeriod    MoneyPeriod?
+  revision          ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  @@unique([profileId, revisionId])
+  @@schema("app")
+}
+model AvailabilityWindow {
+  id         String @id @default(uuid()) @db.Uuid
+  profileId  String @db.Uuid
+  revisionId String @db.Uuid
+  weekday    Int
+  startMinute Int
+  endMinute   Int
+  timezone    String @default("America/Panama") @db.VarChar(64)
+  validFrom   DateTime @db.Date
+  validTo     DateTime @db.Date
+  revision    ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  @@index([profileId, revisionId])
+  @@schema("app")
+}
+model AvailabilityException {
+  id         String @id @default(uuid()) @db.Uuid
+  profileId  String @db.Uuid
+  revisionId String @db.Uuid
+  date       DateTime @db.Date
+  revision   ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  intervals  ExceptionInterval[]
+  @@unique([revisionId, date])
+  @@schema("app")
+}
+model ExceptionInterval {
+  id          String @id @default(uuid()) @db.Uuid
+  exceptionId String @db.Uuid
+  startMinute Int
+  endMinute   Int
+  exception   AvailabilityException @relation(fields: [exceptionId], references: [id], onDelete: Restrict)
+  @@index([exceptionId])
+  @@schema("app")
+}
+
+model ProfileSource {
+  id             String @id @default(uuid()) @db.Uuid
+  profileId      String @db.Uuid
+  version        Int @default(1)
+  kind           SourceKind
+  status         SourceStatus @default(RECEIVED)
+  sha256         String @db.VarChar(64)
+  mediaType      String @db.VarChar(100)
+  sizeBytes      Int
+  manualText     String? @db.VarChar(20000)
+  storageKey     String? @unique @db.VarChar(512)
+  correctionOfId String? @db.Uuid
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  profile        CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  correctionOf   ProfileSource? @relation("SourceCorrection", fields: [profileId, correctionOfId], references: [profileId, id], onDelete: Restrict)
+  corrections    ProfileSource[] @relation("SourceCorrection")
+  fragments      SourceFragment[]
+  @@unique([profileId, id])
+  @@schema("app")
+}
+model SourceFragment {
+  id          String @id @default(uuid()) @db.Uuid
+  profileId   String @db.Uuid
+  sourceId    String @db.Uuid
+  text        String @db.VarChar(20000)
+  page        Int?
+  startMillis Int?
+  endMillis   Int?
+  profile     CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  source      ProfileSource @relation(fields: [profileId, sourceId], references: [profileId, id], onDelete: Restrict)
+  evidence    ProfileEvidence[]
+  @@unique([profileId, id])
+  @@schema("app")
+}
+model ProfileEvidence {
+  id         String @id @default(uuid()) @db.Uuid
+  profileId  String @db.Uuid
+  fragmentId String @db.Uuid
+  kind       EvidenceKind
+  scope      String @db.VarChar(1000)
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  profile    CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  fragment   SourceFragment @relation(fields: [profileId, fragmentId], references: [profileId, id], onDelete: Restrict)
+  links      ProfileEvidenceLink[]
+  @@unique([profileId, id])
+  @@schema("app")
+}
+// SQL requires exactly ONE of experienceId/trainingId/claimId; each is a real FK.
+model ProfileEvidenceLink {
+  id           String @id @default(uuid()) @db.Uuid
+  profileId    String @db.Uuid
+  revisionId   String @db.Uuid
+  evidenceId   String @db.Uuid
+  experienceId String? @db.Uuid
+  trainingId   String? @db.Uuid
+  claimId      String? @db.Uuid
+  revision     ProfileRevision @relation(fields: [profileId, revisionId], references: [profileId, id], onDelete: Restrict)
+  evidence     ProfileEvidence @relation(fields: [profileId, evidenceId], references: [profileId, id], onDelete: Restrict)
+  experience   ProfileExperience? @relation("ExperienceEvidence", fields: [profileId, revisionId, experienceId], references: [profileId, revisionId, id], onDelete: Restrict)
+  training     TrainingDeclaration? @relation("TrainingEvidence", fields: [profileId, revisionId, trainingId], references: [profileId, revisionId, id], onDelete: Restrict)
+  claim        CompetencyClaim? @relation("ClaimEvidence", fields: [profileId, revisionId, claimId], references: [profileId, revisionId, id], onDelete: Restrict)
+  @@unique([evidenceId, experienceId])
+  @@unique([evidenceId, trainingId])
+  @@unique([evidenceId, claimId])
+  @@schema("app")
+}
+
+model SectionReview {
+  id              String @id @default(uuid()) @db.Uuid
+  revisionId      String @db.Uuid
+  section         ProfileSection
+  decision        ReviewDecision
+  contentRevision Int
+  actorUserId     String @db.Uuid
+  reviewedAt      DateTime @default(now()) @db.Timestamptz(3)
+  revision        ProfileRevision @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  actor           AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  @@unique([revisionId, section])
+  @@schema("app")
+}
+model ProfilePreview {
+  id             String @id @default(uuid()) @db.Uuid
+  revisionId     String @db.Uuid
+  draftRevision  Int
+  snapshotDigest String @db.VarChar(64)
+  acknowledgePartialRequired Boolean
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt      DateTime @db.Timestamptz(3)
+  revision       ProfileRevision @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  confirmation   ProfileConfirmation?
+  @@index([revisionId])
+  @@schema("app")
+}
+model ProfileConfirmation {
+  id                 String @id @default(uuid()) @db.Uuid
+  revisionId         String @unique @db.Uuid
+  previewId          String @unique @db.Uuid
+  operationId        String @unique @db.Uuid
+  actorUserId        String @db.Uuid
+  acknowledgedPartial Boolean
+  confirmedAt        DateTime @default(now()) @db.Timestamptz(3)
+  revision           ProfileRevision @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  preview            ProfilePreview @relation(fields: [previewId], references: [id], onDelete: Restrict)
+  operation          OperationReceipt @relation(fields: [operationId], references: [id], onDelete: Restrict)
+  actor              AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  @@schema("app")
+}
+model OperationReceipt {
+  id             String @id @default(uuid()) @db.Uuid
+  actorUserId    String @db.Uuid
+  profileId      String? @db.Uuid
+  operation      String @db.VarChar(60)
+  idempotencyKey String @db.VarChar(128)
+  payloadHash    String @db.VarChar(64)
+  receiptPayload Json
+  recordedAt     DateTime @default(now()) @db.Timestamptz(3)
+  actor          AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  profile        CandidateProfile? @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  confirmation   ProfileConfirmation?
+  auditEvents    AuditEvent[]
+  @@unique([actorUserId, operation, idempotencyKey])
+  @@schema("app")
+}
+model AuditEvent {
+  id          String @id @default(uuid()) @db.Uuid
+  actorUserId String @db.Uuid
+  profileId   String? @db.Uuid
+  revisionId  String? @db.Uuid
+  operationId String? @db.Uuid
+  caseId      String @db.VarChar(100)
+  event       String @db.VarChar(80)
+  reasonCode  String @db.VarChar(80)
+  recordedAt  DateTime @default(now()) @db.Timestamptz(3)
+  actor       AppUser @relation(fields: [actorUserId], references: [id], onDelete: Restrict)
+  profile     CandidateProfile? @relation(fields: [profileId], references: [id], onDelete: Restrict)
+  revision    ProfileRevision? @relation(fields: [revisionId], references: [id], onDelete: Restrict)
+  operation   OperationReceipt? @relation(fields: [operationId], references: [id], onDelete: Restrict)
+  @@index([profileId, recordedAt, id])
+  @@schema("app")
+}
